@@ -5,9 +5,9 @@ import * as React from 'react';
 
 
 
-const CategoryGroupItem: React.FunctionComponent<IProduct> = ({name, description, price, imageUrl, weight, id}) => {
+const CategoryGroupItem: React.FunctionComponent<IProduct> = ({name, description, price, imageUrl, weight}) => {
     return (
-      <div className="rounded-xl p-6 max-w-[380px] bg-white">
+      <div className="rounded-xl p-6 max-w-[380px] bg-white h-full">
         <div>
           <Image src={imageUrl} alt={name} width={331} height={290} />
         </div>
