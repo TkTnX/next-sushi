@@ -6,4 +6,5 @@ export interface IProduct {
   price: number;
   imageUrl: string;
   weight: number;
+  createdAt?: Date;
 }

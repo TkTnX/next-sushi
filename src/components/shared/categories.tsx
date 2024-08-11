@@ -17,7 +17,7 @@ const Categories: React.FunctionComponent<ICategoriesProps> = ({
 }) => {
 
   return (
-    <div className="max-w-max mt-4 py-1 px-4 rounded-xl flex items-center gap-10 bg-white mx-auto sticky top-4">
+    <div className="max-w-max mt-4 py-1 px-4 rounded-xl flex items-center gap-10 bg-white mx-auto sticky top-4 z-10">
       {categories.filter((category) => category.products.length > 0).map((category) => (
     
         <CategoryItem

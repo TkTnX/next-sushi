@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   title: "Ninja Sushi",
 };
 
+// TODO: Страница категории и фильтрация
+// Попробовать высчитывать время создания карточки
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
