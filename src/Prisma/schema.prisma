@@ -3,14 +3,14 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+    provider  = "postgresql"
+    url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+    directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Category {
-    id Int @id @default(autoincrement())
-    name String
+    id       Int    @id @default(autoincrement())
+    name     String
     imageUrl String
 
     products Product[]
@@ -20,14 +20,57 @@ model Category {
 }
 
 model Product {
-    id Int @id @default(autoincrement())
-    name String
+    id          Int    @id @default(autoincrement())
+    name        String
     description String
-    price Int
-    weight Int
-    imageUrl String
-    category Category @relation(fields: [categoryId], references: [id])
+    price       Int
+    weight      Int
+    imageUrl    String
+
+    type   Type @relation(fields: [typeId], references: [id])
+    typeId Int
+
+    exceptions Exception[]
+
+    ingredients Ingredient[]
+
+    category   Category @relation(fields: [categoryId], references: [id])
     categoryId Int
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @default(now())
+}
+
+model Type {
+    id Int @id @default(autoincrement())
+
+    name     String
+    products Product[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
+
+model Exception {
+    id Int @id @default(autoincrement())
+
+    imageUrl String
+    name     String
+
+    product   Product @relation(fields: [productId], references: [id])
+    productId Int
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
+
+model Ingredient {
+    id Int @id @default(autoincrement())
+
+    name     String
+    imageUrl String
+
+    products Product[]
+
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
 }

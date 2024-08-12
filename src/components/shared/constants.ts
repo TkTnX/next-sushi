@@ -19,29 +19,80 @@ export const navbarItems = [
 
 // Временные данные, которые потом переместить в бэкенд
 
-export const categories = [
+export const types = [
   {
-    name: "Роллы",
-    url: "/categories/01.svg",
+    name: "Все",
+    id: 1,
   },
   {
-    name: "Суши",
-    url: "/categories/02.svg",
+    name: "Классические",
+    id: 2,
   },
   {
-    name: "Сеты",
-    url: "/categories/03.svg",
+    name: "Маки",
+    id: 3,
   },
   {
-    name: "Боулы",
-    url: "/categories/04.svg",
+    name: "Драконы",
+    id: 4,
   },
   {
-    name: "Напитки",
-    url: "/categories/05.svg",
+    name: "Запеченные",
+    id: 5,
   },
   {
-    name: "Соусы",
-    url: "/categories/06.svg",
+    name: "Феликсы",
+    id: 6,
+  },
+  {
+    name: "Сладкие",
+    id: 7,
+  },
+];
+
+export const exceptions = [
+  {
+    imageUrl: "/exceptions/00.svg",
+    name: "Все"
+  },
+  {
+    imageUrl: "/exceptions/01.svg",
+    name: "Острые",
+  },
+  {
+    imageUrl: "/exceptions/02.svg",
+    name: "Вегетарианские",
+  },
+  {
+    imageUrl: "/exceptions/03.svg",
+    name: "Безлактозные",
+  },
+];
+
+export const ingredients = [
+  {
+    imageUrl: "/ingredients/01.svg",
+    name: "Лосось",
+    id: 1,
+  },
+  {
+    imageUrl: "/ingredients/02.svg",
+    name: "Угорь",
+    id: 2,
+  },
+  {
+    imageUrl: "/ingredients/03.svg",
+    name: "Тунец",
+    id: 3,
+  },
+  {
+    imageUrl: "/ingredients/04.svg",
+    name: "Куриное филе",
+    id: 4,
+  },
+  {
+    imageUrl: "/ingredients/05.svg",
+    name: "Сливочный сыр",
+    id: 5,
   },
 ];
