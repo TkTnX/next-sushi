@@ -1,5 +1,10 @@
-;
-import { categories, exceptions, ingredients, products, types } from "./constants";
+import {
+  categories,
+  exceptions,
+  ingredients,
+  products,
+  types,
+} from "./constants";
 import { prisma } from "./prisma-client";
 
 async function up() {
@@ -7,24 +12,32 @@ async function up() {
     data: categories,
   });
 
-    await prisma.type.createMany({
-      data: types,
-    });
-
-  await prisma.product.createMany({
-    data: products,
+  await prisma.type.createMany({
+    data: types,
   });
 
   await prisma.exception.createMany({
-    data: exceptions
+    data: exceptions,
   });
 
   await prisma.ingredient.createMany({
-    data: ingredients
-  })
+    data: ingredients,
+  });
 
-
-
+  for (const product of products) {
+    await prisma.product.create({
+      data: {
+        ...product,
+        exceptions: {
+          create: {
+            exception: {
+              connect: {id: 1}
+            }
+          },
+        },
+      },
+    });
+  }
 }
 
 async function down() {

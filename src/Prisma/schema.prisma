@@ -30,7 +30,7 @@ model Product {
     type   Type @relation(fields: [typeId], references: [id])
     typeId Int
 
-    exceptions Exception[]
+    exceptions ProductsOnExceptions[]
 
     ingredients Ingredient[]
 
@@ -56,11 +56,12 @@ model Exception {
     imageUrl String
     name     String
 
-    product   Product @relation(fields: [productId], references: [id])
-    productId Int
+ 
 
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
+
+    products ProductsOnExceptions[]
 }
 
 model Ingredient {
@@ -73,4 +74,14 @@ model Ingredient {
 
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
+}
+
+model ProductsOnExceptions {
+    product   Product @relation(fields: [productId], references: [id])
+    productId Int
+
+    exception Exception @relation(fields: [exceptionId], references: [id])
+    exceptionId Int
+
+    @@id([productId, exceptionId])
 }

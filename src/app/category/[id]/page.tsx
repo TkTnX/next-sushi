@@ -1,8 +1,9 @@
-
 import CategoryGroupItem from "@/components/shared/category-group-item";
 import FilterGroup from "@/components/shared/filter-group";
 import Types from "@/components/shared/types";
 import { prisma } from "@/Prisma/prisma-client";
+import { Api } from "@/services/api-client";
+import { getAllTypes } from "@/services/types";
 import { redirect } from "next/navigation";
 import * as React from "react";
 
@@ -15,6 +16,10 @@ interface ICategoryPageProps {
 const CategoryPage: React.FunctionComponent<ICategoryPageProps> = async ({
   params: { id },
 }) => {
+    const types = await Api.types.getAllTypes();
+
+  
+  
   const category = await prisma.category.findFirst({
     where: { id: Number(id) },
     include: {
@@ -23,30 +28,31 @@ const CategoryPage: React.FunctionComponent<ICategoryPageProps> = async ({
           type: true,
           exceptions: true,
           ingredients: true,
-      }
-    } },
+        },
+      },
+    },
   });
+
 
   if (!category) return redirect("/");
 
+  return (
+    <div>
+      <h2 className="text-6xl font-bold text-black mt-12">{category.name}</h2>
 
-    return (
+      {types && <Types types={types.data} />}
+
       <div>
-        <h2 className="text-6xl font-bold text-black mt-12">{category.name}</h2>
-
-        <Types />
-
-        <div>
-          <FilterGroup />
-        </div>
-
-        <div className="mt-8 grid grid-cols-4 gap-5 items-stretch">
-          {category.products.map((product) => (
-            <CategoryGroupItem key={product.id} {...product} />
-          ))}
-        </div>
+        <FilterGroup />
       </div>
-    );
+
+      <div className="mt-8 grid grid-cols-4 gap-5 items-stretch">
+        {category.products.map((product) => (
+          <CategoryGroupItem key={product.id} {...product} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default CategoryPage;

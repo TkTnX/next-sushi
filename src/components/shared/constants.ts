@@ -19,36 +19,7 @@ export const navbarItems = [
 
 // Временные данные, которые потом переместить в бэкенд
 
-export const types = [
-  {
-    name: "Все",
-    id: 1,
-  },
-  {
-    name: "Классические",
-    id: 2,
-  },
-  {
-    name: "Маки",
-    id: 3,
-  },
-  {
-    name: "Драконы",
-    id: 4,
-  },
-  {
-    name: "Запеченные",
-    id: 5,
-  },
-  {
-    name: "Феликсы",
-    id: 6,
-  },
-  {
-    name: "Сладкие",
-    id: 7,
-  },
-];
+
 
 export const exceptions = [
   {

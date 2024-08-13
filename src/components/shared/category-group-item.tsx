@@ -1,5 +1,7 @@
+"use client";
 import { IProduct } from "@/@types/product";
 import { calculateIsNewProducts } from "@/lib/calculate-is-new-products";
+import { useFilterStore } from "@/store/filterStore";
 import { Heart, Plus } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
@@ -10,16 +12,21 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
   price,
   imageUrl,
   weight,
+  typeId,
   createdAt,
 }) => {
   const isNewProduct = calculateIsNewProducts(createdAt);
+  const selectedType = useFilterStore((state) => state.selectedType);
 
+  if (typeId !== selectedType && selectedType !== 1) return null;
 
   return (
     <div className="rounded-xl p-6 max-w-[380px] bg-white h-full">
       <div className="relative">
         {isNewProduct && (
-          <p className="absolute bg-[#ccf5d5] text-[#00cc2d] text-lg py-1 px-2 rounded-md">New</p>
+          <p className="absolute bg-[#ccf5d5] text-[#00cc2d] text-lg py-1 px-2 rounded-md">
+            New
+          </p>
         )}
         <Image src={imageUrl} alt={name} width={331} height={290} />
       </div>

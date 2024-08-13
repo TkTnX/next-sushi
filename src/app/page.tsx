@@ -10,21 +10,21 @@ export default async function Home() {
     },
   });
 
-
   return (
     <main>
       <Categories categories={categories} />
 
-      {categories.filter((category) => category.products.length > 0).map(category => (
-
-        <CategoryGroup
-          key={category.id}
-        title={category.name}
-          link={`/category/${category.id}`}
-          items={categories.flatMap((item) => item.products)}
-          categoryId={category.id}
-      />
-      ))}
+      {categories
+        .filter((category) => category.products.length > 0)
+        .map((category) => (
+          <CategoryGroup
+            key={category.id}
+            title={category.name}
+            link={`/category/${category.id}`}
+            items={categories.flatMap((item) => item.products)}
+            categoryId={category.id}
+          />
+        ))}
     </main>
   );
 }

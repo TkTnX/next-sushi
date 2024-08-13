@@ -7,4 +7,5 @@ export interface IProduct {
   imageUrl: string;
   weight: number;
   createdAt?: Date;
+  typeId?: number
 }

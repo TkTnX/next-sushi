@@ -30,8 +30,9 @@ export const products = [
     price: 200,
     weight: 40,
     categoryId: 1,
-    typeId: 1, // Random typeId
-    
+    typeId: 7, // Random typeId
+  
+
   },
   {
     imageUrl: "/products/02.png",
@@ -42,7 +43,8 @@ export const products = [
     weight: 40,
     categoryId: 1,
     typeId: 2, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/03.png",
@@ -53,7 +55,8 @@ export const products = [
     weight: 40,
     categoryId: 1,
     typeId: 3, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/04.png",
@@ -64,7 +67,8 @@ export const products = [
     weight: 252,
     categoryId: 1,
     typeId: 4, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/05.png",
@@ -75,7 +79,8 @@ export const products = [
     weight: 40,
     categoryId: 1,
     typeId: 5, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/06.png",
@@ -86,7 +91,8 @@ export const products = [
     weight: 40,
     categoryId: 1,
     typeId: 6, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/07.png",
@@ -97,7 +103,8 @@ export const products = [
     weight: 40,
     categoryId: 1,
     typeId: 2, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/08.png",
@@ -108,7 +115,8 @@ export const products = [
     weight: 40,
     categoryId: 1,
     typeId: 3, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/09.png",
@@ -119,7 +127,8 @@ export const products = [
     weight: 320,
     categoryId: 2,
     typeId: 5, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/10.png",
@@ -130,7 +139,8 @@ export const products = [
     weight: 320,
     categoryId: 2,
     typeId: 6, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/11.png",
@@ -141,8 +151,9 @@ export const products = [
     weight: 310,
     categoryId: 2,
 
-    typeId: 1, // Random typeId
-    
+    typeId: 7, // Random typeId
+  
+
   },
   {
     imageUrl: "/products/12.png",
@@ -153,7 +164,8 @@ export const products = [
     weight: 330,
     categoryId: 2,
     typeId: 2, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/13.png",
@@ -164,8 +176,8 @@ export const products = [
     weight: 350,
     categoryId: 2,
     typeId: 3, // Random typeId
+  
 
-    
   },
   {
     imageUrl: "/products/14.png",
@@ -176,8 +188,8 @@ export const products = [
     weight: 315,
     categoryId: 2,
     typeId: 4, // Random typeId
+  
 
-    
   },
   {
     imageUrl: "/products/15.png",
@@ -188,7 +200,8 @@ export const products = [
     weight: 235,
     categoryId: 2,
     typeId: 5, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/16.png",
@@ -199,8 +212,8 @@ export const products = [
     weight: 235,
     categoryId: 2,
     typeId: 6, // Random typeId
+  
 
-    
   },
   {
     imageUrl: "/products/17.png",
@@ -210,9 +223,9 @@ export const products = [
     price: Math.floor(Math.random() * 100) + 100,
     weight: 950,
     categoryId: 3,
-    typeId: 1, // Random typeId
+    typeId: 7, // Random typeId
+  
 
-    
   },
   {
     imageUrl: "/products/18.png",
@@ -223,7 +236,8 @@ export const products = [
     weight: 895,
     categoryId: 3,
     typeId: 2, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/19.png",
@@ -234,7 +248,8 @@ export const products = [
     weight: 1020,
     categoryId: 3,
     typeId: 3, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/20.png",
@@ -245,8 +260,8 @@ export const products = [
     weight: 1100,
     categoryId: 3,
     typeId: 4, // Random typeId
+  
 
-    
   },
   {
     imageUrl: "/products/21.png",
@@ -257,7 +272,8 @@ export const products = [
     weight: 1200,
     categoryId: 3,
     typeId: 5, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/22.png",
@@ -268,7 +284,8 @@ export const products = [
     weight: 1350,
     categoryId: 3,
     typeId: 6, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/23.png",
@@ -278,8 +295,9 @@ export const products = [
     price: Math.floor(Math.random() * 100) + 100,
     weight: 1400,
     categoryId: 3,
-    typeId: 1, // Random typeId
-    
+    typeId: 7, // Random typeId
+  
+
   },
   {
     imageUrl: "/products/24.png",
@@ -290,7 +308,8 @@ export const products = [
     weight: 1500,
     categoryId: 3,
     typeId: 2, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/25.png",
@@ -301,8 +320,8 @@ export const products = [
     weight: 1600,
     categoryId: 4,
     typeId: 3, // Random typeId
+  
 
-    
   },
   {
     imageUrl: "/products/26.png",
@@ -313,7 +332,8 @@ export const products = [
     weight: 1700,
     categoryId: 4,
     typeId: 4, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/27.png",
@@ -324,7 +344,8 @@ export const products = [
     weight: 1800,
     categoryId: 4,
     typeId: 5, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/28.png",
@@ -335,7 +356,8 @@ export const products = [
     weight: 1900,
     categoryId: 4,
     typeId: 6, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/29.png",
@@ -346,8 +368,9 @@ export const products = [
     weight: 2000,
     categoryId: 4,
 
-    typeId: 1, // Random typeId
-    
+    typeId: 7, // Random typeId
+  
+
   },
   {
     imageUrl: "/products/30.png",
@@ -358,7 +381,8 @@ export const products = [
     weight: 2100,
     categoryId: 4,
     typeId: 2, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/31.png",
@@ -369,7 +393,8 @@ export const products = [
     categoryId: 4,
 
     typeId: 3, // Random typeId
-    
+  
+
   },
   {
     imageUrl: "/products/32.png",
@@ -380,7 +405,8 @@ export const products = [
     weight: 225,
     categoryId: 4,
     typeId: 4, // Random typeId
-    
+  
+
   },
 ];
 
@@ -414,17 +440,14 @@ export const exceptions = [
   {
     imageUrl: "/exceptions/01.svg",
     name: "Острые",
-    productId: 1,
   },
   {
     imageUrl: "/exceptions/02.svg",
     name: "Вегетарианские",
-    productId: 2,
   },
   {
     imageUrl: "/exceptions/03.svg",
     name: "Безлактозные",
-    productId: 3,
   },
 ];
 
