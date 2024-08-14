@@ -18,25 +18,16 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
   isNeedToFilter,
 }) => {
   const isNewProduct = calculateIsNewProducts(createdAt);
-  const selectedType = useFilterStore((state) => state.selectedType);
-  const selectedExceptionId = useFilterStore(
-    (state) => state.selectedException
-  );
-  const selectedIngredients = useFilterStore((state) => state.selectedIngredients);
-
+  const {selectedType, selectedException, selectedIngredients} = useFilterStore();
+  
+  
   const exception = exceptions ? exceptions[0].exceptionId : 0;
+  
+  
   if (isNeedToFilter) {
     if (typeId !== selectedType && selectedType !== 1) return null;
-    if (exception !== selectedExceptionId && selectedExceptionId !== 0)
-      return null;
-    if (
-      ingredients &&
-      selectedIngredients.length > 0 &&
-      !selectedIngredients.some((ingredientId) =>
-        ingredients.some((ingredient) => ingredient.id === ingredientId)
-      )
-    )
-      return null;
+    if (exception !== selectedException && selectedException !== 0) return null;
+    if(ingredients && selectedIngredients.length > 0 && !selectedIngredients.includes(ingredients[0].id)) return null
   }
 
 
@@ -49,6 +40,7 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
             New
           </p>
         )}
+        <Image src={imageUrl} alt={name} width={331} height={290} />
         {exception && (
           <p className="absolute  bottom-3">
             <Image
@@ -59,7 +51,6 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
             />
           </p>
         )}
-        <Image src={imageUrl} alt={name} width={331} height={290} />
       </div>
       <div>
         <h3 className="font-bold text-3xl text-black">{name}</h3>
