@@ -18,3 +18,12 @@ export const getAllExceptions = async () => {
     console.log(error);
   }
 }
+
+
+export const getAllIngredients = async () => {
+  try {
+    return await axiosInstance.get(ApiRoutes.INGREDIENTS);
+  } catch (error) {
+    console.log(error);
+  }
+};

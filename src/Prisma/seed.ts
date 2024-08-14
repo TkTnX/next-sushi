@@ -31,9 +31,15 @@ async function up() {
         exceptions: {
           create: {
             exception: {
-              connect: {id: Math.floor(Math.random() * 3) + 1}
-            }
+              connect: { id: Math.floor(Math.random() * 3) + 1 },
+            },
           },
+        },
+        ingredients: {
+          connect: Array.from(
+            { length: Math.floor(Math.random() * 3) + 1 },
+            () => ({ id: Math.floor(Math.random() * 5) + 1 })
+          ),
         },
       },
     });

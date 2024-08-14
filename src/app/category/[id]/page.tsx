@@ -43,9 +43,10 @@ const CategoryPage: React.FunctionComponent<ICategoryPageProps> = async ({
         <FilterGroup />
       </div>
 
+
       <div className="mt-8 grid grid-cols-4 gap-5 items-stretch">
         {category.products.map((product) => (
-          <CategoryGroupItem key={product.id} {...product} />
+          <CategoryGroupItem key={product.id} isNeedToFilter={true} {...product} />
         ))}
       </div>
     </div>

@@ -11,6 +11,7 @@ interface ICategoryGroupProps {
 }
 
 const CategoryGroup: React.FunctionComponent<ICategoryGroupProps> = ({ title, link, items, categoryId }) => {
+  
     return (
       <section id={title}>
         <div className="flex items-center justify-between mt-[124px]">
@@ -26,7 +27,7 @@ const CategoryGroup: React.FunctionComponent<ICategoryGroupProps> = ({ title, li
         <ul className='mt-8 grid grid-cols-4 gap-5 items-stretch'>
           {items.filter((item) => item.categoryId === categoryId).map((item) => (
             <li key={item.id}>
-              <CategoryGroupItem {...item} />
+              <CategoryGroupItem isNeedToFilter={false} {...item} />
             </li>
           ))}
         </ul>

@@ -1,12 +1,15 @@
 import Categories from "@/components/shared/categories";
 import CategoryGroup from "@/components/shared/category-group";
 import { prisma } from "@/Prisma/prisma-client";
-import { Api } from "@/services/api-client";
 
 export default async function Home() {
   const categories = await prisma.category.findMany({
     include: {
-      products: true,
+      products: {
+        include: {
+          exceptions: true
+        }
+      },
     },
   });
 

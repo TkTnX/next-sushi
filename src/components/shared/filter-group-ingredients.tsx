@@ -1,27 +1,36 @@
-"use client"
+"use client";
 import * as React from "react";
-import { ingredients } from "./constants";
 import Image from "next/image";
 import { useSet } from "react-use";
 import { cn } from "@/lib/utils";
+import { useFilterStore } from "@/store/filterStore";
 
-interface IFilterGroupIngredientsProps {}
+export type IIngredient = {
+  id: number;
+  name: string;
+  imageUrl: string;
+};
+
+interface IFilterGroupIngredientsProps {
+  ingredients: IIngredient[];
+}
 
 const FilterGroupIngredients: React.FunctionComponent<
   IFilterGroupIngredientsProps
-    > = () => {
-        const [set, { toggle }] = useSet(new Set([1,2,3,4]))
-        
-   
+> = ({ ingredients }) => {
+  const setSelectedIngredients = useFilterStore(
+    (state) => state.setSelectedIngredients
+  );
+  const selectedIngredients = useFilterStore((state) => state.selectedIngredients)
   return (
     <ul className="flex items-center gap-4">
       {ingredients.slice(0, 4).map((ingredient, index) => (
         <li key={index}>
           <button
-            onClick={() => toggle(ingredient.id)}
+            onClick={() => setSelectedIngredients(ingredient.id)}
             className={cn(
               "flex items-center border-2 border-white gap-2 bg-white rounded-xl py-2 px-3 text-black hover:bg-slate-100  hover:bg-opacity-80  transition duration-200",
-              set.has(ingredient.id) && " border-primary"
+              selectedIngredients.includes(ingredient.id) && " border-primary"
             )}
           >
             <Image
