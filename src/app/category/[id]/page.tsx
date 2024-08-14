@@ -3,7 +3,6 @@ import FilterGroup from "@/components/shared/filter-group";
 import Types from "@/components/shared/types";
 import { prisma } from "@/Prisma/prisma-client";
 import { Api } from "@/services/api-client";
-import { getAllTypes } from "@/services/types";
 import { redirect } from "next/navigation";
 import * as React from "react";
 
@@ -18,8 +17,7 @@ const CategoryPage: React.FunctionComponent<ICategoryPageProps> = async ({
 }) => {
     const types = await Api.types.getAllTypes();
 
-  
-  
+
   const category = await prisma.category.findFirst({
     where: { id: Number(id) },
     include: {
@@ -35,7 +33,6 @@ const CategoryPage: React.FunctionComponent<ICategoryPageProps> = async ({
 
 
   if (!category) return redirect("/");
-
   return (
     <div>
       <h2 className="text-6xl font-bold text-black mt-12">{category.name}</h2>

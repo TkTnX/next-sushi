@@ -21,24 +21,7 @@ export const navbarItems = [
 
 
 
-export const exceptions = [
-  {
-    imageUrl: "/exceptions/00.svg",
-    name: "Все"
-  },
-  {
-    imageUrl: "/exceptions/01.svg",
-    name: "Острые",
-  },
-  {
-    imageUrl: "/exceptions/02.svg",
-    name: "Вегетарианские",
-  },
-  {
-    imageUrl: "/exceptions/03.svg",
-    name: "Безлактозные",
-  },
-];
+
 
 export const ingredients = [
   {

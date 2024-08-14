@@ -31,7 +31,7 @@ async function up() {
         exceptions: {
           create: {
             exception: {
-              connect: {id: 1}
+              connect: {id: Math.floor(Math.random() * 3) + 1}
             }
           },
         },

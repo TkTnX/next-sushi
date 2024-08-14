@@ -5,3 +5,4 @@ export async function GET() {
   const data = await prisma.type.findMany();
   return NextResponse.json(data);
 }
+

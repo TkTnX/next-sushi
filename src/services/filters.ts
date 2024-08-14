@@ -9,3 +9,12 @@ export const getAllTypes = async () => {
     console.log(error);
   }
 };
+
+
+export const getAllExceptions = async () => {
+  try {
+    return await axiosInstance.get(ApiRoutes.EXCEPTIONS);
+  } catch (error) {
+    console.log(error);
+  }
+}

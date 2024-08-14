@@ -438,6 +438,11 @@ export const types = [
 
 export const exceptions = [
   {
+    imageUrl: "/exceptions/00.svg",
+    name: "Все",
+    id: 0,
+  },
+  {
     imageUrl: "/exceptions/01.svg",
     name: "Острые",
   },

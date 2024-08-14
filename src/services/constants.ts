@@ -1,4 +1,6 @@
 export enum ApiRoutes {
   PRODUCTS = "products",
-  TYPES = "types",
+  TYPES = "filters/types",
+  EXCEPTIONS = "filters/exceptions",
+  INGREDIENTS = "filters/ingredients",
 }

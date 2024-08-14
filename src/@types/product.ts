@@ -8,4 +8,5 @@ export interface IProduct {
   weight: number;
   createdAt?: Date;
   typeId?: number
+  exceptions?: {productId: number, exceptionId: number}[]
 }
