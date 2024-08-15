@@ -1,5 +1,6 @@
 "use client";
 import { IProduct } from "@/@types/product";
+import { useFilterHelp } from "@/hooks/use-filter-help";
 import { calculateIsNewProducts } from "@/lib/calculate-is-new-products";
 import { useFilterStore } from "@/store/filterStore";
 import { Heart, Plus } from "lucide-react";
@@ -18,20 +19,21 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
   isNeedToFilter,
 }) => {
   const isNewProduct = calculateIsNewProducts(createdAt);
-  const {selectedType, selectedException, selectedIngredients} = useFilterStore();
+  const { selectedType, selectedException, selectedIngredients } =
+    useFilterStore();
   
-  
-  const exception = exceptions ? exceptions[0].exceptionId : 0;
-  
-  
+  const { exception, checkIngredient } = useFilterHelp({
+    exceptions: exceptions ?? [],
+    ingredients: ingredients ?? [],
+    selectedIngredients,
+  });
+
   // Фильтрация продуктов
   if (isNeedToFilter) {
     if (typeId !== selectedType && selectedType !== 1) return null;
     if (exception !== selectedException && selectedException !== 0) return null;
-    if(ingredients && selectedIngredients.length > 0 && !selectedIngredients.includes(ingredients[0].id)) return null
+    if (ingredients && selectedIngredients.length > 0 && checkIngredient) return null;
   }
-
-
 
   return (
     <div className="rounded-xl p-6 max-w-[380px] bg-white h-full">
@@ -56,7 +58,7 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
       <div>
         <h3 className="font-bold text-3xl text-black">{name}</h3>
         <p className="text-primary text-lg mt-3">Вес: {weight} г</p>
-        <p className="mt-2 text-[#686870] font-normal flex items-center gap-1">
+        <p className="mt-2 text-[#686870] font-normal flex items-center gap-1 flex-wrap">
           {ingredients &&
             ingredients.map((ingredient, index) => (
               <span key={ingredient.id}>{`${index !== 0 ? "," : ""} ${

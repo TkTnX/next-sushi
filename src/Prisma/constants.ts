@@ -477,4 +477,16 @@ export const ingredients = [
     imageUrl: "/ingredients/05.svg",
     name: "Сливочный сыр",
   },
+  {
+    imageUrl: "/ingredients/06.svg",
+    name: "Тофу",
+  },
+  {
+    imageUrl: "/ingredients/07.svg",
+    name: "Авокадо",
+  },
+  {
+    imageUrl: "/ingredients/08.svg",
+    name: "Помидор",
+  },
 ];

@@ -12,7 +12,7 @@ interface FilterState {
 export const useFilterStore = create<FilterState>()((set) => ({
   selectedType: 1,
   selectedException: 0,
-  selectedIngredients: [1, 2, 3, 4],
+  selectedIngredients: [1, 2, 3, 4, 5, 6, 7, 8],
 
 
   setSelectedType: (type) => set({ selectedType: type }),

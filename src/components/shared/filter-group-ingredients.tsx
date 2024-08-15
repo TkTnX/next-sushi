@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useSet } from "react-use";
 import { cn } from "@/lib/utils";
 import { useFilterStore } from "@/store/filterStore";
+import FilterGroupIngredientBtn from "./filter-group-ingredient-btn";
 
 export type IIngredient = {
   id: number;
@@ -43,6 +44,9 @@ const FilterGroupIngredients: React.FunctionComponent<
           </button>
         </li>
       ))}
+      <li>
+        <FilterGroupIngredientBtn ingredients={ingredients} />
+      </li>
     </ul>
   );
 };
