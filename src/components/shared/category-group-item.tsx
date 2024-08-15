@@ -24,6 +24,7 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
   const exception = exceptions ? exceptions[0].exceptionId : 0;
   
   
+  // Фильтрация продуктов
   if (isNeedToFilter) {
     if (typeId !== selectedType && selectedType !== 1) return null;
     if (exception !== selectedException && selectedException !== 0) return null;

@@ -4,9 +4,8 @@ import * as React from "react";
 import Navbar from "./navbar";
 import Userbar from "./userbar";
 
-interface IHeaderProps {}
 
-const Header: React.FunctionComponent<IHeaderProps> = () => {
+const Header: React.FunctionComponent = () => {
   return (
     <header className="mt-4 bg-white px-3 py-[6px] rounded-xl flex items-center justify-between">
       <Link href={"/"} className="relative ">
