@@ -2,7 +2,6 @@
 import * as React from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import CartDrawerItem from "./cart-drawer-item";
-import { Api } from "@/services/api-client";
 import { useCartStore } from "@/store/cartStore";
 
 interface ICartDrawerProps {}
@@ -10,10 +9,17 @@ interface ICartDrawerProps {}
 const CartDrawer: React.FunctionComponent<
   React.PropsWithChildren<ICartDrawerProps>
 > = ({ children }) => {
-  const { getItems, items, totalPrice } = useCartStore();
+  const { getItems, items, totalPrice  } = useCartStore();
   React.useEffect(() => {
     getItems();
   }, []);
+
+
+  const onClickCountBtn = async (id: number, quantity: number, type: "plus" | "minus") => {
+    const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
+
+  };
+ 
 
   return (
     <Popover>
@@ -29,6 +35,7 @@ const CartDrawer: React.FunctionComponent<
               productItem={item.productItem}
               quantity={item.quantity}
               key={item.id}
+              onClickCountBtn={onClickCountBtn}
             />
           ))}
         </div>

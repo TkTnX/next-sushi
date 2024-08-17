@@ -2,15 +2,18 @@ import { IProduct } from "@/@types/product";
 import { Minus, Plus, X } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
+import CartDrawerCountBtns from "./cart-drawer-count-btns";
 
 interface ICartDrawerItemProps {
   quantity: number;
   productItem: IProduct;
+  onClickCountBtn: (id: number, quantity: number, type: "plus" | "minus") => void;
 }
 
 const CartDrawerItem: React.FunctionComponent<ICartDrawerItemProps> = ({
   quantity,
   productItem,
+  onClickCountBtn
 }) => {
   if (!productItem) return null;
 
@@ -36,15 +39,7 @@ const CartDrawerItem: React.FunctionComponent<ICartDrawerItemProps> = ({
       </div>
       <div className="flex items-center gap-4">
         <p className="text-sm text-black font-bold">{productItem.price} руб</p>
-        <div className="flex items-center gap-2">
-          <button>
-            <Minus className="p-2 bg-white rounded-md w-8 h-8" />
-          </button>
-          <p className="text-sm text-black font-bold">{quantity}</p>
-          <button>
-            <Plus className="p-2 bg-white rounded-md w-8 h-8" />
-          </button>
-        </div>
+       <CartDrawerCountBtns id={productItem.id} quantity={quantity} onClickCountBtn={onClickCountBtn} />
       </div>
     </div>
   );

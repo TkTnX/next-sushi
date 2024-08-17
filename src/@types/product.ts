@@ -14,3 +14,9 @@ export interface IProduct {
   exceptions?: { productId: number; exceptionId: number }[];
   isNeedToFilter?: boolean
 }
+
+
+export interface ICartItem extends IProduct { 
+  quantity: number
+  productItem: IProduct
+}
