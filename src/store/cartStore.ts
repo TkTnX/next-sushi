@@ -11,9 +11,9 @@ interface CartState {
   items: ICartItem[];
 
   getItems: () => void;
+  updateItemQuantity: (id: number, quantity: number) => void;
+  deleteItem: (id: number) => void
 }
-
-
 
 export const useCartStore = create<CartState>()((set) => ({
   totalPrice: 0,
@@ -30,7 +30,7 @@ export const useCartStore = create<CartState>()((set) => ({
 
       set({
         items: data.data.cartItems,
-        totalPrice: calcTotalPrice({items: data.data}),
+        totalPrice: calcTotalPrice({ items: data.data }),
         loading: false,
       });
     } catch (error) {
@@ -41,6 +41,49 @@ export const useCartStore = create<CartState>()((set) => ({
     }
   },
 
+  updateItemQuantity: async (id, quantity) => {
+    try {
+      set({ loading: true, error: false });
+      await Api.cart.updateItemQuantity(id, quantity);
 
+      const newCart = await Api.cart.getCart();
 
+      if (!newCart)
+        return set({ error: true, totalPrice: 0, items: [], loading: false });
+
+      set({
+        items: newCart.data.cartItems,
+        totalPrice: calcTotalPrice({ items: newCart.data }),
+      });
+    } catch (error) {
+      set({ error: true });
+
+      console.log(error);
+    } finally {
+      set({ loading: false });
+    }
+  },
+
+  deleteItem: async (id) => {
+    try {
+      set({ loading: true, error: false });
+      await Api.cart.deleteItem(id);
+
+      const newCart = await Api.cart.getCart();
+
+      if (!newCart)
+        return set({ error: true, totalPrice: 0, items: [], loading: false });
+
+      set({
+        items: newCart.data.cartItems,
+        totalPrice: calcTotalPrice({ items: newCart.data }),
+      });
+    } catch (error) {
+      set({ error: true });
+
+      console.log(error);
+    } finally {
+      set({ loading: false });
+    }
+  },
 }));

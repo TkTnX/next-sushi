@@ -9,17 +9,20 @@ interface ICartDrawerProps {}
 const CartDrawer: React.FunctionComponent<
   React.PropsWithChildren<ICartDrawerProps>
 > = ({ children }) => {
-  const { getItems, items, totalPrice  } = useCartStore();
+  const { getItems, items, totalPrice, updateItemQuantity, deleteItem } = useCartStore();
   React.useEffect(() => {
     getItems();
   }, []);
 
-
-  const onClickCountBtn = async (id: number, quantity: number, type: "plus" | "minus") => {
+  const onClickCountBtn = async (
+    id: number,
+    quantity: number,
+    type: "plus" | "minus"
+  ) => {
     const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
 
+    updateItemQuantity(id, newQuantity);
   };
- 
 
   return (
     <Popover>
@@ -36,6 +39,7 @@ const CartDrawer: React.FunctionComponent<
               quantity={item.quantity}
               key={item.id}
               onClickCountBtn={onClickCountBtn}
+              deleteItem={deleteItem}
             />
           ))}
         </div>

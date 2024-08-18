@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
       include: {
         cartItems: {
           orderBy: {
-            createdAt: "desc",
+            quantity: "desc",
           },
           include: {
             productItem: true,
