@@ -14,6 +14,8 @@ const CartDrawer: React.FunctionComponent<
     getItems();
   }, []);
 
+  console.log(items)
+
   const onClickCountBtn = async (
     id: number,
     quantity: number,
@@ -38,6 +40,7 @@ const CartDrawer: React.FunctionComponent<
               productItem={item.productItem}
               quantity={item.quantity}
               key={item.id}
+              id={item.id}
               onClickCountBtn={onClickCountBtn}
               deleteItem={deleteItem}
             />

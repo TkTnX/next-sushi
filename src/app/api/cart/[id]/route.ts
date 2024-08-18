@@ -10,9 +10,11 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       return NextResponse.json({ error: "Token not found" });
     }
 
+    console.log(id)
+
     const cartItem = await prisma.cartItem.findFirst({
       where: {
-        id: id,
+        id,
       },
     });
 
@@ -48,9 +50,11 @@ export async function DELETE(
         return NextResponse.json({ error: "Token не найден" });
       }
 
+    console.log(id);
+    
       const cartItem = await prisma.cartItem.findFirst({
         where: {
-          id: id,
+          id,
         },
       });
 

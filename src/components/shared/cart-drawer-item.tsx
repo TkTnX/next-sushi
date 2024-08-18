@@ -7,6 +7,7 @@ import CartDrawerCountBtns from "./cart-drawer-count-btns";
 interface ICartDrawerItemProps {
   quantity: number;
   productItem: IProduct;
+  id: number
   onClickCountBtn: (
     id: number,
     quantity: number,
@@ -18,6 +19,7 @@ interface ICartDrawerItemProps {
 const CartDrawerItem: React.FunctionComponent<ICartDrawerItemProps> = ({
   quantity,
   productItem,
+  id,
   onClickCountBtn,
   deleteItem,
 }) => {
@@ -25,7 +27,7 @@ const CartDrawerItem: React.FunctionComponent<ICartDrawerItemProps> = ({
 
   return (
     <div className="flex items-center justify-between bg-[#f5f5f7] py-3 px-5 rounded-xl relative">
-      <button onClick={() => deleteItem(productItem.id)} className="group absolute -left-2">
+      <button onClick={() => deleteItem(id)} className="group absolute -left-2">
         <X
           size={17}
           className="group-hover:text-white group-hover:bg-red-600 rounded-md transition duration-200"
@@ -46,7 +48,7 @@ const CartDrawerItem: React.FunctionComponent<ICartDrawerItemProps> = ({
       <div className="flex items-center gap-4">
         <p className="text-sm text-black font-bold">{productItem.price} руб</p>
         <CartDrawerCountBtns
-          id={productItem.id}
+          id={id}
           quantity={quantity}
           onClickCountBtn={onClickCountBtn}
         />

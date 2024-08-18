@@ -93,8 +93,8 @@ model Cart {
 
     totalPrice Int @default(0)
 
-    user   User @relation(fields: [userId], references: [id])
-    userId Int  @unique
+    user   User? @relation(fields: [userId], references: [id])
+    userId Int?  @unique
 
     token String
 
