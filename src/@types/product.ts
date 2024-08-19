@@ -16,8 +16,8 @@ export interface IProduct {
 }
 
 
-export interface ICartItem extends IProduct { 
+export interface ICartItem { 
   quantity: number
-  productItem: IProduct
+  productId: number;
 }
 

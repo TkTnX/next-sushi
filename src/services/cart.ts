@@ -1,6 +1,7 @@
 import { prisma } from "@/Prisma/prisma-client";
 import { axiosInstance } from "./axios";
 import { ApiRoutes } from "./constants";
+import { ICartItem } from "@/@types/product";
 
 export const getCart = async () => {
   try {
@@ -19,4 +20,8 @@ export const updateItemQuantity = async (id: number, quantity: number): Promise<
 
 export const deleteItem = async (id: number) => {
   return (await axiosInstance.delete("/cart/" + id)).data
+}
+
+export const addToCart = async (values: ICartItem) => {
+  return (await axiosInstance.post(ApiRoutes.CART, values)).data
 }

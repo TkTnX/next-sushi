@@ -1,7 +1,8 @@
 "use client";
-import { IProduct } from "@/@types/product";
+import { ICartItem, IProduct } from "@/@types/product";
 import { useFilterHelp } from "@/hooks/use-filter-help";
 import { calculateIsNewProducts } from "@/lib/calculate-is-new-products";
+import { useCartStore } from "@/store/cartStore";
 import { useFilterStore } from "@/store/filterStore";
 import { Heart, Plus } from "lucide-react";
 import Image from "next/image";
@@ -13,6 +14,7 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
   imageUrl,
   weight,
   typeId,
+  id,
   exceptions,
   ingredients,
   createdAt,
@@ -21,12 +23,20 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
   const isNewProduct = calculateIsNewProducts(createdAt);
   const { selectedType, selectedException, selectedIngredients } =
     useFilterStore();
-  
+  const addItemCart = useCartStore((state) => state.addItemToCart)
   const { exception, checkIngredient } = useFilterHelp({
     exceptions: exceptions ?? [],
     ingredients: ingredients ?? [],
     selectedIngredients,
   });
+
+
+    const onClickAddToCart = () => {
+      addItemCart({
+        quantity: 1,
+        productId: id,
+      });
+    };
 
   // Фильтрация продуктов
   if (isNeedToFilter) {
@@ -79,7 +89,10 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
               size={24}
             />
           </button>
-          <button className="w-[76px] group bg-[#ccf5d5] rounded-xl flex justify-center items-center h-[48px]">
+          <button
+            onClick={onClickAddToCart}
+            className="w-[76px] group bg-[#ccf5d5] rounded-xl flex justify-center items-center h-[48px]"
+          >
             <Plus
               className="group-hover:rotate-45 transition duration-200"
               size={28}

@@ -5,6 +5,7 @@ import CartDrawerItem from "./cart-drawer-item";
 import { useCartStore } from "@/store/cartStore";
 import Image from "next/image";
 import Link from "next/link";
+import { ICartItem } from "@/@types/product";
 
 interface ICartDrawerProps {}
 
@@ -16,7 +17,6 @@ const CartDrawer: React.FunctionComponent<
     getItems();
   }, []);
 
-  console.log(items)
 
   const onClickCountBtn = async (
     id: number,
@@ -27,6 +27,8 @@ const CartDrawer: React.FunctionComponent<
 
     updateItemQuantity(id, newQuantity);
   };
+
+
 
   return (
     <Popover>
@@ -51,7 +53,10 @@ const CartDrawer: React.FunctionComponent<
                 Тут появятся товары, которые <br /> вы закажите
               </p>
 
-              <Link className="text-secondary bg-[#F5F5F7] py-4 rounded-xl hover:bg-secondary hover:text-white transition duration-200 mt-3" href="#!">
+              <Link
+                className="text-secondary bg-[#F5F5F7] py-4 rounded-xl hover:bg-secondary hover:text-white transition duration-200 mt-3"
+                href="#!"
+              >
                 История заказов
               </Link>
             </div>
@@ -61,7 +66,7 @@ const CartDrawer: React.FunctionComponent<
                 productItem={item.productItem}
                 quantity={item.quantity}
                 key={item.id}
-                id={item.id}
+                id={item.id ? item.id : 0}
                 onClickCountBtn={onClickCountBtn}
                 deleteItem={deleteItem}
               />

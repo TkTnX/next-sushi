@@ -1,4 +1,4 @@
-import { IProduct } from "@/@types/product";
+import { ICartItem, IProduct } from "@/@types/product";
 import { Minus, Plus, X } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";

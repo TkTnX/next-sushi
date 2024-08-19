@@ -1,6 +1,5 @@
 import { ICartItem } from "@/@types/product";
 import { calcTotalPrice } from "@/lib/calc-cart-total-price";
-import { prisma } from "@/Prisma/prisma-client";
 import { Api } from "@/services/api-client";
 import { create } from "zustand";
 
@@ -12,7 +11,8 @@ interface CartState {
 
   getItems: () => void;
   updateItemQuantity: (id: number, quantity: number) => void;
-  deleteItem: (id: number) => void
+  deleteItem: (id: number) => void;
+  addItemToCart: (values: ICartItem) => void;
 }
 
 export const useCartStore = create<CartState>()((set) => ({
@@ -68,6 +68,29 @@ export const useCartStore = create<CartState>()((set) => ({
     try {
       set({ loading: true, error: false });
       await Api.cart.deleteItem(id);
+
+      const newCart = await Api.cart.getCart();
+
+      if (!newCart)
+        return set({ error: true, totalPrice: 0, items: [], loading: false });
+
+      set({
+        items: newCart.data.cartItems,
+        totalPrice: calcTotalPrice({ items: newCart.data }),
+      });
+    } catch (error) {
+      set({ error: true });
+
+      console.log(error);
+    } finally {
+      set({ loading: false });
+    }
+  },
+
+  addItemToCart: async (values) => {
+    try {
+      set({ loading: true, error: false });
+      await Api.cart.addToCart(values);
 
       const newCart = await Api.cart.getCart();
 
