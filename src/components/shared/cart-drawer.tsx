@@ -12,23 +12,22 @@ interface ICartDrawerProps {}
 const CartDrawer: React.FunctionComponent<
   React.PropsWithChildren<ICartDrawerProps>
 > = ({ children }) => {
-  const { getItems, items, totalPrice, updateItemQuantity, deleteItem } = useCartStore();
+  const { getItems, items, totalPrice, updateItemQuantity, deleteItem } =
+    useCartStore();
   React.useEffect(() => {
     getItems();
   }, []);
-
 
   const onClickCountBtn = async (
     id: number,
     quantity: number,
     type: "plus" | "minus"
   ) => {
-    const newQuantity = type === "plus" ? quantity + 1 : quantity > 1 ? quantity - 1 : 1;
+    const newQuantity =
+      type === "plus" ? quantity + 1 : quantity > 1 ? quantity - 1 : 1;
 
     updateItemQuantity(id, newQuantity);
   };
-
-
 
   return (
     <Popover>
@@ -61,29 +60,31 @@ const CartDrawer: React.FunctionComponent<
               </Link>
             </div>
           ) : (
-            items.map((item) => (
-              <CartDrawerItem
-                productItem={item.productItem!}
-                quantity={item.quantity}
-                key={item.id}
-                id={item.id ? item.id : 0}
-                onClickCountBtn={onClickCountBtn}
-                deleteItem={deleteItem}
-              />
-            ))
+            <>
+              {items.map((item) => (
+                <CartDrawerItem
+                  productItem={item.productItem!}
+                  quantity={item.quantity}
+                  key={item.id}
+                  id={item.id ? item.id : 0}
+                  onClickCountBtn={onClickCountBtn}
+                  deleteItem={deleteItem}
+                />
+              ))}
+              <div className="py-6 px-8 bg-[#f5f5f7] flex items-center justify-between mt-10">
+                <div className="grid gap-1">
+                  <p className="font-normal text-sm text-[#9e9e9e]">Итого: </p>
+                  <h6 className="font-bold text-3xl text-black">
+                    {totalPrice}{" "}
+                    <span className="text-[#686870] text-xl">руб</span>
+                  </h6>
+                </div>
+                <button className="bg-secondary text-white py-4 px-6 rounded-xl hover:opacity-80">
+                  Оформить заказ
+                </button>
+              </div>
+            </>
           )}
-        </div>
-
-        <div className="py-6 px-8 bg-[#f5f5f7] flex items-center justify-between mt-10">
-          <div className="grid gap-1">
-            <p className="font-normal text-sm text-[#9e9e9e]">Итого: </p>
-            <h6 className="font-bold text-3xl text-black">
-              {totalPrice} <span className="text-[#686870] text-xl">руб</span>
-            </h6>
-          </div>
-          <button className="bg-secondary text-white py-4 px-6 rounded-xl hover:opacity-80">
-            Оформить заказ
-          </button>
         </div>
       </PopoverContent>
     </Popover>
