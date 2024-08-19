@@ -4,9 +4,10 @@ import { useFilterHelp } from "@/hooks/use-filter-help";
 import { calculateIsNewProducts } from "@/lib/calculate-is-new-products";
 import { useCartStore } from "@/store/cartStore";
 import { useFilterStore } from "@/store/filterStore";
-import { Heart, Plus } from "lucide-react";
+import { Heart, Loader, Plus } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
+import toast from "react-hot-toast";
 
 const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
   name,
@@ -23,26 +24,38 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
   const isNewProduct = calculateIsNewProducts(createdAt);
   const { selectedType, selectedException, selectedIngredients } =
     useFilterStore();
-  const addItemCart = useCartStore((state) => state.addItemToCart)
+  const addItemCart = useCartStore((state) => state.addItemToCart);
   const { exception, checkIngredient } = useFilterHelp({
     exceptions: exceptions ?? [],
     ingredients: ingredients ?? [],
     selectedIngredients,
   });
+  const [loadingId, setLoadingId] = React.useState<number | null>(null);
 
-
-    const onClickAddToCart = () => {
-      addItemCart({
+  const onClickAddToCart = async () => {
+    try {
+      setLoadingId(id)
+      await addItemCart({
         quantity: 1,
         productId: id,
       });
-    };
+
+      toast.success(`${name} - добавлено в корзину`);
+    } catch (error) {
+      toast.error(`Произошла ошибка при добавлении ${name} в корзину`);
+      console.log(error);
+    }
+    finally {
+      setLoadingId(null)
+    }
+  };
 
   // Фильтрация продуктов
   if (isNeedToFilter) {
     if (typeId !== selectedType && selectedType !== 1) return null;
     if (exception !== selectedException && selectedException !== 0) return null;
-    if (ingredients && selectedIngredients.length > 0 && checkIngredient) return null;
+    if (ingredients && selectedIngredients.length > 0 && checkIngredient)
+      return null;
   }
 
   return (
@@ -93,10 +106,14 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
             onClick={onClickAddToCart}
             className="w-[76px] group bg-[#ccf5d5] rounded-xl flex justify-center items-center h-[48px]"
           >
-            <Plus
-              className="group-hover:rotate-45 transition duration-200"
-              size={28}
-            />
+            {!loadingId ? (
+              <Plus
+                className="group-hover:rotate-45 transition duration-200"
+                size={28}
+              />
+            ) : (
+              <Loader className="animate-spin" />
+            )}
           </button>
         </div>
       </div>

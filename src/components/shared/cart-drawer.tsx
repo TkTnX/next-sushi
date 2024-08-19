@@ -63,7 +63,7 @@ const CartDrawer: React.FunctionComponent<
           ) : (
             items.map((item) => (
               <CartDrawerItem
-                productItem={item.productItem}
+                productItem={item.productItem!}
                 quantity={item.quantity}
                 key={item.id}
                 id={item.id ? item.id : 0}

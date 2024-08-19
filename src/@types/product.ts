@@ -19,5 +19,7 @@ export interface IProduct {
 export interface ICartItem { 
   quantity: number
   productId: number;
+  productItem?: IProduct;
+  id?: number
 }
 

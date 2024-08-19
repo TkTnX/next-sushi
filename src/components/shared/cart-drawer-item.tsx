@@ -1,5 +1,5 @@
-import { ICartItem, IProduct } from "@/@types/product";
-import { Minus, Plus, X } from "lucide-react";
+import { IProduct } from "@/@types/product";
+import { X } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
 import CartDrawerCountBtns from "./cart-drawer-count-btns";
@@ -7,13 +7,13 @@ import CartDrawerCountBtns from "./cart-drawer-count-btns";
 interface ICartDrawerItemProps {
   quantity: number;
   productItem: IProduct;
-  id: number
+  id: number;
   onClickCountBtn: (
     id: number,
     quantity: number,
     type: "plus" | "minus"
   ) => void;
-  deleteItem: (id: number) => void
+  deleteItem: (id: number) => void;
 }
 
 const CartDrawerItem: React.FunctionComponent<ICartDrawerItemProps> = ({
