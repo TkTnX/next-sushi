@@ -1,6 +1,4 @@
 import { prisma } from "@/Prisma/prisma-client";
-import { Cart } from "@prisma/client";
-import { NextResponse } from "next/server";
 
 export const findOrCreateCart = async (token: string) => {
     let userCart = await prisma.cart.findFirst({

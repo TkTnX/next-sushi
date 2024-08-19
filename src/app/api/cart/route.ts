@@ -2,6 +2,7 @@ import { prisma } from "@/Prisma/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { findOrCreateCart } from "@/lib/findOrCreateCart";
+import { updateCart } from "@/lib/update-cart";
 export async function GET(req: NextRequest) {
   try {
     const token = req.cookies.get("cartToken")?.value;
@@ -10,21 +11,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: "Токен не найден" });
     }
 
-    const data = await prisma.cart.findFirst({
-      where: {
-        token,
-      },
-      include: {
-        cartItems: {
-          orderBy: {
-            quantity: "desc",
-          },
-          include: {
-            productItem: true,
-          },
-        },
-      },
-    });
+    const data = await updateCart(token)
     return NextResponse.json(data);
   } catch (error) {
     console.log(error);
@@ -34,8 +21,6 @@ export async function GET(req: NextRequest) {
 interface IAddItemToCart {
   productId: number;
 }
-
-
 
 export async function POST(req: NextRequest) { 
   try {
@@ -77,20 +62,9 @@ export async function POST(req: NextRequest) {
 
    
 
-    const updatedCart = await prisma.cart.findFirst({
-      where: { token },
-      include: {
-        cartItems: {
-          orderBy: {
-            quantity: "desc",
-          },
-          include: {
-            productItem: true,
-          }
-        }
-      }
+    const updatedCart = await updateCart(token)
 
-    })
+
 
     const res = NextResponse.json(updatedCart);
     res.cookies.set("cartToken", token)

@@ -10,7 +10,7 @@ interface ICartDrawerCountBtnsProps {
 const CartDrawerCountBtns: React.FunctionComponent<ICartDrawerCountBtnsProps> = ({quantity, onClickCountBtn, id}) => {
   return (
     <div className="flex items-center gap-2">
-      <button onClick={() => onClickCountBtn(id, quantity, "minus")}>
+      <button className='disabled:opacity-50 transition duration-200' disabled={quantity === 1} onClick={() => onClickCountBtn(id, quantity, "minus")}>
         <Minus className="p-2 bg-white rounded-md w-8 h-8" />
       </button>
       <p className="text-sm text-black font-bold">{quantity}</p>
