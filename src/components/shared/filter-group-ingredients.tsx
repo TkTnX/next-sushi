@@ -4,8 +4,6 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import FilterGroupIngredientBtn from "./filter-group-ingredient-btn";
 import { useQueryParams } from "@/hooks/use-query-params";
-import { useSearchParams } from "next/navigation";
-
 export type IIngredient = {
   id: number;
   name: string;
@@ -20,8 +18,6 @@ const FilterGroupIngredients: React.FunctionComponent<
   IFilterGroupIngredientsProps
 > = ({ ingredients }) => {
   const { selectedIngredients, setSelectedIngredients } = useQueryParams();
-
-
   return (
     <ul className="flex items-center gap-4">
       {ingredients.slice(0, 4).map((ingredient, index) => (
@@ -29,8 +25,8 @@ const FilterGroupIngredients: React.FunctionComponent<
           <button
             onClick={() => setSelectedIngredients(ingredient.id)}
             className={cn(
-              "flex items-center border-2 border-white gap-2 bg-white rounded-xl py-2 px-3 text-black hover:bg-slate-100  hover:bg-opacity-80  transition duration-200",
-              selectedIngredients.includes(ingredient.id) && " border-primary"
+              "flex items-center border-2 border-white gap-2 bg-white rounded-xl py-2 px-3 text-black hover:bg-slate-100 hover:bg-opacity-80 transition duration-200",
+              selectedIngredients.includes(ingredient.id) && "border-primary"
             )}
           >
             <Image

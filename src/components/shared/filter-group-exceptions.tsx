@@ -19,10 +19,18 @@ const FilterGroupExceptions: React.FunctionComponent<
   IFilterGroupExceptionsProps
 > = ({ exceptions }) => {
   const { selectedException, setSelectedException } = useFilterStore();
+  const [loading, setLoading] = React.useState(true);
   const useParams = useSearchParams()
   React.useEffect(() => {
-    if (useParams.get("exceptions")) {
-      setSelectedException(Number(useParams.get("exceptions")));
+    try {
+      setLoading(true)
+      if (useParams.get("exceptions")) {
+        setSelectedException(Number(useParams.get("exceptions")));
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
     }
   }, []);
 
@@ -31,9 +39,10 @@ const FilterGroupExceptions: React.FunctionComponent<
       {exceptions.map((exception) => (
         <li key={exception.id}>
           <button
+            disabled={loading}
             onClick={() => setSelectedException(exception.id)}
             className={cn(
-              "flex items-center gap-2 bg-white rounded-xl py-3 px-4 text-black hover:bg-slate-100 border-2 border-white  hover:bg-opacity-80  transition duration-200",
+              "flex items-center gap-2 bg-white rounded-xl py-3 px-4 text-black hover:bg-slate-100 border-2 border-white  hover:bg-opacity-80  transition duration-200 disabled:opacity-50",
               selectedException === exception.id && " border-primary"
             )}
           >

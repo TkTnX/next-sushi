@@ -14,18 +14,16 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
   price,
   imageUrl,
   weight,
-  typeId,
   id,
   exceptions,
   ingredients,
   createdAt,
-  isNeedToFilter,
 }) => {
   const isNewProduct = calculateIsNewProducts(createdAt);
-  const { selectedType, selectedException, selectedIngredients } =
+  const {  selectedIngredients } =
     useFilterStore();
   const addItemCart = useCartStore((state) => state.addItemToCart);
-  const { exception, checkIngredient } = useFilterHelp({
+  const { exception } = useFilterHelp({
     exceptions: exceptions ?? [],
     ingredients: ingredients ?? [],
     selectedIngredients,
@@ -50,13 +48,7 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
     }
   };
 
-  // Фильтрация продуктов
-  if (isNeedToFilter) {
-    if (typeId !== selectedType && selectedType !== 1) return null;
-    if (exception !== selectedException && selectedException !== 0) return null;
-    if (ingredients && selectedIngredients.length > 0 && checkIngredient)
-      return null;
-  }
+
 
   return (
     <div className="rounded-xl p-6 max-w-[380px] bg-white h-full">
