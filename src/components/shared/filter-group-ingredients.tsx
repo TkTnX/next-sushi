@@ -1,10 +1,10 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
-import { useSet } from "react-use";
 import { cn } from "@/lib/utils";
-import { useFilterStore } from "@/store/filterStore";
 import FilterGroupIngredientBtn from "./filter-group-ingredient-btn";
+import { useQueryParams } from "@/hooks/use-query-params";
+import { useSearchParams } from "next/navigation";
 
 export type IIngredient = {
   id: number;
@@ -19,10 +19,9 @@ interface IFilterGroupIngredientsProps {
 const FilterGroupIngredients: React.FunctionComponent<
   IFilterGroupIngredientsProps
 > = ({ ingredients }) => {
-  const setSelectedIngredients = useFilterStore(
-    (state) => state.setSelectedIngredients
-  );
-  const selectedIngredients = useFilterStore((state) => state.selectedIngredients)
+  const { selectedIngredients, setSelectedIngredients } = useQueryParams();
+
+
   return (
     <ul className="flex items-center gap-4">
       {ingredients.slice(0, 4).map((ingredient, index) => (

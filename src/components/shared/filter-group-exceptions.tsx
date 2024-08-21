@@ -3,6 +3,7 @@ import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useFilterStore } from "@/store/filterStore";
+import { useSearchParams } from "next/navigation";
 
 type ExceptionType = {
   name: string;
@@ -17,14 +18,20 @@ interface IFilterGroupExceptionsProps {
 const FilterGroupExceptions: React.FunctionComponent<
   IFilterGroupExceptionsProps
 > = ({ exceptions }) => {
-  const selectedException = useFilterStore(state => state.selectedException)
-  const setActiveException = useFilterStore(state => state.setSelectedException)
+  const { selectedException, setSelectedException } = useFilterStore();
+  const useParams = useSearchParams()
+  React.useEffect(() => {
+    if (useParams.get("exceptions")) {
+      setSelectedException(Number(useParams.get("exceptions")));
+    }
+  }, []);
+
   return (
     <ul className="flex items-center gap-4 ">
       {exceptions.map((exception) => (
         <li key={exception.id}>
           <button
-            onClick={() => setActiveException(exception.id)}
+            onClick={() => setSelectedException(exception.id)}
             className={cn(
               "flex items-center gap-2 bg-white rounded-xl py-3 px-4 text-black hover:bg-slate-100 border-2 border-white  hover:bg-opacity-80  transition duration-200",
               selectedException === exception.id && " border-primary"
