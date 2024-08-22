@@ -19,9 +19,8 @@ const CategoryPage: React.FunctionComponent<ICategoryPageProps> = async ({
   searchParams,
 }) => {
   const types = await Api.types.getAllTypes();
-
   const category = await findProduct(Number(id), searchParams);
-
+  
   if (!category) return redirect("/");
   return (
     <div>

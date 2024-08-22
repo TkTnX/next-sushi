@@ -5,7 +5,6 @@ import CartDrawerItem from "./cart-drawer-item";
 import { useCartStore } from "@/store/cartStore";
 import Image from "next/image";
 import Link from "next/link";
-import { ICartItem } from "@/@types/product";
 import { cn } from "@/lib/utils";
 
 interface ICartDrawerProps {}

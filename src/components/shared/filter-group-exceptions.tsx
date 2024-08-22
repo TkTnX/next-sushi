@@ -20,6 +20,8 @@ const FilterGroupExceptions: React.FunctionComponent<
 > = ({ exceptions }) => {
   const { selectedException, setSelectedException } = useFilterStore();
   const [loading, setLoading] = React.useState(true);
+  const disabled = useFilterStore((state) => state.disabled);
+
   const useParams = useSearchParams()
   React.useEffect(() => {
     try {
@@ -35,7 +37,7 @@ const FilterGroupExceptions: React.FunctionComponent<
   }, []);
 
   return (
-    <ul className="flex items-center gap-4 ">
+    <ul className={cn("flex items-center gap-2 mt-8", {"opacity-50 pointer-events-none": disabled})}>
       {exceptions.map((exception) => (
         <li key={exception.id}>
           <button

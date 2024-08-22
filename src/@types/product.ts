@@ -1,7 +1,7 @@
 import { IIngredient } from "@/components/shared/filter-group-ingredients";
 
 export interface IProduct {
-  categoryId: any;
+  categoryId: number;
   id: number;
   name: string;
   description: string;
