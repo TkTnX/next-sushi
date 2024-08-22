@@ -3,11 +3,13 @@ import { X } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
 import CartDrawerCountBtns from "./cart-drawer-count-btns";
+import { cn } from "@/lib/utils";
 
 interface ICartDrawerItemProps {
   quantity: number;
   productItem: IProduct;
   id: number;
+  disabled?: boolean;
   onClickCountBtn: (
     id: number,
     quantity: number,
@@ -20,13 +22,19 @@ const CartDrawerItem: React.FunctionComponent<ICartDrawerItemProps> = ({
   quantity,
   productItem,
   id,
+  disabled,
   onClickCountBtn,
   deleteItem,
 }) => {
   if (!productItem) return null;
 
   return (
-    <div className="flex items-center justify-between bg-[#f5f5f7] py-3 px-5 rounded-xl relative">
+    <div
+      className={cn(
+        "flex items-center justify-between bg-[#f5f5f7] py-3 px-5 rounded-xl relative",
+        { "opacity-50 pointer-events-none": disabled }
+      )}
+    >
       <button onClick={() => deleteItem(id)} className="group absolute -left-2">
         <X
           size={17}

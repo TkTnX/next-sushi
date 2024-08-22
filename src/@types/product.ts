@@ -21,5 +21,6 @@ export interface ICartItem {
   productId: number;
   productItem?: IProduct;
   id?: number
+  disabled?: boolean
 }
 

@@ -6,13 +6,14 @@ import { useCartStore } from "@/store/cartStore";
 import Image from "next/image";
 import Link from "next/link";
 import { ICartItem } from "@/@types/product";
+import { cn } from "@/lib/utils";
 
 interface ICartDrawerProps {}
 
 const CartDrawer: React.FunctionComponent<
   React.PropsWithChildren<ICartDrawerProps>
 > = ({ children }) => {
-  const { getItems, items, totalPrice, updateItemQuantity, deleteItem } =
+  const { getItems, items, totalPrice, updateItemQuantity, deleteItem, loading } =
     useCartStore();
   React.useEffect(() => {
     getItems();
@@ -66,6 +67,7 @@ const CartDrawer: React.FunctionComponent<
                   productItem={item.productItem!}
                   quantity={item.quantity}
                   key={item.id}
+                  disabled={item.disabled}
                   id={item.id ? item.id : 0}
                   onClickCountBtn={onClickCountBtn}
                   deleteItem={deleteItem}
@@ -79,7 +81,12 @@ const CartDrawer: React.FunctionComponent<
                     <span className="text-[#686870] text-xl">руб</span>
                   </h6>
                 </div>
-                <button className="bg-secondary text-white py-4 px-6 rounded-xl hover:opacity-80">
+                <button
+                  className={cn(
+                    "bg-secondary text-white py-4 px-6 rounded-xl hover:opacity-80",
+                    { "opacity-50 pointer-events-none": loading }
+                  )}
+                >
                   Оформить заказ
                 </button>
               </div>
