@@ -16,6 +16,7 @@ interface ICartDrawerItemProps {
     type: "plus" | "minus"
   ) => void;
   deleteItem: (id: number) => void;
+  className?: string;
 }
 
 const CartDrawerItem: React.FunctionComponent<ICartDrawerItemProps> = ({
@@ -25,6 +26,7 @@ const CartDrawerItem: React.FunctionComponent<ICartDrawerItemProps> = ({
   disabled,
   onClickCountBtn,
   deleteItem,
+  className
 }) => {
   if (!productItem) return null;
 
@@ -32,7 +34,8 @@ const CartDrawerItem: React.FunctionComponent<ICartDrawerItemProps> = ({
     <div
       className={cn(
         "flex items-center justify-between bg-[#f5f5f7] py-3 px-5 rounded-xl relative",
-        { "opacity-50 pointer-events-none": disabled }
+        { "opacity-50 pointer-events-none": disabled },
+        className
       )}
     >
       <button onClick={() => deleteItem(id)} className="group absolute -left-2">

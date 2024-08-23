@@ -10,17 +10,19 @@ export const metadata: Metadata = {
   title: "Ninja Sushi",
 };
 
-export default function RootLayout({
+export default function AppLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="ru" suppressHydrationWarning={true}>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body
         className={cn("bg-[#f5f5f7] min-h-full container", inter.className)}
       >
-        <Header />
         {children}
         <Toaster />
       </body>
