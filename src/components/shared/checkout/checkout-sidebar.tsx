@@ -40,7 +40,7 @@ const CheckoutSidebar: React.FunctionComponent = () => {
             placeholder="Введите промокод"
             className="py-3 px-6 max-w-[214px] border-none"
           />
-          <Button className="text-secondary bg-white rounded-xl py-4 px-6 hover:text-white">
+          <Button type="button" className="text-secondary bg-white rounded-xl py-4 px-6 hover:text-white">
             Применить
           </Button>
         </div>
@@ -50,7 +50,7 @@ const CheckoutSidebar: React.FunctionComponent = () => {
           loading={loading}
         />
         {totalPrice < MIN_TOTAL_PRICE && (
-          <p className="text-primary mt-2">Минимальная сумма заказа 400 грн</p>
+          <p className="text-primary mt-2">Минимальная сумма заказа 400 руб.</p>
         )}
       </div>
     </div>

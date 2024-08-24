@@ -12,7 +12,10 @@ export default function CheckoutLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className={cn("bg-[#f5f5f7] min-h-full container")}>
+    <main
+      suppressHydrationWarning={true}
+      className={cn("bg-[#f5f5f7] min-h-full container")}
+    >
       <Header isCheckoutPage={true} />
       {children}
     </main>

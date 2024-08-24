@@ -38,7 +38,7 @@ const CartDrawerItem: React.FunctionComponent<ICartDrawerItemProps> = ({
         className
       )}
     >
-      <button onClick={() => deleteItem(id)} className="group absolute -left-2">
+      <button type="button" onClick={() => deleteItem(id)} className="group absolute -left-2">
         <X
           size={17}
           className="group-hover:text-white group-hover:bg-red-600 rounded-md transition duration-200"
