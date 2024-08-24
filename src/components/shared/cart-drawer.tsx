@@ -2,9 +2,6 @@
 import * as React from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import CartDrawerItem from "./cart-drawer-item";
-import Image from "next/image";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 import { useCart } from "@/hooks/use-cart";
 import CartTotalPrice from "./cart-total-price";
 import CartDrawerEmpty from "./cart-drawer-empty";
