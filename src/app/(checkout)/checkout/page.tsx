@@ -5,9 +5,18 @@ import CheckoutDelivery from "@/components/shared/checkout/checkout-delivery";
 import CheckoutPersonalData from "@/components/shared/checkout/checkout-personal-data";
 import CheckoutSidebar from "@/components/shared/checkout/checkout-sidebar";
 import * as React from "react";
-import { checkoutFormSchema, CheckoutFormType } from "@/components/shared/checkout/checkout-form-schema";
+import {
+  checkoutFormSchema,
+  CheckoutFormType,
+} from "@/components/shared/checkout/checkout-form-schema";
+import { useCartStore } from "@/store/cartStore";
+import { cn } from "@/lib/utils";
+import { createOrder } from "@/app/actions";
+import toast from "react-hot-toast";
 
 const CheckoutPage: React.FunctionComponent = () => {
+  const [submitting, setSubmitting] = React.useState(false);
+  const loading = useCartStore((state) => state.loading);
   const form = useForm<CheckoutFormType>({
     resolver: zodResolver(checkoutFormSchema),
     defaultValues: {
@@ -17,11 +26,29 @@ const CheckoutPage: React.FunctionComponent = () => {
       phone: "",
       address: "",
       comment: "",
-    }
+    },
   });
 
-  const onSubmit: SubmitHandler<CheckoutFormType> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<CheckoutFormType> = async (data) => {
+    try {
+      setSubmitting(true);
+      const url = await createOrder(data);
+
+      toast.success("Заказ оформлен! Переход к оплате...", {
+        icon: "🛒",
+      });
+
+      if (url) {
+        window.location.href = url;
+      }
+      
+    } catch (error) {
+      console.log(error);
+      toast.error("Произошла ошибка при оформлении заказа", {
+        icon: "🚨",
+      });
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -32,14 +59,18 @@ const CheckoutPage: React.FunctionComponent = () => {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="mt-6 flex items-start justify-between mb-20 gap-[153px]">
             {/* Левая часть */}
-            <div className="grid gap-5 flex-1">
+            <div
+              className={cn("grid gap-5 flex-1", {
+                "opacity-50 pointer-events-none": loading,
+              })}
+            >
               <CheckoutPersonalData />
 
               <CheckoutDelivery />
             </div>
 
             {/* Правая часть */}
-            <CheckoutSidebar />
+            <CheckoutSidebar submitting={submitting} />
           </div>
         </form>
       </FormProvider>
