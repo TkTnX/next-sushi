@@ -1,6 +1,8 @@
 "use server";
 
 import { CheckoutFormType } from "@/components/shared/checkout/checkout-form-schema";
+import { PayOrder } from "@/components/shared/email-templates/pay-order";
+import { sendEmail } from "@/lib/send-email";
 import { prisma } from "@/Prisma/prisma-client";
 import { OrderStatus } from "@prisma/client";
 import { cookies } from "next/headers";
@@ -55,24 +57,34 @@ export async function createOrder(data: CheckoutFormType) {
         userId: userCart.userId,
       },
     });
-      
-      await prisma.cart.update({
-          where: {
-              id: userCart.id
-          },
-          data: {
-              totalPrice: 0
-          }
-      })
 
-      await prisma.cartItem.deleteMany({
-        where: {
-          cartId: userCart.id
-        }
-      })
+    await prisma.cart.update({
+      where: {
+        id: userCart.id,
+      },
+      data: {
+        totalPrice: 0,
+      },
+    });
 
-      return "https://youtube.com"
-      
+    await prisma.cartItem.deleteMany({
+      where: {
+        cartId: userCart.id,
+      },
+    });
+
+    await sendEmail(
+      data.email,
+      `Заказ №${order.id}`,
+      PayOrder({
+        orderId: order.id,
+        fullName: data.firstName + " " + data.lastName,
+        payLink: "https://youtube.com",
+        totalPrice: userCart.totalPrice,
+      })
+    );
+
+    // return "https://youtube.com";
   } catch (error) {
     console.log(error);
   }
