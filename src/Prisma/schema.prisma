@@ -172,6 +172,18 @@ model VerificationCode {
     @@unique([code, userId])
 }
 
+model Promocode {
+    id Int @id @default(autoincrement())
+
+    code String
+    discount Int
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+
+    
+}
+
 enum OrderStatus {
     PENDING
     SUCCEEDED

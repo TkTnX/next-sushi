@@ -3,6 +3,7 @@ import {
   exceptions,
   ingredients,
   products,
+  promocodes,
   types,
 } from "./constants";
 import { prisma } from "./prisma-client";
@@ -77,6 +78,10 @@ async function up() {
       },
     ]
   })
+
+  await prisma.promocode.createMany({
+    data: promocodes,
+  })
 }
 
 async function down() {
@@ -88,6 +93,7 @@ async function down() {
   await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Cart" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "CartItem" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Promocode" RESTART IDENTITY CASCADE`;
 
 }
 

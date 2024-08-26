@@ -4,19 +4,23 @@ import * as React from "react";
 import { Skeleton } from "../ui/skeleton";
 
 interface ICartTotalPriceProps {
+  submitting?: boolean;
   totalPrice: number;
   loading?: boolean;
   className?: string;
   link?: string;
   minTotalPrice?: number;
+  discount?: number;
 }
 
 const CartTotalPrice: React.FunctionComponent<ICartTotalPriceProps> = ({
+  submitting,
   totalPrice,
   loading,
   className,
   link,
   minTotalPrice,
+  discount,
 }) => {
   return (
     <div
@@ -30,6 +34,7 @@ const CartTotalPrice: React.FunctionComponent<ICartTotalPriceProps> = ({
         <h6 className="font-bold text-3xl text-black flex items-end gap-2">
           {loading ? <Skeleton className="w-[55px] h-[36px]" /> : totalPrice}{" "}
           <span className="text-[#686870] text-xl">руб</span>
+          {discount !== 0 && <span className="text-red-500 text-xs">с учётом скидки {discount}%</span>}
         </h6>
       </div>
       {link ? (
@@ -44,7 +49,9 @@ const CartTotalPrice: React.FunctionComponent<ICartTotalPriceProps> = ({
         </Link>
       ) : (
         <button
-          disabled={minTotalPrice ? totalPrice < minTotalPrice : false}
+          disabled={
+            minTotalPrice ? totalPrice < minTotalPrice || submitting : false
+          }
           className={cn(
             "bg-secondary text-white py-4 px-6 rounded-xl hover:opacity-80 disabled:opacity-50",
             { "opacity-50 pointer-events-none": loading }

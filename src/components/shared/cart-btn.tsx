@@ -13,7 +13,7 @@ const CartBtn: React.FunctionComponent = () => {
     <div>
       <CartDrawer>
         {loading ? (
-          <div className="w-[131px] h-[56px]  border border-[#d2d2d7] rounded-2xl p-4 text-[#686870] flex items-center justify-center">
+          <div className="w-[131px] h-[56px]  border border-[#d2d2d7] rounded-2xl p-4 text-[#686870] flex items-center justify-center pointer-events-none">
             <Loader className="animate-spin" />
           </div>
         ) : (

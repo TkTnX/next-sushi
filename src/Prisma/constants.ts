@@ -490,3 +490,18 @@ export const ingredients = [
     name: "Помидор",
   },
 ];
+
+export const promocodes = [
+  {
+    code: "FIRSTPROMO",
+    discount: 50,
+  },
+  {
+    code: "SECONDPROMO",
+    discount: 30,
+  },
+  {
+    code: "TIMURTOP",
+    discount: 100,
+  },
+] 

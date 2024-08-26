@@ -7,6 +7,7 @@ interface CartState {
   totalPrice: number;
   loading: boolean;
   error: boolean;
+  discount: number;
   disabled: boolean;
   items: ICartItem[];
 
@@ -14,12 +15,14 @@ interface CartState {
   updateItemQuantity: (id: number, quantity: number) => void;
   deleteItem: (id: number) => void;
   addItemToCart: (values: ICartItem) => void;
+  setDiscount: (discount: number) => void;
 }
 
 export const useCartStore = create<CartState>()((set) => ({
   totalPrice: 0,
   loading: false,
   error: false,
+  discount: 0,
   disabled: false,
   items: [],
   getItems: async () => {
@@ -130,4 +133,6 @@ export const useCartStore = create<CartState>()((set) => ({
       set({ loading: false });
     }
   },
+
+  setDiscount: (discount) => set({ discount }),
 }));

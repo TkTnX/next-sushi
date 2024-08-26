@@ -59,7 +59,7 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
           </p>
         )}
         <Image src={imageUrl} alt={name} width={331} height={290} />
-        {exception && (
+        {exception ? (
           <p className="absolute  bottom-3">
             <Image
               src={`/exceptions/0${exception}.svg`}
@@ -68,7 +68,7 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
               height={27}
             />
           </p>
-        )}
+        ) : ''}
       </div>
       <div>
         <h3 className="font-bold text-3xl text-black">{name}</h3>

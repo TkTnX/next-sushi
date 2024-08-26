@@ -1,6 +1,7 @@
 "use server";
 
 import { CheckoutFormType } from "@/components/shared/checkout/checkout-form-schema";
+import { OrderSuccess } from "@/components/shared/email-templates/order-success";
 import { PayOrder } from "@/components/shared/email-templates/pay-order";
 import { sendEmail } from "@/lib/send-email";
 import { prisma } from "@/Prisma/prisma-client";
@@ -73,7 +74,8 @@ export async function createOrder(data: CheckoutFormType) {
       },
     });
 
-    await sendEmail(
+
+    const email = await sendEmail(
       data.email,
       `Заказ №${order.id}`,
       PayOrder({
@@ -84,7 +86,45 @@ export async function createOrder(data: CheckoutFormType) {
       })
     );
 
-    // return "https://youtube.com";
+    if (email) {
+      await prisma.order.update({
+        where: {
+          id: order.id,
+        },
+        data: {
+          status: OrderStatus.SUCCEEDED,
+        },
+      });
+
+      await sendEmail(
+        data.email,
+        `Заказ №${order.id} - успешно!`,
+        OrderSuccess({
+          orderId: order.id,
+          fullName: data.firstName + " " + data.lastName,
+        })
+      );
+    } else {
+      await prisma.order.update({
+        where: {
+          id: order.id,
+        },
+        data: {
+          status: OrderStatus.CANCELLED,
+        },
+      });
+
+      await sendEmail(
+        data.email,
+        `Заказ №${order.id} - неудача!`,
+        OrderSuccess({
+          orderId: order.id,
+          fullName: data.firstName + " " + data.lastName,
+        })
+      );
+    }
+
+    return "http://localhost:3000?paid";
   } catch (error) {
     console.log(error);
   }
