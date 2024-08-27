@@ -82,3 +82,12 @@ html {
 .container {
   @apply max-w-[1592px] mx-auto px-2;
 }
+
+
+html body[data-scroll-locked] {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+
+}

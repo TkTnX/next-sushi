@@ -6,6 +6,7 @@ import Navbar from "./navbar";
 import Userbar from "./userbar";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
+import AuthModal from "./modals/auth-modal";
 
 export interface IHeaderProps {
   isCheckoutPage?: boolean;
@@ -14,16 +15,16 @@ export interface IHeaderProps {
 const Header: React.FunctionComponent<IHeaderProps> = ({
   isCheckoutPage = false,
 }) => {
-  const searchParams = useSearchParams()
-  const router = useRouter()
+  const [openAuthModal, setOpenModal] = React.useState(false)
+  const searchParams = useSearchParams();
+  const router = useRouter();
   React.useEffect(() => {
     if (searchParams.has("paid")) {
       setTimeout(() => {
         toast.success("Заказ успешно оплачен! Информация отправлена на почту");
-        
       }, 500);
 
-      router.push("/")
+      router.push("/");
     }
   }, []);
 
@@ -38,7 +39,8 @@ const Header: React.FunctionComponent<IHeaderProps> = ({
       </div>
 
       <div>
-        <Userbar isCheckoutPage={isCheckoutPage} />
+        <AuthModal open={openAuthModal} onClose={() => setOpenModal(false)} />
+        <Userbar setOpenAuthModal={() => setOpenModal(prev => !prev)} isCheckoutPage={isCheckoutPage} />
       </div>
     </header>
   );
