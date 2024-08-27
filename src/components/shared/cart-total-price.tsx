@@ -34,7 +34,7 @@ const CartTotalPrice: React.FunctionComponent<ICartTotalPriceProps> = ({
         <h6 className="font-bold text-3xl text-black flex items-end gap-2">
           {loading ? <Skeleton className="w-[55px] h-[36px]" /> : totalPrice}{" "}
           <span className="text-[#686870] text-xl">руб</span>
-          {discount !== 0 && <span className="text-red-500 text-xs">с учётом скидки {discount}%</span>}
+          {discount !== 0 && discount && <span className="text-red-500 text-xs">с учётом скидки {discount}%</span>}
         </h6>
       </div>
       {link ? (

@@ -7,6 +7,9 @@ import {
   types,
 } from "./constants";
 import { prisma } from "./prisma-client";
+import bcrypt from "bcrypt";
+
+const hash = (password: string, salt: number) => bcrypt.hashSync(password, salt)
 
 async function up() {
   await prisma.category.createMany({
@@ -50,7 +53,7 @@ async function up() {
     data: {
       fullName: "timurAdmin",
       email: "admin",
-      password: "admin",
+      password: hash("admin", 10),
       role: "ADMIN",
       verificated: new Date(),
     },

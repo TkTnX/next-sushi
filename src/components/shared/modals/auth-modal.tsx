@@ -5,6 +5,7 @@ import Image from "next/image";
 import * as React from "react";
 import AuthBtn from "../auth-btn";
 import { Input } from "@/components/ui/input";
+import LoginForm from "../forms/login-form";
 
 interface IAuthModalProps {
   open: boolean;
@@ -19,6 +20,8 @@ const AuthModal: React.FunctionComponent<IAuthModalProps> = ({
     onClose();
   };
 
+  // TODO: bcrypt для паролей
+
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="p-6 w-[460px]">
@@ -26,21 +29,10 @@ const AuthModal: React.FunctionComponent<IAuthModalProps> = ({
           Авторизация
         </DialogTitle>
         <p className="text-center    text-[#686870]">
-          Введите ваш номер телефона:
+          Введите вашу почту и пароль:
         </p>
         {/* FORM */}
-        <form>
-          <label className="grid w-full gap-2 text-[#9E9E9E]">
-            Почта
-            <Input placeholder="Введите почту" className="text-black" />
-            <Button
-              variant="default"
-              className="bg-secondary text-white mt-3 py-4"
-            >
-              Войти по почте
-            </Button>
-          </label>
-        </form>
+        <LoginForm />
 
         <p className="text-[#9E9E9E] mt-4 text-center">Или</p>
 
