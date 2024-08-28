@@ -1,10 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { signIn } from "next-auth/react";
-import Image from "next/image";
 import * as React from "react";
 import AuthBtn from "../auth-btn";
-import { Input } from "@/components/ui/input";
 import LoginForm from "../forms/login-form";
 
 interface IAuthModalProps {
@@ -20,7 +16,6 @@ const AuthModal: React.FunctionComponent<IAuthModalProps> = ({
     onClose();
   };
 
-  // TODO: bcrypt для паролей
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
@@ -32,7 +27,7 @@ const AuthModal: React.FunctionComponent<IAuthModalProps> = ({
           Введите вашу почту и пароль:
         </p>
         {/* FORM */}
-        <LoginForm />
+        <LoginForm onClose={handleClose} />
 
         <p className="text-[#9E9E9E] mt-4 text-center">Или</p>
 

@@ -16,6 +16,9 @@ const Userbar: React.FunctionComponent<IUserbarProps> = ({
   isCheckoutPage,
 }) => {
   const { data: session } = useSession();
+
+  console.log(session)
+
   return (
     <div className="flex items-center gap-3">
       {/* Кнопка уведомлений */}

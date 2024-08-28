@@ -1,6 +1,6 @@
 import {z} from "zod"
 
-const passwordSchema = z.string().min(6, "Пароль должен содержать не менее 6 символов")
+const passwordSchema = z.string().min(4, "Пароль должен содержать не менее 4 символов")
 
 export const loginFormSchema = z.object({
     email: z.string().email("Неверный адрес электронной почты"),
