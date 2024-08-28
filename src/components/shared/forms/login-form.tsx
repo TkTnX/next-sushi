@@ -51,7 +51,7 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = ({onClose}) => {
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="grid w-full gap-2" onSubmit={form.handleSubmit(onSubmit)}>
         <FormInput
           label="Почта"
           type="email"

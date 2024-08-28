@@ -15,6 +15,7 @@ export interface IHeaderProps {
 const Header: React.FunctionComponent<IHeaderProps> = ({
   isCheckoutPage = false,
 }) => {
+  const [type, setType] = React.useState<"login" | "register">("login")
   const [openAuthModal, setOpenModal] = React.useState(false)
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -39,7 +40,10 @@ const Header: React.FunctionComponent<IHeaderProps> = ({
       </div>
 
       <div>
-        <AuthModal open={openAuthModal} onClose={() => setOpenModal(false)} />
+        <AuthModal open={openAuthModal} type={type} setType={setType} onClose={() => setOpenModal(false)} />
+        
+        
+
         <Userbar setOpenAuthModal={() => setOpenModal(prev => !prev)} isCheckoutPage={isCheckoutPage} />
       </div>
     </header>
