@@ -2,12 +2,21 @@ import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/Prisma/prisma-client";
-import { compare } from "bcrypt";
+import { compare, hashSync } from "bcrypt";
 const handler = NextAuth({
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID!,
       clientSecret: process.env.GITHUB_SECRET!,
+      profile(profile) {
+        return {
+          id: profile.id.toString(),
+          name: profile.name || profile.login,
+          email: profile.email,
+          image: profile.avatar_url,
+          role: "USER",
+        };
+      },
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -54,9 +63,63 @@ const handler = NextAuth({
   },
 
   callbacks: {
+    async signIn({ user, account }) {
+      try {
+        if (account?.provider === "credentials") {
+          return true;
+        }
+
+        if (!user.email) {
+          return false;
+        }
+
+        const findUser = await prisma.user.findFirst({
+          where: {
+            OR: [
+              {
+                provider: account?.provider,
+                providerId: account?.providerAccountId,
+              },
+              { email: user.email },
+            ],
+          },
+        });
+
+        if (findUser) {
+          await prisma.user.update({
+            where: {
+              id: findUser.id,
+            },
+            data: {
+              provider: account?.provider,
+              providerId: account?.providerAccountId,
+            },
+          });
+
+          return true;
+        }
+
+        await prisma.user.create({
+          data: {
+            email: user.email,
+            fullName: user.name || "User #" + user.id,
+            password: hashSync(Math.random().toString(36).slice(-8), 10),
+            verificated: new Date(),
+            provider: account?.provider,
+            providerId: account?.providerAccountId,
+            role: "USER",
+          },
+        });
+
+        return true
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    },
     async jwt({ token }) {
       if (!token) {
-        return null;
+        throw new Error("Токен не найден");
       }
 
       const findUser = await prisma.user.findFirst({
@@ -68,7 +131,7 @@ const handler = NextAuth({
       if (!findUser) {
         throw new Error("Пользователь не найден");
       } else {
-        token.id = findUser.id;
+        token.id = String(findUser.id);
         token.email = findUser.email;
         token.role = findUser.role;
         token.fullName = findUser.fullName;
@@ -83,8 +146,8 @@ const handler = NextAuth({
         session.user.role = token.role;
       }
 
-      return session
-    }
+      return session;
+    },
   },
 });
 

@@ -124,7 +124,7 @@ export async function createOrder(data: CheckoutFormType) {
       );
     }
 
-    return "http://localhost:3000?paid";
+    return `http://localhost:3000/order-info/${order.id}?paid`;
   } catch (error) {
     console.log(error);
   }

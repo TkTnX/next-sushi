@@ -33,7 +33,6 @@ const CheckoutPage: React.FunctionComponent = () => {
     try {
       setSubmitting(true);
       const url = await createOrder(data);
-
       toast.success("Заказ оформлен! Переход к оплате...", {
         icon: "🛒",
       });
