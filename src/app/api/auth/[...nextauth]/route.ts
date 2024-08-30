@@ -1,9 +1,10 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/Prisma/prisma-client";
 import { compare, hashSync } from "bcrypt";
-const handler = NextAuth({
+
+export const authOptions: AuthOptions = {
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID!,
@@ -19,7 +20,7 @@ const handler = NextAuth({
       },
     }),
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
@@ -76,11 +77,11 @@ const handler = NextAuth({
         const findUser = await prisma.user.findFirst({
           where: {
             OR: [
+              { email: user.email },
               {
                 provider: account?.provider,
                 providerId: account?.providerAccountId,
               },
-              { email: user.email },
             ],
           },
         });
@@ -111,7 +112,7 @@ const handler = NextAuth({
           },
         });
 
-        return true
+        return true;
       } catch (error) {
         console.log(error);
         return false;
@@ -149,6 +150,8 @@ const handler = NextAuth({
       return session;
     },
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

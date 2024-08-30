@@ -7,8 +7,8 @@ import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 
 interface IUserbarProps {
-  setOpenAuthModal: () => void
-  isCheckoutPage: boolean
+  setOpenAuthModal: () => void;
+  isCheckoutPage: boolean;
 }
 
 const Userbar: React.FunctionComponent<IUserbarProps> = ({
@@ -16,8 +16,6 @@ const Userbar: React.FunctionComponent<IUserbarProps> = ({
   isCheckoutPage,
 }) => {
   const { data: session } = useSession();
-
-  console.log(session)
 
   return (
     <div className="flex items-center gap-3">
@@ -50,12 +48,7 @@ const Userbar: React.FunctionComponent<IUserbarProps> = ({
         </button>
       ) : (
         <Link href="/profile">
-          <button
-            onClick={() =>
-              signIn("github", { callbackUrl: "/", redirect: true })
-            }
-            className="w-[56px] h-[56px] border border-[#d2d2d7] rounded-2xl p-4 group hover:bg-primary hover:border-primary transition duration-200"
-          >
+          <button className="w-[56px] h-[56px] border border-[#d2d2d7] rounded-2xl p-4 group hover:bg-primary hover:border-primary transition duration-200">
             <UserRoundCheckIcon
               className="stroke-[#686870] group-hover:stroke-white transition duration-200"
               size={24}

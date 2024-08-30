@@ -3,9 +3,15 @@
 import { CheckoutFormType } from "@/components/shared/checkout/checkout-form-schema";
 import { OrderSuccess } from "@/components/shared/email-templates/order-success";
 import { PayOrder } from "@/components/shared/email-templates/pay-order";
+import {
+  ChangeUserFormData,
+  RegisterFormData,
+} from "@/components/shared/forms/schemas";
+import { getUserSession } from "@/lib/get-user-session";
 import { sendEmail } from "@/lib/send-email";
 import { prisma } from "@/Prisma/prisma-client";
 import { OrderStatus } from "@prisma/client";
+import { hashSync } from "bcrypt";
 import { cookies } from "next/headers";
 
 export async function createOrder(data: CheckoutFormType) {
@@ -74,7 +80,6 @@ export async function createOrder(data: CheckoutFormType) {
       },
     });
 
-
     const email = await sendEmail(
       data.email,
       `Заказ №${order.id}`,
@@ -125,6 +130,41 @@ export async function createOrder(data: CheckoutFormType) {
     }
 
     return `http://localhost:3000/order-info/${order.id}?paid`;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function updateUserInformation(data: ChangeUserFormData) {
+  try {
+    const currentUser = await getUserSession();
+    if (!currentUser) {
+      throw new Error("Пользователь не найден");
+    }
+
+    const findUser = await prisma.user.findFirst({
+      where: {
+        id: Number(currentUser.id),
+      },
+    });
+
+    if (!findUser) {
+      throw new Error("Пользователь не найден");
+    }
+
+    await prisma.user.update({
+      where: {
+        id: Number(currentUser.id),
+      },
+      data: {
+        fullName: data.fullName !== "" ? data.fullName : findUser.fullName,
+        email: data.email !== "" ? data.email : findUser.email,
+        password:
+          data.password !== ""
+            ? hashSync(data.password as string, 15)
+            : findUser.password,
+      },
+    });
   } catch (error) {
     console.log(error);
   }

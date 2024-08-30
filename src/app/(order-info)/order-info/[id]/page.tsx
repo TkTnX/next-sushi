@@ -1,8 +1,6 @@
 import OrderInfoItem from "@/components/shared/order-info-item";
 import WhiteBox from "@/components/shared/white-box";
-import { prisma } from "@/Prisma/prisma-client";
 import { Api } from "@/services/api-client";
-import { CartItem } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
