@@ -3,6 +3,8 @@
 import { CheckoutFormType } from "@/components/shared/checkout/checkout-form-schema";
 import { OrderSuccess } from "@/components/shared/email-templates/order-success";
 import { PayOrder } from "@/components/shared/email-templates/pay-order";
+import VerifyCodeTemplate from "@/components/shared/email-templates/verify-code-template";
+
 import {
   ChangeUserFormData,
   RegisterFormData,
@@ -167,5 +169,61 @@ export async function updateUserInformation(data: ChangeUserFormData) {
     });
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function registerUser(data: RegisterFormData) {
+  try {
+    if (!data) {
+      throw new Error();
+    }
+
+    const user = await prisma.user.findFirst({
+      where: {
+        email: data.email,
+      },
+    });
+
+    if (user) {
+      if (user.verificated) {
+        return new Error("Вы уже зарегистрированы");
+      }
+
+      return new Error("Пользователь существует");
+    }
+
+    const newUser = await prisma.user.create({
+      data: {
+        fullName: data.fullName,
+        email: data.email,
+        password: hashSync(data.password, 15),
+      },
+    });
+
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+
+    const verificationCode = await prisma.verificationCode.create({
+      data: {
+        code,
+        userId: newUser.id,
+      },
+    });
+
+    if (!verificationCode) {
+      return new Error("Не удалось создать код подтверждения");
+    }
+
+    await sendEmail(
+      data.email,
+      "Next Sushi | Подтвердите почту",
+      VerifyCodeTemplate({
+        code: code,
+      })
+    );
+
+ 
+  } catch (error) {
+    console.error(error);
+    console.log("[REGISTER_USER_FUNC] Error: ", error);
   }
 }

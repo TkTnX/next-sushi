@@ -2,6 +2,8 @@
 import Image from "next/image";
 import * as React from "react";
 import ProfileEdit from "../modals/profile-edit";
+import { Button } from "@/components/ui/button";
+import { signOut } from "next-auth/react";
 
 interface IProfileUserInfoProps {
   name: string;
@@ -16,32 +18,37 @@ const ProfileUserInfo: React.FunctionComponent<IProfileUserInfoProps> = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   return (
-    <div className="bg-white flex items-start gap-3 w-full p-4 rounded-xl mt-4">
-      <div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="rounded-2xl min-w-[55px] min-h-[55px]"
-          src={image ? image : "/icons/userIcon.png"}
-          alt="user"
-          width={55}
-          height={55}
+    <div className="bg-white   p-4 rounded-xl mt-4">
+      <div className="flex items-start gap-3 w-full">
+        <div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="rounded-2xl min-w-[55px] min-h-[55px]"
+            src={image ? image : "/icons/userIcon.png"}
+            alt="user"
+            width={55}
+            height={55}
+          />
+        </div>
+        <div className="w-full">
+          <div className="flex items-center justify-between w-full">
+            <h5>{name}</h5>
+            <button onClick={() => setOpen(true)}>
+              <Image src={"/icons/pen.svg"} alt="edit" width={24} height={24} />
+            </button>
+          </div>
+          <p className="text-[#9E9E9E] text-xs">{email}</p>
+        </div>
+        <ProfileEdit
+          name={name}
+          email={email}
+          open={open}
+          onClose={() => setOpen(false)}
         />
       </div>
-      <div className="w-full">
-        <div className="flex items-center justify-between w-full">
-          <h5>{name}</h5>
-          <button onClick={() => setOpen(true)}>
-            <Image src={"/icons/pen.svg"} alt="edit" width={24} height={24} />
-          </button>
-        </div>
-        <p className="text-[#9E9E9E] text-xs">{email}</p>
-      </div>
-      <ProfileEdit
-        name={name}
-        email={email}
-        open={open}
-        onClose={() => setOpen(false)}
-      />
+      <Button className="w-full mt-2" onClick={() => signOut({ callbackUrl: "/" })}>
+        Выйти из аккаунта
+      </Button>
     </div>
   );
 };

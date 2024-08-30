@@ -15,17 +15,28 @@ export interface IHeaderProps {
 const Header: React.FunctionComponent<IHeaderProps> = ({
   isCheckoutPage = false,
 }) => {
-  const [type, setType] = React.useState<"login" | "register">("login")
-  const [openAuthModal, setOpenModal] = React.useState(false)
+  const [type, setType] = React.useState<"login" | "register">("login");
+  const [openAuthModal, setOpenModal] = React.useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
   React.useEffect(() => {
+    let toastText = "";
     if (searchParams.has("paid")) {
-      setTimeout(() => {
-        toast.success("Заказ успешно оплачен! Информация отправлена на почту");
-      }, 500);
+      toastText = "Заказ успешно оплачен! Информация отправлена на почту";
+    }
 
-      router.push("/");
+    if (searchParams.has("verified")) {
+      toastText = "Ваша почта подтверждена! Теперь вы можете войти в аккаунт!";
+    }
+
+    if (toastText) {
+      setTimeout(() => {
+        toast.success(toastText, {
+          icon: "✅",
+        });
+
+        router.replace("/");
+      }, 500);
     }
   }, []);
 
@@ -40,11 +51,17 @@ const Header: React.FunctionComponent<IHeaderProps> = ({
       </div>
 
       <div>
-        <AuthModal open={openAuthModal} type={type} setType={setType} onClose={() => setOpenModal(false)} />
-        
-        
+        <AuthModal
+          open={openAuthModal}
+          type={type}
+          setType={setType}
+          onClose={() => setOpenModal(false)}
+        />
 
-        <Userbar setOpenAuthModal={() => setOpenModal(prev => !prev)} isCheckoutPage={isCheckoutPage} />
+        <Userbar
+          setOpenAuthModal={() => setOpenModal((prev) => !prev)}
+          isCheckoutPage={isCheckoutPage}
+        />
       </div>
     </header>
   );

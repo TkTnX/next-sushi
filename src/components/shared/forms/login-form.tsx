@@ -67,7 +67,7 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = ({onClose}) => {
           placeholder="Пароль"
         />
 
-        <Button variant="default" className="bg-secondary text-white mt-3 py-4">
+        <Button disabled={form.formState.isSubmitting} variant="default" className="bg-secondary text-white mt-3 py-4">
           Войти в аккаунт
         </Button>
       </form>
