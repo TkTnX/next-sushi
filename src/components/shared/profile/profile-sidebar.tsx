@@ -17,18 +17,21 @@ const ProfileSidebar: React.FunctionComponent = async () => {
   const user = await prisma.user.findFirst({
     where: {
       id: Number(data.id),
-    }
-  })
+    },
+  });
 
   if (!user) {
     return redirect("/not-auth");
   }
 
-
   return (
     <div className="w-[246px] ">
       <ProfileSidebarCategories />
-      <ProfileUserInfo name={user.fullName} email={user.email} image={data.image} />
+      <ProfileUserInfo
+        name={user.fullName}
+        email={user.email}
+        image={data.image}
+      />
     </div>
   );
 };

@@ -15,7 +15,7 @@ const AuthBtn: React.FunctionComponent<IAuthBtnProps> = ({ name }) => {
       className="flex items-center gap-2 h-[56px] flex-1"
     >
       <Image src={`/icons/${name}.svg`} alt={name} width={36} height={36} />
-      Github
+      {name}
     </Button>
   );
 };

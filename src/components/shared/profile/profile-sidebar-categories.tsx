@@ -2,25 +2,27 @@
 import { profileSidebarItems } from "@/Prisma/constants";
 import * as React from "react";
 import ProfileSidebarItem from "./profile-sidebar-item";
+import { useUserStore } from "@/store/userStore";
+import { Tabs, TabsList } from "@/components/ui/tabs";
 
-interface ProfileSidebarCategoriesProps {}
-
-const ProfileSidebarCategories: React.FunctionComponent<ProfileSidebarCategoriesProps> = (props) => {
-  const [activeCategory, setActiveCategory] = React.useState(0);
+const ProfileSidebarCategories: React.FunctionComponent = () => {
+  const { activeCategoryId, setActiveCategoryId } = useUserStore();
 
   return (
-    <div className="grid gap-3">
-      {profileSidebarItems.map((item, index) => (
-        <ProfileSidebarItem
-          key={index}
-          imageUrl={item.imageUrl}
-          title={item.title}
-          activeCategory={activeCategory}
-          index={index}
-          setActiveCategory={setActiveCategory}
-        />
-      ))}
-    </div>
+    <Tabs onValueChange={(value) => setActiveCategoryId(Number(value))} className="bg-inherit" value={String(activeCategoryId)}>
+      <TabsList className="grid gap-3 bg-inherit">
+        {profileSidebarItems.map((item, index) => (
+          <ProfileSidebarItem
+            key={index}
+            imageUrl={item.imageUrl}
+            title={item.title}
+            activeCategory={activeCategoryId}
+            index={index}
+            setActiveCategory={setActiveCategoryId}
+          />
+        ))}
+      </TabsList>
+    </Tabs>
   );
 };
 

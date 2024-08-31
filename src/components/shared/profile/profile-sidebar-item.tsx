@@ -1,3 +1,4 @@
+import { TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import * as React from "react";
@@ -6,21 +7,23 @@ interface IProfileSidebarItemProps {
   imageUrl: string;
   title: string;
   activeCategory: number;
-    index: number;
-    setActiveCategory: (number: number) => void
+  index: number;
+  setActiveCategory: (number: number) => void;
 }
 
 const ProfileSidebarItem: React.FunctionComponent<IProfileSidebarItemProps> = ({
   imageUrl,
   title,
   activeCategory,
-    index,
-  setActiveCategory
+  index,
+  setActiveCategory,
 }) => {
   return (
-    <button onClick={() => setActiveCategory(index)}
+    <TabsTrigger
+      value={String(index)}
+      onClick={() => setActiveCategory(index)}
       className={cn(
-        "flex items-center gap-3 group hover:bg-primary transition duration-200 p-3 rounded-xl",
+        "flex items-center gap-3 group hover:bg-primary transition duration-200 p-3 rounded-xl bg-inherit",
         { "bg-primary text-white": activeCategory === index }
       )}
     >
@@ -30,7 +33,7 @@ const ProfileSidebarItem: React.FunctionComponent<IProfileSidebarItemProps> = ({
       <h6 className="font-semibold group-hover:text-white transition duration-200">
         {title}
       </h6>
-    </button>
+    </TabsTrigger>
   );
 };
 

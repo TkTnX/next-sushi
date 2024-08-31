@@ -4,10 +4,10 @@ import Header from "@/components/shared/header";
 import ProfileSidebar from "@/components/shared/profile/profile-sidebar";
 
 export const metadata: Metadata = {
-  title: "Ninja Sushi",
+  title: "Ninja Sushi | Профиль",
 };
 
-export default function RootLayout({
+export default function ProfileLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -18,7 +18,7 @@ export default function RootLayout({
       className={cn("bg-[#f5f5f7] min-h-full container")}
     >
       <Header />
-          <div className="flex items-start justify-between mt-8">
+          <div className="flex items-start mt-8 gap-[153px]">
               <ProfileSidebar />
               {children}
           </div>

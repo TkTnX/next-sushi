@@ -82,7 +82,7 @@ const ProfileEdit: React.FunctionComponent<IProfileEditProps> = ({
               placeholder="Новый пароль"
             />
 
-            <Button className="mt-4 w-full" type="submit">
+            <Button disabled={form.formState.isSubmitting} className="mt-4 w-full" type="submit">
               Изменить данные
             </Button>
           </form>
@@ -93,6 +93,4 @@ const ProfileEdit: React.FunctionComponent<IProfileEditProps> = ({
 };
 
 export default ProfileEdit;
-function onClose() {
-  throw new Error("Function not implemented.");
-}
+

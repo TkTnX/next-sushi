@@ -1,6 +1,7 @@
 import NextAuth, { AuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "@/Prisma/prisma-client";
 import { compare, hashSync } from "bcrypt";
 
@@ -18,6 +19,10 @@ export const authOptions: AuthOptions = {
           role: "USER",
         };
       },
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     CredentialsProvider({
       name: "credentials",
