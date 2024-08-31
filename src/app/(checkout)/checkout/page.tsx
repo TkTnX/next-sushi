@@ -13,16 +13,22 @@ import { useCartStore } from "@/store/cartStore";
 import { cn } from "@/lib/utils";
 import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 const CheckoutPage: React.FunctionComponent = () => {
   const [submitting, setSubmitting] = React.useState(false);
+  const { data: session } = useSession();
   const loading = useCartStore((state) => state.loading);
+
+  const firstName = session?.user.name.split(" ")[0];
+  const lastName = session?.user.name.split(" ")[1];
+
   const form = useForm<CheckoutFormType>({
     resolver: zodResolver(checkoutFormSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
+      firstName: firstName || "",
+      lastName: lastName || "",
+      email: session?.user.email || "",
       phone: "",
       address: "",
       comment: "",
@@ -40,7 +46,6 @@ const CheckoutPage: React.FunctionComponent = () => {
       if (url) {
         window.location.href = url;
       }
-      
     } catch (error) {
       console.log(error);
       toast.error("Произошла ошибка при оформлении заказа", {
