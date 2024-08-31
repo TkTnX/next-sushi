@@ -1,3 +1,5 @@
+"use server";
+
 import { prisma } from "@/Prisma/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -36,7 +38,11 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.redirect(new URL("/?verified", req.url));
   } catch (error) {
-    console.error(error);
-    console.log("[VERIFY_CODE_FUNC] Error: ", error);
+    console.error("[VERIFY_CODE_FUNC] Error: ", error);
+
+    return NextResponse.json({
+      error: "Произошла ошибка на сервере",
+      status: 500,
+    });
   }
 }

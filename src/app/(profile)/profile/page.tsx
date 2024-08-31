@@ -12,15 +12,17 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
   const {activeCategoryId, setActiveCategoryId} = useUserStore();
 
   return (
-    <Tabs
-      onValueChange={(value) => setActiveCategoryId(Number(value))}
-      className="flex-1"
-      value={String(activeCategoryId)}
-    >
-      <ProfileOrders personalValue="0" />
-      <ProfileFavorites personalValue="1" />
-      <ProfileAddress personalValue="2" />
-    </Tabs>
+    <React.Suspense>
+      <Tabs
+        onValueChange={(value) => setActiveCategoryId(Number(value))}
+        className="flex-1"
+        value={String(activeCategoryId)}
+      >
+        <ProfileOrders personalValue="0" />
+        <ProfileFavorites personalValue="1" />
+        <ProfileAddress personalValue="2" />
+      </Tabs>
+    </React.Suspense>
   );
 };
 

@@ -35,35 +35,36 @@ const Header: React.FunctionComponent<IHeaderProps> = ({
           icon: "✅",
         });
 
-        router.replace("/");
       }, 500);
     }
   }, []);
 
   return (
-    <header className="mt-4 bg-white px-3 py-[6px] rounded-xl flex items-center justify-between">
-      <Link href={"/"} className="relative ">
-        <Image src="/logo.svg" alt={"logo"} width={214} height={48} />
-      </Link>
+    <React.Suspense>
+      <header className="mt-4 bg-white px-3 py-[6px] rounded-xl flex items-center justify-between">
+        <Link href={"/"} className="relative ">
+          <Image src="/logo.svg" alt={"logo"} width={214} height={48} />
+        </Link>
 
-      <div>
-        <Navbar />
-      </div>
+        <div>
+          <Navbar />
+        </div>
 
-      <div>
-        <AuthModal
-          open={openAuthModal}
-          type={type}
-          setType={setType}
-          onClose={() => setOpenModal(false)}
-        />
+        <div>
+          <AuthModal
+            open={openAuthModal}
+            type={type}
+            setType={setType}
+            onClose={() => setOpenModal(false)}
+          />
 
-        <Userbar
-          setOpenAuthModal={() => setOpenModal((prev) => !prev)}
-          isCheckoutPage={isCheckoutPage}
-        />
-      </div>
-    </header>
+          <Userbar
+            setOpenAuthModal={() => setOpenModal((prev) => !prev)}
+            isCheckoutPage={isCheckoutPage}
+          />
+        </div>
+      </header>
+    </React.Suspense>
   );
 };
 

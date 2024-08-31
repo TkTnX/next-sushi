@@ -86,7 +86,7 @@ const RegisterForm: React.FunctionComponent<IRegisterFormProps> = ({
         />
 
         <Button disabled={form.formState.isSubmitting} variant="default" className="bg-secondary text-white mt-3 py-4">
-          Зарегестрироваться
+          Зарегистрироваться
         </Button>
       </form>
     </FormProvider>

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Header from "@/components/shared/header";
 import { Toaster } from "react-hot-toast";
 import Providers from "@/components/shared/providers";
+import { Suspense } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,7 +25,9 @@ export default function AppLayout({
       <body
         className={cn("bg-[#f5f5f7] min-h-full container", inter.className)}
       >
-        <Providers>{children}</Providers>
+        <Suspense>
+          <Providers>{children}</Providers>
+        </Suspense>
       </body>
     </html>
   );
