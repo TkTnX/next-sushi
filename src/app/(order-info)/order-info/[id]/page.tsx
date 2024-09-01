@@ -1,3 +1,4 @@
+import OrderInfoItems from "@/components/shared/checkout/order-info-items";
 import OrderInfoItem from "@/components/shared/order-info-item";
 import WhiteBox from "@/components/shared/white-box";
 import { Api } from "@/services/api-client";
@@ -31,19 +32,7 @@ const OrderInfo: React.FunctionComponent<Props> = async ({ params }) => {
 
         {/* RIGHT */}
 
-        <div className="flex-1">
-          <h4 className="text-2xl font-bold">Информация о доставке</h4>
-
-          <OrderInfoItem title="Адрес" value={order?.address!} />
-          <OrderInfoItem title="Получатель" value={order?.fullName!} />
-          <OrderInfoItem title="Телефон" value={order?.phone!} />
-          <OrderInfoItem title="Email" value={order?.email!} />
-          <OrderInfoItem
-            title="Сумма заказа"
-            value={String(order?.totalPrice)}
-          />
-          <OrderInfoItem title="Комментарий" value={order?.comment} />
-        </div>
+       <OrderInfoItems order={order} />
       </WhiteBox>
 
       <WhiteBox className="mt-4 py-12 px-16">

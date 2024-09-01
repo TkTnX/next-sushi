@@ -9,4 +9,11 @@ export const getOrder = async (id: number) => {
   }
 };
 
+export const getAll = async () => {
+  try {
+    return (await axiosInstance.get<Order[]>("/order/all")).data
+  } catch (error) {
+    console.log(error)
+  }
+}
 

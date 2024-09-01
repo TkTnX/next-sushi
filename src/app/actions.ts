@@ -20,6 +20,7 @@ export async function createOrder(data: CheckoutFormType) {
   try {
     const cookie = cookies();
     const cartToken = cookie.get("cartToken")?.value;
+    const user = await getUserSession();
 
     if (!cartToken) {
       throw new Error("Токен не найден");
@@ -63,7 +64,7 @@ export async function createOrder(data: CheckoutFormType) {
         email: data.email,
         address: data.address,
         comment: data.comment || "",
-        userId: userCart.userId,
+        userId: Number(user?.id) || null,
       },
     });
 
