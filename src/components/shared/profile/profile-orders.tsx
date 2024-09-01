@@ -12,49 +12,36 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 interface IProfileOrdersProps {
   personalValue: string;
+  loading: boolean;
+  orders: Order[];
 }
 
 const ProfileOrders: React.FunctionComponent<IProfileOrdersProps> = ({
   personalValue,
+  loading,
+  orders
 }) => {
   const [openId, setOpenId] = React.useState<number | null>(null);
-  const [orders, setOrders] = React.useState<Order[]>([]);
-  const [loading, setLoading] = React.useState(true);
-  const { data: session } = useSession();
 
-  React.useEffect(() => {
-    setLoading(true);
-    async function getOrders() {
-      if (session) {
-        const orders = await Api.order.getAll();
-        setOrders(orders ?? []);
-
-        setLoading(false)
-        return orders;
-      }
-    }
-
-    getOrders();
-  }, [session]);
 
   if (loading) {
     return (
-      <div className="grid gap-3">
+      <TabsContent value={personalValue} className="grid gap-3">
         {[...Array(6)].map((_, index) => (
           <Skeleton key={index} className="w-full h-[112px] rounded-xl animate-pulse bg-[#c2c2c3]" />
         ))}
-      </div>
+      </TabsContent>
     );
   }
   return (
     <TabsContent value={personalValue} className="flex-1">
+      <h2 className="text-5xl font-bold mb-6">История заказов</h2>
       {!loading && orders.length === 0 ? (
-        <ProfileStarter
-          title="История заказов"
-          imageUrl="00.svg"
-          subtitle="У вас нет заказов"
-          description="Переходите в интересующую вас категорию и сделайте свой первый заказ"
-        />
+          <ProfileStarter
+            imageUrl="00.svg"
+            subtitle="У вас нет заказов"
+            description="Переходите в интересующую вас категорию и сделайте свой первый заказ"
+          />
       ) : (
         <div className="grid gap-3">
           {orders.slice(0, 6).map((order) => (

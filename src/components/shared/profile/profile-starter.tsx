@@ -3,30 +3,23 @@ import WhiteBox from "../white-box";
 import Image from "next/image";
 
 interface IProfileStarterProps {
-  title: string;
   imageUrl: string;
   subtitle: string;
   description: string;
-  endAdornment?: React.ReactNode;
 }
 
 const ProfileStarter: React.FunctionComponent<IProfileStarterProps> = ({
-  title,
   imageUrl,
   subtitle,
   description,
-  endAdornment,
 }) => {
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <h2 className="text-5xl font-bold">{title}</h2>
-        {endAdornment}
-      </div>
+    
       <WhiteBox className="mt-6 flex items-start gap-8 p-10">
         <Image
           src={`/profile/${imageUrl}`}
-          alt={title}
+          alt={subtitle}
           className="min-w-[154px] min-h-[154px]"
           width={323}
           height={175}

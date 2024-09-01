@@ -12,8 +12,8 @@ const ProfileFavorites: React.FunctionComponent<IProfileFavoritesProps> = ({
 
   return (
     <TabsContent value={personalValue} className="flex-1">
+      <h2 className="text-5xl font-bold mb-6">История заказов</h2>
       <ProfileStarter
-        title="Избранные товары"
         imageUrl="01.svg"
         subtitle="Вы еще ничего не добавили в избанное"
         description="Переходите в интересующую вас категорию и отмечайте понравившиеся"
