@@ -21,7 +21,7 @@ const CartDrawerEmpty: React.FunctionComponent = () => {
 
       <Link
         className="text-secondary bg-[#F5F5F7] py-4 rounded-xl hover:bg-secondary hover:text-white transition duration-200 mt-3"
-        href="#!"
+        href="/profile"
       >
         История заказов
       </Link>

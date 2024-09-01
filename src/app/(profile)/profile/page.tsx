@@ -33,7 +33,6 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
   }, [session]);
 
   return (
-    <React.Suspense>
       <Tabs
         onValueChange={(value) => setActiveCategoryId(Number(value))}
         className="flex-1"
@@ -43,7 +42,6 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
         <ProfileFavorites personalValue="1" />
         <ProfileAddress orders={orders} personalValue="2" />
       </Tabs>
-    </React.Suspense>
   );
 };
 

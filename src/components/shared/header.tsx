@@ -40,7 +40,6 @@ const Header: React.FunctionComponent<IHeaderProps> = ({
   }, []);
 
   return (
-    <React.Suspense>
       <header className="mt-4 bg-white px-3 py-[6px] rounded-xl flex items-center justify-between">
         <Link href={"/"} className="relative ">
           <Image src="/logo.svg" alt={"logo"} width={214} height={48} />
@@ -64,7 +63,6 @@ const Header: React.FunctionComponent<IHeaderProps> = ({
           />
         </div>
       </header>
-    </React.Suspense>
   );
 };
 

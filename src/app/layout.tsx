@@ -25,9 +25,9 @@ export default function AppLayout({
       <body
         className={cn("bg-[#f5f5f7] min-h-full container", inter.className)}
       >
-        <Suspense>
-          <Providers>{children}</Providers>
-        </Suspense>
+        <Providers>
+          <Suspense>{children}</Suspense>
+        </Providers>
       </body>
     </html>
   );
