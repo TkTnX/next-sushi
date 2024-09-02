@@ -9,3 +9,11 @@ export const getAllProducts = async () => {
     console.log(error);
   }
 };
+
+export const getProductById = async (id: number) => {
+  try {
+    return (await axiosInstance.get<IProduct>(`/products/${id}`)).data
+  } catch (error) {
+    console.log(error)
+  }
+}
