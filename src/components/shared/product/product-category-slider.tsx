@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as SwiperType } from "swiper";
 import { Navigation } from "swiper/modules";
 import CategoryGroupItem from "../category-group-item";
 import { IProduct } from "@/@types/product";
@@ -24,25 +25,15 @@ interface IProductCategorySliderProps {
 const ProductCategorySlider: React.FunctionComponent<
   IProductCategorySliderProps
 > = ({ category }) => {
-  const prevSlide = React.useRef(null);
-  const nextSlide = React.useRef(null);
+  const swiperRef = React.useRef<SwiperType>();
   return (
     <Swiper
       slidesPerView={4}
       spaceBetween={20}
-      modules={[Navigation]}
-      navigation={{
-        prevEl: prevSlide.current,
-        nextEl: nextSlide.current,
-      }}
+          modules={[Navigation]}
+          
       onBeforeInit={(swiper) => {
-        if (
-          swiper.params.navigation &&
-          typeof swiper.params.navigation === "object"
-        ) {
-          swiper.params.navigation.prevEl = prevSlide.current;
-          swiper.params.navigation.nextEl = nextSlide.current;
-        }
+        swiperRef.current = swiper;
       }}
       className="flex items-stretch mt-8"
     >
@@ -56,13 +47,13 @@ const ProductCategorySlider: React.FunctionComponent<
       <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex items-center justify-between z-[1]">
         <button
           className="h-[162px] px-9 bg-[#ebebec]/70 rounded-xl flex items-center justify-center hover:opacity-50 transition duration-200 disabled:hover:opacity-100 disabled:cursor-not-allowed"
-          ref={prevSlide}
+          onClick={() => swiperRef.current?.slidePrev()}
         >
           <ChevronLeft />
         </button>
         <button
           className="h-[162px] px-9 bg-[#ebebec]/70 rounded-xl flex items-center justify-center hover:opacity-50 transition duration-200 disabled:hover:opacity-100 disabled:cursor-not-allowed"
-          ref={nextSlide}
+          onClick={() => swiperRef.current?.slideNext()}
         >
           <ChevronRight />
         </button>
