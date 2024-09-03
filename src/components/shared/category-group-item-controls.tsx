@@ -1,8 +1,10 @@
 import { useAddToCart } from '@/hooks/use-add-to-cart';
 import { cn } from '@/lib/utils';
+import { addToFavorites } from '@/services/favorites';
 import { useCartStore } from '@/store/cartStore';
 import { Heart, Loader, Plus } from 'lucide-react';
 import * as React from 'react';
+import toast from 'react-hot-toast';
 
 interface ICategoryGroupItemsControlsProps {
   className?: string;
@@ -15,9 +17,26 @@ const CategoryGroupItemsControls: React.FunctionComponent<
   ICategoryGroupItemsControlsProps
 > = ({ className, id, name, isFavorite }) => {
   const { onClickAddToCart, loadingId } = useAddToCart({ id, name });
+  const handleAddToFavorite = async () => {
+    try {
+      if (isFavorite) {
+        throw Error;
+      }
+      
+      const data = await addToFavorites(17, id);
+
+      toast.success("Товар добавлен в избранное");
+
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+    
+    
+  }
   return (
     <div className={cn("flex items-center gap-3 ", className)}>
-      <button
+      <button onClick={handleAddToFavorite}
         className={cn(
           "bg-[#f5f5f7] group w-[48px] h-[48px] rounded-xl flex items-center justify-center",
           {

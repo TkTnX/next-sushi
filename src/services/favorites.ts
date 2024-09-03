@@ -12,3 +12,20 @@ export const getUserFavorites = async (userId: number) => {
     return null;
   }
 };
+
+export const addToFavorites = async (userId: number, productId: number) => {
+  try {
+    if (!userId || !productId) {
+      throw Error();
+    }
+
+    console.log({productId, userId})
+    const { data } = await axiosInstance.post(`/favorites/${productId}`, {
+      userId,
+    });
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

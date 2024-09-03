@@ -21,7 +21,6 @@ const ProfileFavorites: React.FunctionComponent<IProfileFavoritesProps> = ({
   personalValue,
   favorites,
 }) => {
-  console.log(favorites)
   return (
     <TabsContent value={personalValue} className="flex-1">
       <h2 className="text-5xl font-bold mb-6">Избранное</h2>
