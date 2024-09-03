@@ -40,6 +40,8 @@ model Product {
     updatedAt  DateTime @default(now())
 
     CartItem CartItem[]
+
+    FavoriteItem FavoriteItem[]
 }
 
 model Type {
@@ -120,6 +122,8 @@ model User {
     cart             Cart?
     orders           Order[]
     verificationCode VerificationCode?
+
+    favorites Favorites?
 }
 
 model CartItem {
@@ -134,6 +138,28 @@ model CartItem {
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
+
+model Favorites {
+    id Int @id @default(autoincrement())
+
+    user   User @relation(fields: [userId], references: [id])
+    userId Int @unique
+
+
+
+    favoriteItem FavoriteItem[]
+}
+
+model FavoriteItem {
+    id          Int     @id @default(autoincrement())
+    productItem Product @relation(fields: [productId], references: [id])
+    productId   Int
+
+    favorites   Favorites @relation(fields: [favoritesId], references: [id])
+    favoritesId Int
+
+
 }
 
 model Order {

@@ -12,7 +12,8 @@ export interface IProduct {
   createdAt?: Date;
   typeId?: number;
   exceptions?: { productId: number; exceptionId: number }[];
-  isNeedToFilter?: boolean
+  isNeedToFilter?: boolean;
+  isFavorite?: boolean;
 }
 
 

@@ -2,16 +2,13 @@
 import {  IProduct } from "@/@types/product";
 import { useFilterHelp } from "@/hooks/use-filter-help";
 import { calculateIsNewProducts } from "@/lib/calculate-is-new-products";
-import { useCartStore } from "@/store/cartStore";
 import { useFilterStore } from "@/store/filterStore";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
-import toast from "react-hot-toast";
 import CategoryGroupItemIsNew from "./category-group-item-is-new";
 import CategoryGroupItemException from "./category-group-item-exception";
 import CategoryGroupItemsControls from "./category-group-item-controls";
-import { useAddToCart } from "@/hooks/use-add-to-cart";
 
 const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
   name,
@@ -22,15 +19,15 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
   exceptions,
   ingredients,
   createdAt,
+  isFavorite,
 }) => {
   const isNewProduct = calculateIsNewProducts(createdAt);
   const { selectedIngredients } = useFilterStore();
   const { exception } = useFilterHelp({
-    exceptions: exceptions ?? [],
+    exceptions: exceptions ?? null,
     ingredients: ingredients ?? [],
     selectedIngredients,
   });
-
 
   return (
     <div className="rounded-xl p-6 max-w-[380px] bg-white h-full">
@@ -58,7 +55,11 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
           {price} <span className="text-2xl text-[#686870]">руб</span>
         </p>
 
-        <CategoryGroupItemsControls name={name} id={id} />
+        <CategoryGroupItemsControls
+          isFavorite={isFavorite}
+          name={name}
+          id={id}
+        />
       </div>
     </div>
   );

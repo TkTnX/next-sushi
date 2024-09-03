@@ -2,7 +2,7 @@ import { IIngredient } from "@/components/shared/filter-group-ingredients";
 import { useEffect, useState } from "react";
 
 interface IFilterHelp {
-  exceptions: { productId: number; exceptionId: number }[];
+  exceptions: { productId: number; exceptionId: number }[] | null;
   ingredients: IIngredient[];
   selectedIngredients: number[];
 }

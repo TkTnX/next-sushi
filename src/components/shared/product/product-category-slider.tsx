@@ -30,8 +30,7 @@ const ProductCategorySlider: React.FunctionComponent<
     <Swiper
       slidesPerView={4}
       spaceBetween={20}
-          modules={[Navigation]}
-          
+      modules={[Navigation]}
       onBeforeInit={(swiper) => {
         swiperRef.current = swiper;
       }}

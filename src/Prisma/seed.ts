@@ -9,7 +9,8 @@ import {
 import { prisma } from "./prisma-client";
 import bcrypt from "bcrypt";
 
-const hash = (password: string, salt: number) => bcrypt.hashSync(password, salt)
+const hash = (password: string, salt: number) =>
+  bcrypt.hashSync(password, salt);
 
 async function up() {
   await prisma.category.createMany({
@@ -49,23 +50,13 @@ async function up() {
     });
   }
 
-  await prisma.user.create({
-    data: {
-      fullName: "timurAdmin",
-      email: "admin@mail.ru",
-      password: hash("admin", 10),
-      role: "ADMIN",
-      verificated: new Date(),
-    },
-  });
-
   await prisma.cart.create({
     data: {
       userId: 1,
       totalPrice: 0,
       token: "admin",
-    }
-  })
+    },
+  });
 
   await prisma.cartItem.createMany({
     data: [
@@ -79,12 +70,31 @@ async function up() {
         productId: 2,
         quantity: 3,
       },
-    ]
-  })
+    ],
+  });
 
   await prisma.promocode.createMany({
     data: promocodes,
-  })
+  });
+
+  await prisma.favorites.create({
+    data: {
+      userId: 17,
+    },
+  });
+
+  await prisma.favoriteItem.createMany({
+    data: [
+      {
+        productId: 1,
+        favoritesId: 1,
+      },
+      {
+        productId: 2,
+        favoritesId: 1,
+      },
+    ],
+  });
 }
 
 async function down() {
@@ -93,11 +103,11 @@ async function down() {
   await prisma.$executeRaw`TRUNCATE TABLE "Exception" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Ingredient" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Type" RESTART IDENTITY CASCADE`;
-  await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Cart" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "CartItem" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Promocode" RESTART IDENTITY CASCADE`;
-
+  await prisma.$executeRaw`TRUNCATE TABLE "Favorites" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "FavoriteItem" RESTART IDENTITY CASCADE`;
 }
 
 async function main() {

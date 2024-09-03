@@ -5,7 +5,7 @@ import ProfileOrders from "@/components/shared/profile/profile-orders";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Api } from "@/services/api-client";
 import { useUserStore } from "@/store/userStore";
-import { Order } from "@prisma/client";
+import { Favorites, Order } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import * as React from "react";
 
@@ -15,6 +15,7 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
   const { activeCategoryId, setActiveCategoryId } = useUserStore();
   const [loading, setLoading] = React.useState(true);
   const [orders, setOrders] = React.useState<Order[]>([]);
+  const [favorites, setFavorites] = React.useState<any>();
   const { data: session } = useSession();
 
   React.useEffect(() => {
@@ -29,19 +30,30 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
       }
     }
 
+    async function getFavorites() {
+      if (session) {
+        const favorites = await Api.favorites.getUserFavorites(
+          Number(session.user.id)
+        );
+        setFavorites(favorites ?? []);
+      }
+    }
+
     getOrders();
+    getFavorites();
   }, [session]);
 
+
   return (
-      <Tabs
-        onValueChange={(value) => setActiveCategoryId(Number(value))}
-        className="flex-1"
-        value={String(activeCategoryId)}
-      >
-        <ProfileOrders loading={loading} orders={orders} personalValue="0" />
-        <ProfileFavorites personalValue="1" />
-        <ProfileAddress orders={orders} personalValue="2" />
-      </Tabs>
+    <Tabs
+      onValueChange={(value) => setActiveCategoryId(Number(value))}
+      className="flex-1"
+      value={String(activeCategoryId)}
+    >
+      <ProfileOrders loading={loading} orders={orders} personalValue="0" />
+      <ProfileFavorites favorites={favorites ? favorites.favoriteItem : {}} personalValue="1" />
+      <ProfileAddress orders={orders} personalValue="2" />
+    </Tabs>
   );
 };
 
