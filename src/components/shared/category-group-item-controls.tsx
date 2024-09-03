@@ -13,6 +13,10 @@ interface ICategoryGroupItemsControlsProps {
   isFavorite?: boolean;
 }
 
+// TODO: Доделывать избранное
+
+
+
 const CategoryGroupItemsControls: React.FunctionComponent<
   ICategoryGroupItemsControlsProps
 > = ({ className, id, name, isFavorite }) => {
@@ -22,14 +26,16 @@ const CategoryGroupItemsControls: React.FunctionComponent<
       if (isFavorite) {
         throw Error;
       }
-      
+
+      // TODO: передавать не зашитый id!
       const data = await addToFavorites(17, id);
 
       toast.success("Товар добавлен в избранное");
 
-      return data
+      return data;
     } catch (error) {
       console.log(error)
+      toast.error("Не удалось добавить в избранное");
     }
     
     

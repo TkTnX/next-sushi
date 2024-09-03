@@ -4,6 +4,7 @@ import ProfileFavorites from "@/components/shared/profile/profile-favorites";
 import ProfileOrders from "@/components/shared/profile/profile-orders";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Api } from "@/services/api-client";
+import { useFavoriteStore } from "@/store/favoritesStore";
 import { useUserStore } from "@/store/userStore";
 import { Favorites, Order } from "@prisma/client";
 import { useSession } from "next-auth/react";
@@ -13,36 +14,24 @@ interface IProfileProps {}
 
 const Profile: React.FunctionComponent<IProfileProps> = () => {
   const { activeCategoryId, setActiveCategoryId } = useUserStore();
-  const [loading, setLoading] = React.useState(true);
   const [orders, setOrders] = React.useState<Order[]>([]);
-  const [favorites, setFavorites] = React.useState<any>();
   const { data: session } = useSession();
-
+  const { loading, favorites, getItems } = useFavoriteStore();
   React.useEffect(() => {
-    setLoading(true);
     async function getOrders() {
       if (session) {
         const orders = await Api.order.getAll();
         setOrders(orders ?? []);
-
-        setLoading(false);
-        return orders;
       }
     }
-
-    async function getFavorites() {
-      if (session) {
-        const favorites = await Api.favorites.getUserFavorites(
-          Number(session.user.id)
-        );
-        setFavorites(favorites ?? []);
-      }
-    }
-
     getOrders();
-    getFavorites();
   }, [session]);
 
+  React.useEffect(() => {
+      if (session) {
+        getItems(session.user.id);
+      }
+   }, [session])
 
   return (
     <Tabs
@@ -51,7 +40,11 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
       value={String(activeCategoryId)}
     >
       <ProfileOrders loading={loading} orders={orders} personalValue="0" />
-      <ProfileFavorites favorites={favorites ? favorites.favoriteItem : {}} personalValue="1" />
+      <ProfileFavorites
+        loading={loading}
+        favorites={favorites ? favorites.favoriteItem : []}
+        personalValue="1"
+      />
       <ProfileAddress orders={orders} personalValue="2" />
     </Tabs>
   );

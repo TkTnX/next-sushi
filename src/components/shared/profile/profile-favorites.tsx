@@ -4,8 +4,9 @@ import ProfileStarter from "./profile-starter";
 import { FavoriteItem, Favorites } from "@prisma/client";
 import CategoryGroupItem from "../category-group-item";
 import { IProduct } from "@/@types/product";
+import { Skeleton } from "@/components/ui/skeleton";
 
-type TFavorites = {
+export type TFavorites = {
   favoritesId: number;
   id: number;
   productId: number;
@@ -15,28 +16,45 @@ type TFavorites = {
 interface IProfileFavoritesProps {
   personalValue: string;
   favorites: TFavorites[];
+  loading: boolean;
 }
 
 const ProfileFavorites: React.FunctionComponent<IProfileFavoritesProps> = ({
   personalValue,
   favorites,
+  loading,
 }) => {
   return (
     <TabsContent value={personalValue} className="flex-1">
       <h2 className="text-5xl font-bold mb-6">Избранное</h2>
+      {loading && (
+        <div className="grid grid-cols-3 gap-5">
+          {[...Array(6)].map((_, index) => (
+            <Skeleton
+              key={index}
+              className="w-full h-[573px] rounded-xl animate-pulse bg-[#c2c2c3]"
+            />
+          ))}
+        </div>
+      )}
       {favorites && favorites.length > 0 ? (
         <div className="grid grid-cols-3 gap-5">
-          {favorites.length > 0 &&
-            favorites.map(({ productItem }) => (
-              <CategoryGroupItem key={productItem.id} {...productItem} isFavorite={true} />
-            ))}
+          {favorites.map(({ productItem }) => (
+            <CategoryGroupItem
+              key={productItem.id}
+              {...productItem}
+              isFavorite={true}
+            />
+          ))}
         </div>
       ) : (
-        <ProfileStarter
-          imageUrl="01.svg"
-          subtitle="Вы еще ничего не добавили в избанное"
-          description="Переходите в интересующую вас категорию и отмечайте понравившиеся"
-        />
+        !loading && (
+          <ProfileStarter
+            imageUrl="01.svg"
+            subtitle="Вы еще ничего не добавили в избанное"
+            description="Переходите в интересующую вас категорию и отмечайте понравившиеся"
+          />
+        )
       )}
     </TabsContent>
   );
