@@ -1,5 +1,6 @@
 import { TFavorites } from "@/components/shared/profile/profile-favorites";
 import { Api } from "@/services/api-client";
+import { removeFromFavorites } from "@/services/favorites";
 import { create } from "zustand";
 
 export type FavoriteType = {
@@ -13,8 +14,8 @@ interface FavoriteStore {
   error: boolean;
   loading: boolean;
 
-
   getItems: (id: string) => void;
+  removeFromFavorites: (id: number, userId: number) => void;
 }
 
 export const useFavoriteStore = create<FavoriteStore>()((set) => ({
@@ -40,4 +41,29 @@ export const useFavoriteStore = create<FavoriteStore>()((set) => ({
     }
   },
 
+  removeFromFavorites: async (id, userId) => {
+    try {
+      if (!userId || !id) {
+        throw Error();
+      }
+
+      set({ loading: true, error: false });
+      await removeFromFavorites(Number(userId), id);
+
+      set((state) => ({
+        favorites: {
+          ...state.favorites,
+          favoriteItem: state.favorites.favoriteItem.filter(
+            (item) => item.productId !== id
+          ),
+        },
+      }))
+
+    } catch (error) {
+      console.log(error);
+      set({ error: true, loading: false });
+    } finally {
+      set({ loading: false });
+    }
+  },
 }));

@@ -43,7 +43,6 @@ const ProfileFavorites: React.FunctionComponent<IProfileFavoritesProps> = ({
             <CategoryGroupItem
               key={productItem.id}
               {...productItem}
-              isFavorite={true}
             />
           ))}
         </div>

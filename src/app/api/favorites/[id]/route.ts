@@ -1,4 +1,5 @@
 import { prisma } from "@/Prisma/prisma-client";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(
@@ -108,8 +109,6 @@ export async function DELETE(
     if (!user) {
       return NextResponse.json({ error: "Пользователь не найден" });
     }
-
-    
 
     await prisma.favoriteItem.deleteMany({
       where: {

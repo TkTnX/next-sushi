@@ -28,12 +28,12 @@ const Userbar: React.FunctionComponent<IUserbarProps> = ({
       </button>
 
       {/* Кнопка favorite */}
-      <button className="w-[56px] h-[56px] border border-[#d2d2d7] rounded-2xl p-4 group hover:bg-primary hover:border-primary transition duration-200">
+      <Link href="/profile" className="w-[56px] h-[56px] border border-[#d2d2d7] rounded-2xl p-4 group hover:bg-primary hover:border-primary transition duration-200">
         <Heart
           className="stroke-[#686870] group-hover:stroke-white transition duration-200"
           size={24}
         />
-      </button>
+      </Link>
 
       {/* Кнопка профиля */}
       {!session ? (

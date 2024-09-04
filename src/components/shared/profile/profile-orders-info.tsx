@@ -42,9 +42,9 @@ const ProfileOrdersInfo: React.FunctionComponent<IProfileOrdersInfoProps> = ({
         </div>
         <div className="flex items-center w-full flex-wrap gap-4">
           {typeof order.items === "string" &&
-            JSON.parse(order.items).map((item: any) => (
+            JSON.parse(order.items).map((item: any, index: number) => (
               <div
-                key={order.id}
+                key={index}
                 className="grid text-[#9E9E9E] bg-[#F5F5F7] rounded-full p-1"
               >
                 <Image

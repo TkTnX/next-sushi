@@ -39,8 +39,8 @@ const ProfileAddress: React.FunctionComponent<IProfileAddressProps> = ({
       </div>
       {addresses.length > 0 ? (
         <div className="grid gap-3">
-          {addresses.map((address) => (
-            <ProfileAddressItem key={address} name={address} />
+          {addresses.map((address, index) => (
+            <ProfileAddressItem key={index} name={address} />
           ))}
         </div>
       ) : (
