@@ -19,12 +19,27 @@ export const addToFavorites = async (userId: number, productId: number) => {
       throw Error();
     }
 
-    console.log({productId, userId})
     const { data } = await axiosInstance.post(`/favorites/${productId}`, {
       userId,
     });
 
     return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const removeFromFavorites = async (userId: number, id: number) => {
+  try {
+    if (!userId || !id) {
+      throw Error();
+    }
+
+    const { data } = await axiosInstance.delete(
+      `/favorites/${id}?userId=${userId}`
+    );
+
+    return data
   } catch (error) {
     console.log(error);
   }

@@ -1,5 +1,6 @@
 import Categories from "@/components/shared/categories";
 import CategoryGroup from "@/components/shared/category-group";
+import { getUserSession } from "@/lib/get-user-session";
 import { prisma } from "@/Prisma/prisma-client";
 
 export default async function Home() {

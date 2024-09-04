@@ -1,58 +1,66 @@
-import { useAddToCart } from '@/hooks/use-add-to-cart';
-import { cn } from '@/lib/utils';
-import { addToFavorites } from '@/services/favorites';
-import { useCartStore } from '@/store/cartStore';
-import { Heart, Loader, Plus } from 'lucide-react';
-import * as React from 'react';
-import toast from 'react-hot-toast';
+import { useAddToCart } from "@/hooks/use-add-to-cart";
+import { cn } from "@/lib/utils";
+import { addToFavorites, removeFromFavorites } from "@/services/favorites";
+import { FavoriteType } from "@/store/favoritesStore";
+import { Heart, Loader, Plus } from "lucide-react";
+import { useSession } from "next-auth/react";
+import * as React from "react";
+import toast from "react-hot-toast";
 
 interface ICategoryGroupItemsControlsProps {
   className?: string;
   id: number;
   name: string;
-  isFavorite?: boolean;
 }
-
-// TODO: Доделывать избранное
-
-
 
 const CategoryGroupItemsControls: React.FunctionComponent<
   ICategoryGroupItemsControlsProps
-> = ({ className, id, name, isFavorite }) => {
+> = ({ className, id, name }) => {
   const { onClickAddToCart, loadingId } = useAddToCart({ id, name });
+  const { data: session } = useSession();
+
   const handleAddToFavorite = async () => {
     try {
-      if (isFavorite) {
-        throw Error;
-      }
+      // if (favorites?.includes(id)) {
+      //   throw Error;
+      // }
 
-      // TODO: передавать не зашитый id!
-      const data = await addToFavorites(17, id);
-
+      const data = await addToFavorites(Number(session?.user.id), id);
       toast.success("Товар добавлен в избранное");
+      return data;
+    } catch (error) {
+      console.log(error);
+      toast.error("Не удалось добавить в избранное");
+    }
+  };
+
+  const handleRemoveFromFavorite = async () => {
+    try {
+      const data = await removeFromFavorites(Number(session?.user.id), id);
+      toast.success("Товар удален из избранного");
 
       return data;
     } catch (error) {
-      console.log(error)
-      toast.error("Не удалось добавить в избранное");
+      console.log(error);
+      toast.error("Не удалось удалить из избранного");
     }
-    
-    
-  }
+  };
+
   return (
     <div className={cn("flex items-center gap-3 ", className)}>
-      <button onClick={handleAddToFavorite}
+      <button onClick={handleRemoveFromFavorite}>test btn</button>
+      <button
+        onClick={handleAddToFavorite}
         className={cn(
           "bg-[#f5f5f7] group w-[48px] h-[48px] rounded-xl flex items-center justify-center",
           {
-            "bg-primary": isFavorite,
+            // "bg-primary": favoriteItems?.includes(id),
           }
         )}
       >
         <Heart
           className={cn("group-hover:stroke-red-600 transition duration-200", {
-            "fill-white stroke-white" : isFavorite
+            // "fill-white stroke-white": favoriteItems?.includes(id),
           })}
           size={24}
         />

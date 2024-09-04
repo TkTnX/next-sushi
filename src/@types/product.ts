@@ -1,4 +1,5 @@
 import { IIngredient } from "@/components/shared/filter-group-ingredients";
+import { FavoriteType } from "@/store/favoritesStore";
 
 export interface IProduct {
   categoryId: number;
@@ -8,12 +9,11 @@ export interface IProduct {
   price: number;
   imageUrl: string;
   weight: number;
-  ingredients?: IIngredient[]
+  ingredients?: IIngredient[];
   createdAt?: Date;
   typeId?: number;
   exceptions?: { productId: number; exceptionId: number }[];
   isNeedToFilter?: boolean;
-  isFavorite?: boolean;
 }
 
 

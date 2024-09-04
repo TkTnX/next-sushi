@@ -19,7 +19,6 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
   exceptions,
   ingredients,
   createdAt,
-  isFavorite,
 }) => {
   const isNewProduct = calculateIsNewProducts(createdAt);
   const { selectedIngredients } = useFilterStore();
@@ -55,11 +54,7 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
           {price} <span className="text-2xl text-[#686870]">руб</span>
         </p>
 
-        <CategoryGroupItemsControls
-          isFavorite={isFavorite}
-          name={name}
-          id={id}
-        />
+        <CategoryGroupItemsControls name={name} id={id}  />
       </div>
     </div>
   );
