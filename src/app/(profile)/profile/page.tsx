@@ -17,6 +17,7 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
   const [orders, setOrders] = React.useState<Order[]>([]);
   const { data: session } = useSession();
   const { loading, favorites, getItems } = useFavoriteStore();
+
   React.useEffect(() => {
     async function getOrders() {
       if (session) {
@@ -42,7 +43,7 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
       <ProfileOrders loading={loading} orders={orders} personalValue="0" />
       <ProfileFavorites
         loading={loading}
-        favorites={favorites ? favorites.favoriteItem : []}
+        favorites={favorites.favoriteItem}
         personalValue="1"
       />
       <ProfileAddress orders={orders} personalValue="2" />

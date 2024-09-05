@@ -10,7 +10,10 @@ import CategoryGroupItemIsNew from "./category-group-item-is-new";
 import CategoryGroupItemException from "./category-group-item-exception";
 import CategoryGroupItemsControls from "./category-group-item-controls";
 
-const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
+type Props = {
+};
+
+const CategoryGroupItem: React.FunctionComponent<IProduct & Props> = ({
   name,
   price,
   imageUrl,
@@ -54,7 +57,10 @@ const CategoryGroupItem: React.FunctionComponent<IProduct> = ({
           {price} <span className="text-2xl text-[#686870]">руб</span>
         </p>
 
-        <CategoryGroupItemsControls name={name} id={id}  />
+        <CategoryGroupItemsControls
+          name={name}
+          id={id}
+        />
       </div>
     </div>
   );

@@ -8,11 +8,14 @@ export default async function Home() {
     include: {
       products: {
         include: {
-          exceptions: true
-        }
+          exceptions: true,
+        },
       },
     },
   });
+
+
+
 
   return (
     <main>
