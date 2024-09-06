@@ -1,7 +1,7 @@
 import { useAddToCart } from "@/hooks/use-add-to-cart";
 import { cn } from "@/lib/utils";
-import { addToFavorites, removeFromFavorites } from "@/services/favorites";
-import { FavoriteType, useFavoriteStore } from "@/store/favoritesStore";
+import { addToFavorites } from "@/services/favorites";
+import {  useFavoriteStore } from "@/store/favoritesStore";
 import { Heart, Loader, Plus } from "lucide-react";
 import { useSession } from "next-auth/react";
 import * as React from "react";

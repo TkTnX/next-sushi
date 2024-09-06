@@ -15,8 +15,6 @@ export default async function Home() {
   });
 
 
-
-
   return (
     <main>
       <Categories categories={categories} />

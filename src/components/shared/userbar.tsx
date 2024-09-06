@@ -5,6 +5,7 @@ import CartBtn from "./cart-btn";
 import { IHeaderProps } from "./header";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
+import NotificationsModal from "./modals/notifications-modal";
 
 interface IUserbarProps {
   setOpenAuthModal: () => void;
@@ -20,15 +21,20 @@ const Userbar: React.FunctionComponent<IUserbarProps> = ({
   return (
     <div className="flex items-center gap-3">
       {/* Кнопка уведомлений */}
-      <button className="w-[56px] h-[56px] border border-[#d2d2d7] rounded-2xl p-4 group hover:bg-primary  hover:border-primary transition duration-200">
-        <Bell
-          className="stroke-[#686870] group-hover:stroke-white transition duration-200"
-          size={24}
-        />
-      </button>
+      <NotificationsModal>
+        <button className="w-[56px] h-[56px] border border-[#d2d2d7] rounded-2xl p-4 group hover:bg-primary  hover:border-primary transition duration-200">
+          <Bell
+            className="stroke-[#686870] group-hover:stroke-white transition duration-200"
+            size={24}
+          />
+        </button>
+      </NotificationsModal>
 
       {/* Кнопка favorite */}
-      <Link href="/profile" className="w-[56px] h-[56px] border border-[#d2d2d7] rounded-2xl p-4 group hover:bg-primary hover:border-primary transition duration-200">
+      <Link
+        href="/profile"
+        className="w-[56px] h-[56px] border border-[#d2d2d7] rounded-2xl p-4 group hover:bg-primary hover:border-primary transition duration-200"
+      >
         <Heart
           className="stroke-[#686870] group-hover:stroke-white transition duration-200"
           size={24}

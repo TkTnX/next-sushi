@@ -18,7 +18,6 @@ const Header: React.FunctionComponent<IHeaderProps> = ({
   const [type, setType] = React.useState<"login" | "register">("login");
   const [openAuthModal, setOpenModal] = React.useState(false);
   const searchParams = useSearchParams();
-  const router = useRouter();
   React.useEffect(() => {
     let toastText = "";
     if (searchParams.has("paid")) {

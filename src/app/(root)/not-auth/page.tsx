@@ -1,11 +1,17 @@
 import WhiteBox from "@/components/shared/white-box";
 import { Button } from "@/components/ui/button";
+import { getUserSession } from "@/lib/get-user-session";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import * as React from "react";
 
 interface INotAuthProps {}
 
-const NotAuth: React.FunctionComponent<INotAuthProps> = (props) => {
+const NotAuth: React.FunctionComponent<INotAuthProps> = async (props) => {
+  const user = await getUserSession();
+
+  if (user) return redirect("/profile");
+
   return (
     <div>
       <WhiteBox className="mt-4 max-w-4xl mx-auto p-20">
@@ -18,7 +24,7 @@ const NotAuth: React.FunctionComponent<INotAuthProps> = (props) => {
         </p>
 
         <Link href="/">
-          <Button variant="default" className="w-full mt-4" >
+          <Button variant="default" className="w-full mt-4">
             Вернуться на главную
           </Button>
         </Link>
