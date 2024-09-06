@@ -7,6 +7,8 @@ import Userbar from "./userbar";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import AuthModal from "./modals/auth-modal";
+import { useSession } from "next-auth/react";
+import { useFavoriteStore } from "@/store/favoritesStore";
 
 export interface IHeaderProps {
   isCheckoutPage?: boolean;
@@ -17,6 +19,15 @@ const Header: React.FunctionComponent<IHeaderProps> = ({
 }) => {
   const [type, setType] = React.useState<"login" | "register">("login");
   const [openAuthModal, setOpenModal] = React.useState(false);
+  const { data: session } = useSession();
+  const { getItems } = useFavoriteStore();
+
+  React.useEffect(() => {
+    if (session) {
+      getItems(session.user.id);
+    }
+  }, [session]);
+
   const searchParams = useSearchParams();
   React.useEffect(() => {
     let toastText = "";
@@ -33,35 +44,35 @@ const Header: React.FunctionComponent<IHeaderProps> = ({
         toast.success(toastText, {
           icon: "✅",
         });
-
+      
       }, 500);
     }
   }, []);
 
   return (
-      <header className="mt-4 bg-white px-3 py-[6px] rounded-xl flex items-center justify-between">
-        <Link href={"/"} className="relative ">
-          <Image src="/logo.svg" alt={"logo"} width={214} height={48} />
-        </Link>
+    <header className="mt-4 bg-white px-3 py-[6px] rounded-xl flex items-center justify-between">
+      <Link href={"/"} className="relative ">
+        <Image src="/logo.svg" alt={"logo"} width={214} height={48} />
+      </Link>
 
-        <div>
-          <Navbar />
-        </div>
+      <div>
+        <Navbar />
+      </div>
 
-        <div>
-          <AuthModal
-            open={openAuthModal}
-            type={type}
-            setType={setType}
-            onClose={() => setOpenModal(false)}
-          />
+      <div>
+        <AuthModal
+          open={openAuthModal}
+          type={type}
+          setType={setType}
+          onClose={() => setOpenModal(false)}
+        />
 
-          <Userbar
-            setOpenAuthModal={() => setOpenModal((prev) => !prev)}
-            isCheckoutPage={isCheckoutPage}
-          />
-        </div>
-      </header>
+        <Userbar
+          setOpenAuthModal={() => setOpenModal((prev) => !prev)}
+          isCheckoutPage={isCheckoutPage}
+        />
+      </div>
+    </header>
   );
 };
 

@@ -16,7 +16,7 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
   const { activeCategoryId, setActiveCategoryId } = useUserStore();
   const [orders, setOrders] = React.useState<Order[]>([]);
   const { data: session } = useSession();
-  const { loading, favorites, getItems } = useFavoriteStore();
+  const { loading, favorites } = useFavoriteStore();
 
   React.useEffect(() => {
     async function getOrders() {
@@ -28,11 +28,6 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
     getOrders();
   }, [session]);
 
-  React.useEffect(() => {
-      if (session) {
-        getItems(session.user.id);
-      }
-   }, [session])
 
   return (
     <Tabs

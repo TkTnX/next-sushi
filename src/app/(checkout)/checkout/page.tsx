@@ -14,10 +14,12 @@ import { cn } from "@/lib/utils";
 import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
+import { useNotifications } from "@/store/notificationsStore";
 
 const CheckoutPage: React.FunctionComponent = () => {
   const [submitting, setSubmitting] = React.useState(false);
   const { data: session } = useSession();
+  const { addNewNotification } = useNotifications();
   const loading = useCartStore((state) => state.loading);
 
   const firstName = session?.user.name.split(" ")[0];
@@ -39,6 +41,10 @@ const CheckoutPage: React.FunctionComponent = () => {
     try {
       setSubmitting(true);
       const url = await createOrder(data);
+      addNewNotification(
+        `Заказ на адрес ${data.address} оформлен!`,
+        "Вы успешно оформили заказ 🛒"
+      );
       toast.success("Заказ оформлен! Переход к оплате...", {
         icon: "🛒",
       });
@@ -51,6 +57,10 @@ const CheckoutPage: React.FunctionComponent = () => {
       toast.error("Произошла ошибка при оформлении заказа", {
         icon: "🚨",
       });
+      addNewNotification(
+        "Произошла ошибка при оформлении заказа",
+        "Не удалось создать заказ 🚨"
+      );
       setSubmitting(false);
     }
   };

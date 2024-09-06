@@ -108,9 +108,9 @@ model User {
     id Int @id @default(autoincrement())
 
     fullName    String
-    email       String   @unique
+    email       String    @unique
     password    String
-    role        role     @default(USER)
+    role        role      @default(USER)
     verificated DateTime?
 
     provider   String?
@@ -124,6 +124,8 @@ model User {
     verificationCode VerificationCode?
 
     favorites Favorites?
+
+    notifications Notifications[]
 }
 
 model CartItem {
@@ -144,9 +146,7 @@ model Favorites {
     id Int @id @default(autoincrement())
 
     user   User @relation(fields: [userId], references: [id])
-    userId Int @unique
-
-
+    userId Int  @unique
 
     favoriteItem FavoriteItem[]
 }
@@ -158,8 +158,6 @@ model FavoriteItem {
 
     favorites   Favorites @relation(fields: [favoritesId], references: [id])
     favoritesId Int
-
-
 }
 
 model Order {
@@ -201,16 +199,37 @@ model VerificationCode {
 model Promocode {
     id Int @id @default(autoincrement())
 
-    code String
+    code     String
     discount Int
 
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
-
-    
 }
 
+model Notifications {
+    id Int @id @default(autoincrement())
 
+    notificationsItem NotificationsItem[]
+
+    user   User @relation(fields: [userId], references: [id])
+    userId Int
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
+
+model NotificationsItem {
+    id Int @id @default(autoincrement())
+
+    notifications   Notifications @relation(fields: [notificationsId], references: [id])
+    notificationsId Int
+
+    title String
+    body  String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
 
 enum OrderStatus {
     PENDING

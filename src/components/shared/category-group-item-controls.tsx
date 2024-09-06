@@ -1,7 +1,8 @@
 import { useAddToCart } from "@/hooks/use-add-to-cart";
 import { cn } from "@/lib/utils";
 import { addToFavorites } from "@/services/favorites";
-import {  useFavoriteStore } from "@/store/favoritesStore";
+import { useFavoriteStore } from "@/store/favoritesStore";
+import { useNotifications } from "@/store/notificationsStore";
 import { Heart, Loader, Plus } from "lucide-react";
 import { useSession } from "next-auth/react";
 import * as React from "react";
@@ -17,12 +18,18 @@ const CategoryGroupItemsControls: React.FunctionComponent<
   ICategoryGroupItemsControlsProps
 > = ({ className, id, name }) => {
   const { onClickAddToCart, loadingId } = useAddToCart({ id, name });
-  const [loadingFavoriteId, setLoadingFavoriteId] = React.useState<number | null>(null);
-  const removeFromFavorites = useFavoriteStore((state) => state.removeFromFavorites);
+  const { addNewNotification } = useNotifications();
+  const [loadingFavoriteId, setLoadingFavoriteId] = React.useState<
+    number | null
+  >(null);
+  const removeFromFavorites = useFavoriteStore(
+    (state) => state.removeFromFavorites
+  );
   const { data: session } = useSession();
   const { getItems, favorites } = useFavoriteStore();
 
-  const favoriteItemsIds = favorites.favoriteItem.map((item) => item.productId) ?? [];
+  const favoriteItemsIds =
+    favorites.favoriteItem.map((item) => item.productId) ?? [];
 
   const isFavorite = favoriteItemsIds.includes(id);
 
@@ -30,6 +37,10 @@ const CategoryGroupItemsControls: React.FunctionComponent<
     try {
       setLoadingFavoriteId(id);
       const data = await removeFromFavorites(id, Number(session?.user.id));
+      await addNewNotification(
+        "Товар удалён из избранного",
+        `Товар ${name} удалён из избранного 🗑🚮`
+      );
       toast.success("Товар удален из избранного", {
         icon: "🚮",
       });
@@ -39,6 +50,7 @@ const CategoryGroupItemsControls: React.FunctionComponent<
     } catch (error) {
       console.log(error);
       toast.error("Не удалось удалить из избранного");
+  
     }
   };
 
@@ -49,6 +61,10 @@ const CategoryGroupItemsControls: React.FunctionComponent<
       }
       setLoadingFavoriteId(id);
       const data = await addToFavorites(Number(session?.user.id), id);
+      await addNewNotification(
+        "Товар добавлен в избранное",
+        `Товар ${name} добавлен в избранное ✅`
+      );
       toast.success("Товар добавлен в избранное");
 
       await getItems(session?.user.id!);
@@ -57,6 +73,7 @@ const CategoryGroupItemsControls: React.FunctionComponent<
     } catch (error) {
       console.log(error);
       toast.error("Не удалось добавить в избранное");
+     
     }
   };
 
