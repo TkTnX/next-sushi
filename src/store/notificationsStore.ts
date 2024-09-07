@@ -9,14 +9,18 @@ export type NotificationsItemType = {
 
 interface Notifications {
   notifications: NotificationsItemType[];
-    getNotifications: () => Promise<void>;
-    addNewNotification: (title: string, body: string) => Promise<void>;
+  hasNewNotifications: boolean;
   loading: boolean;
+  
+  getNotifications: () => Promise<void>;
+  addNewNotification: (title: string, body: string) => Promise<void>;
+  setOffNewNotifications: () => void;
 }
 
 export const useNotifications = create<Notifications>()((set, state) => ({
   notifications: [],
   loading: false,
+  hasNewNotifications: false,
   getNotifications: async () => {
     set({ loading: true });
     try {
@@ -39,7 +43,10 @@ export const useNotifications = create<Notifications>()((set, state) => ({
         body,
       });
 
-      set({ notifications: newNotifications.notificationsItem });
+      set({
+        notifications: newNotifications.notificationsItem,
+        hasNewNotifications: true,
+      });
     } catch (error) {
       console.log(error);
       set({ loading: false });
@@ -47,4 +54,7 @@ export const useNotifications = create<Notifications>()((set, state) => ({
       set({ loading: false });
     }
   },
+  setOffNewNotifications: () => {
+    set({ hasNewNotifications: false });
+  }
 }));

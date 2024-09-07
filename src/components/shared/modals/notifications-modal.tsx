@@ -5,9 +5,7 @@ import {
 } from "@/components/ui/popover";
 import * as React from "react";
 import NotificationsItem from "../notifications/notifications-item";
-import { Api } from "@/services/api-client";
 import { useNotifications } from "@/store/notificationsStore";
-import Image from "next/image";
 import { Bell } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -40,7 +38,7 @@ const NotificationsModal: React.FunctionComponent<INotificationsModalProps> = ({
           )}
 
           {!loading && notifications
-            ? notifications.map((item) => (
+            ? [...notifications].reverse().map((item) => (
                 <NotificationsItem
                   key={item.id}
                   title={item.title}

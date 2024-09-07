@@ -78,34 +78,36 @@ const CategoryGroupItemsControls: React.FunctionComponent<
   };
 
   return (
-    <div className={cn("flex items-center gap-3 ", className)}>
-      <button
-        disabled={loadingFavoriteId === id}
-        onClick={handleAddToFavorite}
-        className={cn(
-          "bg-[#f5f5f7] group w-[48px] h-[48px] rounded-xl flex items-center justify-center disabled:pointer-events-none disabled:opacity-50",
-          {
-            "bg-primary": isFavorite,
-          }
-        )}
-      >
-        {loadingFavoriteId === id ? (
-          <Loader className="animate-spin" />
-        ) : (
-          <Heart
-            className={cn(
-              "group-hover:stroke-red-600 transition duration-200",
-              {
-                "fill-white stroke-white": isFavorite,
-              }
-            )}
-            size={24}
-          />
-        )}
-      </button>
+    <div className={cn("flex items-center gap-3 w-full", className)}>
+      {session && (
+        <button
+          disabled={loadingFavoriteId === id}
+          onClick={handleAddToFavorite}
+          className={cn(
+            "bg-[#f5f5f7] group lg:w-[48px] w-full p-2 lg:p-0 lg:h-[48px] rounded-xl flex items-center justify-center disabled:pointer-events-none disabled:opacity-50",
+            {
+              "bg-primary": isFavorite,
+            }
+          )}
+        >
+          {loadingFavoriteId === id ? (
+            <Loader className="animate-spin" />
+          ) : (
+            <Heart
+              className={cn(
+                "group-hover:stroke-red-600 transition duration-200",
+                {
+                  "fill-white stroke-white": isFavorite,
+                }
+              )}
+              size={24}
+            />
+          )}
+        </button>
+      )}
       <button
         onClick={onClickAddToCart}
-        className="w-[76px] group bg-[#ccf5d5] rounded-xl flex justify-center items-center h-[48px]"
+        className="lg:w-[76px] w-full p-2 lg:p-0 lg:h-[48px] group bg-[#ccf5d5] rounded-xl flex justify-center items-center "
       >
         {!loadingId ? (
           <Plus

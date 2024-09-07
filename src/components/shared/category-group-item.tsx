@@ -1,5 +1,5 @@
 "use client";
-import {  IProduct } from "@/@types/product";
+import { IProduct } from "@/@types/product";
 import { useFilterHelp } from "@/hooks/use-filter-help";
 import { calculateIsNewProducts } from "@/lib/calculate-is-new-products";
 import { useFilterStore } from "@/store/filterStore";
@@ -10,8 +10,7 @@ import CategoryGroupItemIsNew from "./category-group-item-is-new";
 import CategoryGroupItemException from "./category-group-item-exception";
 import CategoryGroupItemsControls from "./category-group-item-controls";
 
-type Props = {
-};
+type Props = {};
 
 const CategoryGroupItem: React.FunctionComponent<IProduct & Props> = ({
   name,
@@ -32,17 +31,17 @@ const CategoryGroupItem: React.FunctionComponent<IProduct & Props> = ({
   });
 
   return (
-    <div className="rounded-xl p-6 max-w-[380px] bg-white h-full">
+    <div className="rounded-xl p-6 sm:max-w-[380px] bg-white h-full ">
       <div className="relative">
         {isNewProduct && <CategoryGroupItemIsNew />}
         <Link href={`/products/${id}`}>
-          <Image src={imageUrl} alt={name} width={331} height={290} />
+          <Image className="mx-auto sm:mx-0" src={imageUrl} alt={name} width={331} height={290} />
         </Link>
         {exception ? <CategoryGroupItemException exception={exception} /> : ""}
       </div>
       <div>
-        <h3 className="font-bold text-3xl text-black">{name}</h3>
-        <p className="text-primary text-lg mt-3">Вес: {weight} г</p>
+        <h3 className="font-bold text-xl md:text-3xl text-black">{name}</h3>
+        <p className="text-primary text-sm md:text-lg mt-3">Вес: {weight} г</p>
         <p className="mt-2 text-[#686870] font-normal flex items-center gap-1 flex-wrap">
           {ingredients &&
             ingredients.map((ingredient, index) => (
@@ -52,15 +51,12 @@ const CategoryGroupItem: React.FunctionComponent<IProduct & Props> = ({
             ))}
         </p>
       </div>
-      <div className="flex items-center justify-between mt-[72px]">
-        <p className="font-bold text-4xl text-black">
-          {price} <span className="text-2xl text-[#686870]">руб</span>
+      <div className="flex lg:items-center lg:flex-row  justify-between mt-2 md:mt-[72px] flex-col items-start gap-2 lg:gap-0">
+        <p className="font-bold text-2xl md:text-4xl text-black">
+          {price} <span className=" text-lg md:text-2xl text-[#686870]">руб</span>
         </p>
 
-        <CategoryGroupItemsControls
-          name={name}
-          id={id}
-        />
+        <CategoryGroupItemsControls name={name} id={id} />
       </div>
     </div>
   );

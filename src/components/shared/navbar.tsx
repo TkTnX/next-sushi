@@ -6,7 +6,7 @@ interface INavbarProps {}
 const Navbar: React.FunctionComponent<INavbarProps> = (props) => {
   return (
     <nav>
-      <ul className="flex items-center gap-12">
+      <ul className="flex items-center gap-3 xl:gap-12">
         {navbarItems.map((item) => (
           <li key={item.url}>
             <a

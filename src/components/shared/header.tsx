@@ -4,7 +4,7 @@ import Link from "next/link";
 import * as React from "react";
 import Navbar from "./navbar";
 import Userbar from "./userbar";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import AuthModal from "./modals/auth-modal";
 import { useSession } from "next-auth/react";
@@ -44,18 +44,17 @@ const Header: React.FunctionComponent<IHeaderProps> = ({
         toast.success(toastText, {
           icon: "✅",
         });
-      
       }, 500);
     }
   }, []);
 
   return (
-    <header className="mt-4 bg-white px-3 py-[6px] rounded-xl flex items-center justify-between">
+    <header className="mt-4 bg-white px-3 py-[14px] md:py-[6px] rounded-xl flex items-center justify-between  gap-3 md:gap-0 flex-col sm:flex-row  ">
       <Link href={"/"} className="relative ">
         <Image src="/logo.svg" alt={"logo"} width={214} height={48} />
       </Link>
 
-      <div>
+      <div className="hidden md:block">
         <Navbar />
       </div>
 

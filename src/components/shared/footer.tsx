@@ -9,8 +9,8 @@ interface IFooterProps {}
 const Footer: React.FunctionComponent<IFooterProps> = () => {
   return (
     <footer className="bg-white mt-9  py-16 ">
-      <div className="flex items-start justify-between container ">
-        <div>
+      <div className="grid  text-center sm:text-left sm:flex items-start sm:justify-between container flex-wrap gap-3">
+        <div className="justify-self-center ">
           <Image src="/logo.svg" alt="logo" width={246} height={59} />
           <p className="text-sm font-medium mt-4">
             © Ninja Sushi. All rights reserved.
@@ -42,7 +42,7 @@ const Footer: React.FunctionComponent<IFooterProps> = () => {
         />
         <div>
           <h6 className="text-[#686870] text-sm">Мы в соц. сетях:</h6>
-          <div className="flex items-center gap-3 mt-3">
+          <div className="flex items-center gap-3 mt-3 justify-center sm:justify-normal">
             <Link href="https://facebook.com">
               <Image
                 src="/icons/facebook.svg"
@@ -64,7 +64,7 @@ const Footer: React.FunctionComponent<IFooterProps> = () => {
           </div>
           <Button
             variant="outline"
-            className="text-[#039BE5] flex items-center gap-3 mt-4"
+            className="text-[#039BE5] flex items-center gap-3 mt-4 w-full sm:w-auto max-w-max mx-auto"
           >
             <Image
               src="/icons/telegram.svg"
@@ -76,7 +76,7 @@ const Footer: React.FunctionComponent<IFooterProps> = () => {
           </Button>
         </div>
         <div>
-          <h2 className="text-5xl font-bold">#NinjaSushi</h2>
+          <h2 className="text-3xl sm:text-5xl font-bold">#NinjaSushi</h2>
           <p className="text-base font-medium mt-2">
             Ninja Sushi в фотографиях наших клиентов
           </p>

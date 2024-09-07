@@ -9,6 +9,14 @@ export async function GET() {
       return NextResponse.json({ message: "Вы не в аккаунте" });
     }
 
+    await prisma.notificationsItem.deleteMany({
+      where: {
+        createdAt: {
+          lt: new Date(new Date().setDate(new Date().getDate() - 1)),
+        },
+      },
+    });
+
     const notifications = await prisma.notifications.findFirst({
       where: {
         userId: Number(user.id),
@@ -50,7 +58,6 @@ export async function POST(req: NextRequest) {
       where: {
         userId: Number(user.id),
       },
-    
     });
 
     if (!notifications) {
@@ -83,17 +90,16 @@ export async function POST(req: NextRequest) {
         userId: Number(user.id),
       },
       include: {
-          notificationsItem: {
-            orderBy: {
-              createdAt: "asc",
-            },
+        notificationsItem: {
+          orderBy: {
+            createdAt: "asc",
           },
         },
-      
+      },
     });
 
     if (!newNotifications) {
-        return NextResponse.json({ message: "Не удалось добавить уведомление" });
+      return NextResponse.json({ message: "Не удалось добавить уведомление" });
     }
     return NextResponse.json(newNotifications);
   } catch (error) {
