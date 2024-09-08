@@ -15,11 +15,13 @@ import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useNotifications } from "@/store/notificationsStore";
+import { useAddressStore } from "@/store/addressStore";
 
 const CheckoutPage: React.FunctionComponent = () => {
   const [submitting, setSubmitting] = React.useState(false);
   const { data: session } = useSession();
   const { addNewNotification } = useNotifications();
+  const addNewAddress = useAddressStore(state => state.addNewAddress)
   const loading = useCartStore((state) => state.loading);
 
   const firstName = session?.user.name.split(" ")[0];
@@ -52,6 +54,8 @@ const CheckoutPage: React.FunctionComponent = () => {
       if (url) {
         window.location.href = url;
       }
+
+      addNewAddress(data.address);
     } catch (error) {
       console.log(error);
       toast.error("Произошла ошибка при оформлении заказа", {

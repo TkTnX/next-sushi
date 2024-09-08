@@ -249,6 +249,8 @@ model AddressItem {
 
     userAddresses   UserAddresses @relation(fields: [userAddressesId], references: [id])
     userAddressesId Int
+
+     @@unique([name, userAddressesId])
 }
 
 enum OrderStatus {

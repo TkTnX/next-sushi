@@ -5,99 +5,89 @@ import { Plus } from "lucide-react";
 import ProfileAddressItem from "./profile-address-item";
 import { Api } from "@/services/api-client";
 import { Button } from "@/components/ui/button";
+import AddAddressModal from "../modals/add-address-modal";
+import { useAddressStore } from "@/store/addressStore";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface IProfileAddressProps {
   personalValue: string;
 }
 
-type TAddressItem = {
+export type TAddressItem = {
   id: number;
   name: string;
 };
 
-type TUserAddresses = {
+export type TUserAddresses = {
   id: number;
   userId: number;
   addressItem: TAddressItem[];
+  error?: boolean;
 };
 
 const ProfileAddress: React.FunctionComponent<IProfileAddressProps> = ({
   personalValue,
 }) => {
-  const [addresses, setAddresses] = React.useState<TUserAddresses>({
-    id: 0,
-    userId: 0,
-    addressItem: [],
-  });
+  const {
+    addresses,
+    loading,
+    getAddresses,
+    addNewAddress,
+    deleteAddress,
+  } = useAddressStore();
 
-  // TODO: ПЕРЕНЕСТИ ЭТИ ФУНКЦИИ В ZUSTAND
   React.useEffect(() => {
-    async function getAddresses() {
-      try {
-        const addresses = await Api.addresses.getAddresses();
-
-        setAddresses(addresses);
-      } catch (error) {
-        console.log(error);
-      }
-    }
     getAddresses();
   }, []);
 
-  const handleAddAddress = async () => {
-    try {
-      // TODO: ПЕРЕДАВАТЬ НЕ СТАТИЧНЫЙ АДРЕС
-
-      const newAddress = await Api.addresses.addAddress("test address");
-
-      setAddresses(newAddress);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleAddAddress = async (address: string) => {
+    addNewAddress(address);
   };
 
-  const handleDeleteAddress = async () => {
-    try {
-      // TODO: ПЕРЕДАВАТЬ НЕ СТАТИЧНЫЙ ID
-
-      const newAddress = await Api.addresses.deleteAddress(2);
-
-      setAddresses(newAddress);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleDeleteAddress = async (id: number) => {
+    deleteAddress(id);
   };
-
-  console.log(addresses);
 
   return (
     <TabsContent value={personalValue} className="flex-1">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-5xl font-bold">Адрес доставки</h2>
 
-        <Button
-          onClick={handleAddAddress}
-          className="flex items-center p-3 gap-2 bg-secondary text-white rounded-xl hover:bg-primary transition duration-200"
-        >
-          Новый адрес <Plus width={24} color="white" />
-        </Button>
+        <AddAddressModal addresses={addresses.addressItem} handleAddAddress={handleAddAddress}>
+          <Button className="flex items-center p-3 gap-2 bg-secondary text-white rounded-xl hover:bg-primary transition duration-200">
+            Новый адрес <Plus width={24} color="white" />
+          </Button>
+        </AddAddressModal>
       </div>
-      {addresses.addressItem.length > 0 ? (
+
+      <div className="grid gap-3">
+  
+        {loading &&
+          [...new Array(5)].map((_, index) => (
+            <Skeleton
+              key={index}
+              className="w-full h-[80px] rounded-xl animate-pulse bg-[#c2c2c3]"
+            />
+          ))}
+      </div>
+      {!loading && addresses.addressItem.length > 0 ? (
         <div className="grid gap-3">
           {addresses.addressItem.map((address) => (
             <ProfileAddressItem
-              handleDeleteAddress={handleDeleteAddress}
+              handleDeleteAddress={() => handleDeleteAddress(address.id)}
               key={address.id}
               name={address.name}
             />
           ))}
         </div>
       ) : (
-        <ProfileStarter
-          imageUrl="02.svg"
-          subtitle="У вас нет сохраненных адресов"
-          description="Переходите в интересующую вас категорию и сделайте свой первый заказ и адрес сохранится автоматически"
-        />
+        !loading && (
+          <ProfileStarter
+            imageUrl="02.svg"
+            subtitle="У вас нет сохраненных адресов"
+            description="Переходите в интересующую вас категорию и сделайте свой первый заказ и адрес сохранится автоматически"
+          />
+        )
       )}
     </TabsContent>
   );
