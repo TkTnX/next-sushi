@@ -126,6 +126,8 @@ model User {
     favorites Favorites?
 
     notifications Notifications[]
+
+    userAddresses UserAddresses[]
 }
 
 model CartItem {
@@ -229,6 +231,24 @@ model NotificationsItem {
 
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
+}
+
+model UserAddresses {
+    id Int @id @default(autoincrement())
+
+    addressItem AddressItem[]
+
+    user   User @relation(fields: [userId], references: [id])
+    userId Int
+}
+
+model AddressItem {
+    id Int @id @default(autoincrement())
+
+    name String
+
+    userAddresses   UserAddresses @relation(fields: [userAddressesId], references: [id])
+    userAddressesId Int
 }
 
 enum OrderStatus {

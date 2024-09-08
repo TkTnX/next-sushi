@@ -8,11 +8,11 @@ export async function GET(req: NextRequest) {
     const session = await getUserSession();
     if (!userId) {
       return NextResponse.json({ error: "Вы не вошли в аккаунт!" });
-      }
-      
-      if (userId !== session?.id) {
-        return NextResponse.json({ error: "Вы не вошли в аккаунт!" });
-      }
+    }
+
+    if (userId !== session?.id) {
+      return NextResponse.json({ error: "Вы не вошли в аккаунт!" });
+    }
 
     const favorites = await prisma.favorites.findFirst({
       where: {
@@ -28,11 +28,12 @@ export async function GET(req: NextRequest) {
     });
 
     if (!favorites) {
-      return NextResponse.json({
-        error: "Не удалось получить избранные товары",
+      await prisma.favorites.create({
+        data: {
+          userId: Number(userId),
+        },
       });
     }
-
 
     return NextResponse.json(favorites);
   } catch (error) {

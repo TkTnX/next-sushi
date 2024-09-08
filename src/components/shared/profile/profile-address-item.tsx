@@ -4,10 +4,12 @@ import { MapPin, Trash } from "lucide-react";
 
 interface IProfileAddressItemProps {
   name: string;
+  handleDeleteAddress: () => void;
 }
 
 const ProfileAddressItem: React.FunctionComponent<IProfileAddressItemProps> = ({
   name,
+  handleDeleteAddress,
 }) => {
   return (
     <WhiteBox className="flex items-center justify-between">
@@ -15,9 +17,12 @@ const ProfileAddressItem: React.FunctionComponent<IProfileAddressItemProps> = ({
         <MapPin size={24} />
         <h5 className="font-medium">{name}</h5>
       </div>
-      {/* <button className="bg-[#686870/10] p-1 rounded-full">
+      <button
+        onClick={handleDeleteAddress}
+        className="bg-[#686870/10] p-1 rounded-full"
+      >
         <Trash color="#686870" width={24} />
-      </button> */}
+      </button>
     </WhiteBox>
   );
 };

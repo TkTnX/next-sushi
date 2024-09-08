@@ -41,7 +41,7 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
         favorites={favorites.favoriteItem}
         personalValue="1"
       />
-      <ProfileAddress orders={orders} personalValue="2" />
+      <ProfileAddress personalValue="2" />
     </Tabs>
   );
 };

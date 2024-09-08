@@ -28,8 +28,7 @@ const CategoryGroupItemsControls: React.FunctionComponent<
   const { data: session } = useSession();
   const { getItems, favorites } = useFavoriteStore();
 
-  const favoriteItemsIds =
-    favorites.favoriteItem.map((item) => item.productId) ?? [];
+  const favoriteItemsIds = favorites.favoriteItem.map((item) => item.productId);
 
   const isFavorite = favoriteItemsIds.includes(id);
 
@@ -50,7 +49,6 @@ const CategoryGroupItemsControls: React.FunctionComponent<
     } catch (error) {
       console.log(error);
       toast.error("Не удалось удалить из избранного");
-  
     }
   };
 
@@ -73,7 +71,6 @@ const CategoryGroupItemsControls: React.FunctionComponent<
     } catch (error) {
       console.log(error);
       toast.error("Не удалось добавить в избранное");
-     
     }
   };
 

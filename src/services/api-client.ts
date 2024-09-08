@@ -4,11 +4,13 @@ import * as cart from "./cart";
 import * as order from "./order";
 import * as favorites from "./favorites";
 import * as notifications from "./notifications"
+import * as addresses from "./addresses"
 export const Api = {
   products,
   types,
   cart,
   order,
   favorites,
-  notifications
+  notifications,
+  addresses
 };
