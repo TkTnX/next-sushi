@@ -75,7 +75,7 @@ const CategoryGroupItemsControls: React.FunctionComponent<
   };
 
   return (
-    <div className={cn("flex items-center gap-3 w-full", className)}>
+    <div className={cn("flex items-center gap-3", className)}>
       {session && (
         <button
           disabled={loadingFavoriteId === id}

@@ -7,6 +7,8 @@ import ErrorMessage from "../error-message";
 
 const CheckoutDelivery: React.FunctionComponent = () => {
   const { control } = useFormContext();
+
+  
   return (
     <WhiteBox
       title="Доставка"
@@ -21,6 +23,7 @@ const CheckoutDelivery: React.FunctionComponent = () => {
           <>
             <CheckoutAddressInput
               onChange={field.onChange}
+              value={field.value}
               label="Введите адрес"
               placeholder="Ваш адрес"
               className="mt-10"

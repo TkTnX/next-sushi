@@ -92,3 +92,7 @@ html body[data-scroll-locked] {
 
 }
 
+
+html body .react-dadata.react-dadata__container {
+  width: 100% !important;
+}
