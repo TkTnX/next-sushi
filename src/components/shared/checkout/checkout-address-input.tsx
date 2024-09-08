@@ -1,8 +1,6 @@
 import * as React from "react";
 import { AddressSuggestions } from "react-dadata";
 import "react-dadata/dist/react-dadata.css";
-import { useFormContext } from "react-hook-form";
-import CheckoutClearInputValue from "./checkout-clear-input-value";
 
 interface ICheckoutAddressInputProps {
   onChange?: (value?: string) => void;

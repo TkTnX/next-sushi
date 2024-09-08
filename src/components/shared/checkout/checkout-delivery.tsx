@@ -1,6 +1,5 @@
 import * as React from "react";
 import WhiteBox from "../white-box";
-import FormInput from "@/components/ui/form-input";
 import FormTextarea from "@/components/ui/form-textarea";
 import CheckoutAddressInput from "./checkout-address-input";
 import { Controller, useFormContext } from "react-hook-form";

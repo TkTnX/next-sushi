@@ -51,8 +51,8 @@ const CategoryGroupItem: React.FunctionComponent<IProduct & Props> = ({
             ))}
         </p>
       </div>
-      <div className="flex lg:items-center lg:flex-row  justify-between mt-2 md:mt-[72px] flex-col items-start gap-2 lg:gap-0">
-        <p className="font-bold text-2xl md:text-4xl text-black">
+      <div className="flex lg:items-center lg:flex-row  justify-between mt-2 md:mt-[72px] flex-col items-start gap-2 lg:gap-2 ">
+        <p className="font-bold text-2xl md:text-4xl text-black flex items-end">
           {price} <span className=" text-lg md:text-2xl text-[#686870]">руб</span>
         </p>
 
