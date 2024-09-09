@@ -25,7 +25,7 @@ const CheckoutAllAddresses: React.FunctionComponent<
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent className="p-2">
         <div className="w-full grid gap-2">
-          {addresses.addressItem.map((address) => (
+          {addresses.addressItem.length > 0 ? addresses.addressItem.map((address) => (
             <button
               onClick={() => onChange(address.name)}
               className="w-full text-left border p-2 hover:bg-[#f5f5f7] hover:opacity-80 transition duration-200 rounded-lg"
@@ -33,7 +33,7 @@ const CheckoutAllAddresses: React.FunctionComponent<
             >
               {address.name}
             </button>
-          ))}
+          )) : <p>Нет адресов</p>}
         </div>
       </PopoverContent>
     </Popover>
