@@ -22,9 +22,16 @@ const FilterGroupIngredients: React.FunctionComponent<
   const disabled = useFilterStore((state) => state.disabled);
 
   return (
-    <ul className={cn("flex items-center gap-2 mt-8", {"opacity-50 pointer-events-none": disabled})}>
+    <ul
+      className={cn("flex items-center gap-2 mt-8", {
+        "opacity-50 pointer-events-none": disabled,
+      })}
+    >
       {ingredients.slice(0, 4).map((ingredient, index) => (
-        <li key={index}>
+        <li
+          className="hidden first:block   sm:even:hidden md:block"
+          key={index}
+        >
           <button
             onClick={() => setSelectedIngredients(ingredient.id)}
             className={cn(

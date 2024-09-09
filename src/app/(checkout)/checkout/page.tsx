@@ -71,11 +71,11 @@ const CheckoutPage: React.FunctionComponent = () => {
 
   return (
     <div className="mt-12">
-      <h2 className="text-5xl font-bold">Оформление заказа</h2>
+      <h2 className="text-3xl md:text-5xl font-bold">Оформление заказа</h2>
 
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="mt-6 flex items-start justify-between mb-20 gap-[153px]">
+          <div className="mt-6 xl:flex items-start justify-between mb-20 gap-10 2xl:gap-[153px]">
             {/* Левая часть */}
             <div
               className={cn("grid gap-5 flex-1", {

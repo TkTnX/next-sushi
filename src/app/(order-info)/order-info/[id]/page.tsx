@@ -15,30 +15,28 @@ interface Props {
 const OrderInfo: React.FunctionComponent<Props> = async ({ params }) => {
   const order = await Api.order.getOrder(Number(params.id));
 
-
-
-  
   return (
     <div>
-      <WhiteBox className="mt-4 py-12 px-16 flex items-start justify-between gap-[138px]">
-        <h2 className="text-4xl font-bold leading-normal">
-          Спасибо, <br /> ваш заказ{" "}
+      <WhiteBox className="mt-4 py-3 px-4 sm:py-12 sm:px-16 flex items-start flex-col xl:flex-row xl:justify-between gap-4 xl:gap-[138px]">
+        <h2 className="text-2xl text-center sm:text-4xl font-bold leading-normal  xl:max-w-[450px]">
+          Спасибо, ваш заказ{" "}
           <span className="bg-primary text-white rounded-xl py-1 px-2">
             #{order?.id}
           </span>{" "}
-          <br />
           успешно оформлен
         </h2>
 
         {/* RIGHT */}
 
-       <OrderInfoItems order={order} />
+        <OrderInfoItems className="w-full xl:w-auto" order={order} />
       </WhiteBox>
 
       <WhiteBox className="mt-4 py-12 px-16">
-        <div className="flex items-center justify-between w-full gap-5">
+        <div className="flex flex-col items-start sm:flex-row sm:items-center justify-between w-full gap-5">
           <div>
-            <p className="text-[#9E9E9E]">{new Date(order.createdAt).toLocaleDateString()}</p>
+            <p className="text-[#9E9E9E]">
+              {new Date(order.createdAt).toLocaleDateString()}
+            </p>
             <h5 className="text-bold text-2xl font-bold">#{order?.id}</h5>
           </div>
           <div className="flex items-center w-full flex-wrap gap-4">

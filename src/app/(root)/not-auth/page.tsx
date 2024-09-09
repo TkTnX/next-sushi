@@ -14,11 +14,11 @@ const NotAuth: React.FunctionComponent<INotAuthProps> = async (props) => {
 
   return (
     <div>
-      <WhiteBox className="mt-4 max-w-4xl mx-auto p-20">
-        <h2 className="text-3xl font-bold text-center">
+      <WhiteBox className="mt-4 max-w-4xl mx-auto p-3 md:p-20">
+        <h2 className="text-xl md:text-3xl font-bold text-center">
           Войдите или зарегистрируйтесь, <br /> чтобы посетить эту страницу
         </h2>
-        <p className="mt-2 text-[#686870] text-sm">
+        <p className="mt-2 text-[#686870] text-center text-sm">
           Страница, которую вы хотите посетить, доступна только
           зарегистрированным пользователям
         </p>

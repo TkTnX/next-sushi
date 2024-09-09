@@ -9,7 +9,7 @@ const FilterGroup: React.FunctionComponent = async () => {
   const exceptions = await Api.types.getAllExceptions()
   const ingredients = await Api.types.getAllIngredients()
     return (
-      <div className="flex items-center justify-between mt-6">
+      <div className="flex flex-col items-baseline 2xl:items-center 2xl:flex-row justify-between mt-6">
         {exceptions && <FilterGroupExceptions exceptions={exceptions.data} />}
         {ingredients && <FilterGroupIngredients ingredients={ingredients.data} />}
       </div>

@@ -10,7 +10,7 @@ const ProfileSidebarCategories: React.FunctionComponent = () => {
 
   return (
     <Tabs onValueChange={(value) => setActiveCategoryId(Number(value))} className="bg-inherit" value={String(activeCategoryId)}>
-      <TabsList className="grid gap-3 bg-inherit">
+      <TabsList className="flex justify-center xl:grid gap-3 bg-inherit flex-wrap">
         {profileSidebarItems.map((item, index) => (
           <ProfileSidebarItem
             key={index}

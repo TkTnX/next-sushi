@@ -26,7 +26,7 @@ const ProfileFavorites: React.FunctionComponent<IProfileFavoritesProps> = ({
 }) => {
   return (
     <TabsContent value={personalValue} className="flex-1">
-      <h2 className="text-5xl font-bold mb-6">Избранное</h2>
+      <h2 className="text-3xl md:text-5xl font-bold mb-6">Избранное</h2>
       {loading && (
         <div className="grid grid-cols-3 gap-5">
           {[...Array(6)].map((_, index) => (
@@ -38,7 +38,7 @@ const ProfileFavorites: React.FunctionComponent<IProfileFavoritesProps> = ({
         </div>
       )}
       {favorites && favorites.length > 0 ? (
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
           {favorites.map(({ productItem }) => (
             <CategoryGroupItem
               key={productItem.id}

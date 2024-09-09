@@ -1,6 +1,4 @@
 import * as React from "react";
-import ProfileSidebarItem from "./profile-sidebar-item";
-import { profileSidebarItems } from "@/Prisma/constants";
 import ProfileUserInfo from "./profile-user-info";
 import ProfileSidebarCategories from "./profile-sidebar-categories";
 import { getUserSession } from "@/lib/get-user-session";
@@ -25,7 +23,7 @@ const ProfileSidebar: React.FunctionComponent = async () => {
   }
 
   return (
-    <div className="w-[246px] ">
+    <div className="mx-auto xl:w-[246px] ">
       <ProfileSidebarCategories />
       <ProfileUserInfo
         name={user.fullName}

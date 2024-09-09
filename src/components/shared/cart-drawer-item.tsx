@@ -56,7 +56,7 @@ const CartDrawerItem: React.FunctionComponent<ICartDrawerItemProps> = ({
           <p className="text-sm text-primary">Вес: {productItem.weight} г</p>
         </div>
       </div>
-      <div className="flex items-center gap-4">
+      <div className=" flex-col sm:flex-row flex items-center gap-4">
         <p className="text-sm text-black font-bold">{productItem.price} руб</p>
         <CartDrawerCountBtns
           id={id}

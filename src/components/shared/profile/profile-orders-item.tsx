@@ -1,4 +1,6 @@
+import { EllipsisVertical } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 
 interface IProfileOrdersItemProps {
@@ -17,12 +19,12 @@ const ProfileOrdersItem: React.FunctionComponent<IProfileOrdersItemProps> = ({
   quantity,
 }) => {
   return (
-    <div className="flex items-center justify-between ">
+    <div className="flex  flex-col items-baseline justify-center sm:justify-between sm:items-center sm:flex-row">
       <div className="flex items-center gap-6">
         <Image src={imageUrl} alt={title} width={64} height={64} />
         <div className="grid gap-1">
           <h5 className="font-semibold">{title}</h5>
-          <p className="text-primary text-sm-">Вес: {weight} г</p>
+          <p className="text-primary text-sm">Вес: {weight} г</p>
         </div>
       </div>
       <div className="flex items-center gap-6">
@@ -34,9 +36,7 @@ const ProfileOrdersItem: React.FunctionComponent<IProfileOrdersItemProps> = ({
         </p>
         <p className="text-[#9E9E9E] text-xs ">
           Кол-во <br />
-          <span className="text-black font-bold block text-lg">
-            {quantity}
-          </span>
+          <span className="text-black font-bold block text-lg">{quantity}</span>
         </p>
         <p className="text-[#9E9E9E] text-xs ">
           Итого <br />
@@ -44,6 +44,7 @@ const ProfileOrdersItem: React.FunctionComponent<IProfileOrdersItemProps> = ({
             {price * quantity} руб
           </span>
         </p>
+        
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ export default function ProfileLayout({
       className={cn("bg-[#f5f5f7] min-h-full container")}
     >
       <Header />
-          <div className="flex items-start mt-8 gap-[153px]">
+          <div className="flex items-start mt-8 gap-5 flex-col xl:flex-row 2xl:gap-[153px]">
               <ProfileSidebar />
               {children}
           </div>

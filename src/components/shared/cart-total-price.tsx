@@ -25,7 +25,7 @@ const CartTotalPrice: React.FunctionComponent<ICartTotalPriceProps> = ({
   return (
     <div
       className={cn(
-        "py-6 px-8 bg-[#f5f5f7] flex items-center justify-between mt-10",
+        "py-6 px-8 bg-[#f5f5f7] flex  justify-between mt-10 flex-col items-start gap-2 sm:gap-0 sm:flex-row sm:items-center",
         className
       )}
     >
@@ -34,7 +34,11 @@ const CartTotalPrice: React.FunctionComponent<ICartTotalPriceProps> = ({
         <h6 className="font-bold text-3xl text-black flex items-end gap-2">
           {loading ? <Skeleton className="w-[55px] h-[36px]" /> : totalPrice}{" "}
           <span className="text-[#686870] text-xl">руб</span>
-          {discount !== 0 && discount && <span className="text-red-500 text-xs">с учётом скидки {discount}%</span>}
+          {discount !== 0 && discount && (
+            <span className="text-red-500 text-xs">
+              с учётом скидки {discount}%
+            </span>
+          )}
         </h6>
       </div>
       {link ? (
@@ -53,7 +57,7 @@ const CartTotalPrice: React.FunctionComponent<ICartTotalPriceProps> = ({
             minTotalPrice ? totalPrice < minTotalPrice || submitting : false
           }
           className={cn(
-            "bg-secondary text-white py-4 px-6 rounded-xl hover:opacity-80 disabled:opacity-50",
+            "bg-secondary text-white py-4 px-6 rounded-xl hover:opacity-80 disabled:opacity-50 w-full sm:w-auto",
             { "opacity-50 pointer-events-none": loading }
           )}
         >

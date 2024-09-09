@@ -1,8 +1,9 @@
 import * as React from "react";
 import Image from "next/image";
 import { Order } from "@prisma/client";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, EllipsisVertical } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface IProfileOrdersInfoProps {
   setOpenId: (id: number | null) => void;
@@ -24,13 +25,15 @@ const ProfileOrdersInfo: React.FunctionComponent<IProfileOrdersInfoProps> = ({
   };
 
   return (
-    <div className="flex items-center justify-between w-full gap-5 ">
+    <div
+      onClick={() => handleSetOpenMenu(order.id)}
+      className="flex items-baseline flex-col sm:flex-row sm:items-center justify-between w-full gap-5 cursor-pointer"
+    >
       <div className="flex items-center w-full gap-5">
         <button
           className={cn("transition duration-200", {
             "rotate-180": openId === order.id,
           })}
-          onClick={() => handleSetOpenMenu(order.id)}
         >
           <ChevronDown size={30} />
         </button>
@@ -40,7 +43,7 @@ const ProfileOrdersInfo: React.FunctionComponent<IProfileOrdersInfoProps> = ({
           </p>
           <h5 className="text-bold text-2xl font-bold">#{order?.id}</h5>
         </div>
-        <div className="flex items-center w-full flex-wrap gap-4">
+        <div className="hidden sm:flex items-center w-full flex-wrap gap-4">
           {typeof order.items === "string" &&
             JSON.parse(order.items).map((item: any, index: number) => (
               <div
@@ -71,6 +74,9 @@ const ProfileOrdersInfo: React.FunctionComponent<IProfileOrdersInfoProps> = ({
             {order.totalPrice} руб
           </span>
         </p>
+        <Link href={`/order-info/${order.id}`}>
+          <EllipsisVertical />
+        </Link>
       </div>
     </div>
   );

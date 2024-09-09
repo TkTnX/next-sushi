@@ -32,7 +32,7 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
   return (
     <Tabs
       onValueChange={(value) => setActiveCategoryId(Number(value))}
-      className="flex-1"
+      className="flex-1 w-full xl:w-auto"
       value={String(activeCategoryId)}
     >
       <ProfileOrders loading={loading} orders={orders} personalValue="0" />

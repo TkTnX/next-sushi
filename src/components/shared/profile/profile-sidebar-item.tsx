@@ -23,7 +23,7 @@ const ProfileSidebarItem: React.FunctionComponent<IProfileSidebarItemProps> = ({
       value={String(index)}
       onClick={() => setActiveCategory(index)}
       className={cn(
-        "flex items-center gap-3 group hover:bg-primary transition duration-200 p-3 rounded-xl bg-inherit",
+        "flex items-center gap-3 group hover:bg-primary transition duration-200 p-3 rounded-xl bg-inherit w-full md:w-auto",
         { "bg-primary text-white": activeCategory === index }
       )}
     >

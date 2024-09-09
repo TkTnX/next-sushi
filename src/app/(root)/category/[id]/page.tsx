@@ -20,7 +20,7 @@ const CategoryPage: React.FunctionComponent<ICategoryPageProps> = async ({
 }) => {
   const types = await Api.types.getAllTypes();
   const category = await findProduct(Number(id), searchParams);
-  
+
   if (!category) return redirect("/");
   return (
     <div>
@@ -33,7 +33,7 @@ const CategoryPage: React.FunctionComponent<ICategoryPageProps> = async ({
       </div>
 
       {category.products.length > 0 ? (
-        <div className="mt-8 grid grid-cols-4 gap-5 items-stretch">
+        <div className="mt-8   grid sm:grid-cols-2  lg:grid-cols-3 2xl:grid-cols-4 gap-5 items-stretch">
           {category.products.map((product) => (
             <CategoryGroupItem
               key={product.id}
@@ -44,10 +44,14 @@ const CategoryPage: React.FunctionComponent<ICategoryPageProps> = async ({
         </div>
       ) : (
         <div className="bg-white flex items-center justify-center flex-col  mx-auto max-w-max mt-8 p-5 text-center rounded-2xl">
-            <Image src={"/cart/bag.svg"} width={100} height={80} alt="empty" />
-            
-            <h2 className="text-3xl font-bold text-black mt-12">По вашему запросу <br /> ничего не найдено</h2>
-            <p className="text-[#686870] text-sm mt-4">Попробуйте изменить параметры поиска</p>
+          <Image src={"/cart/bag.svg"} width={100} height={80} alt="empty" />
+
+          <h2 className="text-3xl font-bold text-black mt-12">
+            По вашему запросу <br /> ничего не найдено
+          </h2>
+          <p className="text-[#686870] text-sm mt-4">
+            Попробуйте изменить параметры поиска
+          </p>
         </div>
       )}
     </div>

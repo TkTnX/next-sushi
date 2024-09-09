@@ -34,8 +34,8 @@ const ProfileOrders: React.FunctionComponent<IProfileOrdersProps> = ({
     );
   }
   return (
-    <TabsContent value={personalValue} className="flex-1">
-      <h2 className="text-5xl font-bold mb-6">История заказов</h2>
+    <TabsContent value={personalValue} className="flex-1 w-full xl:w-auto">
+      <h2 className="text-3xl md:text-5xl font-bold mb-6">История заказов</h2>
       {!loading && orders.length === 0 ? (
           <ProfileStarter
             imageUrl="00.svg"
@@ -54,7 +54,7 @@ const ProfileOrders: React.FunctionComponent<IProfileOrdersProps> = ({
               {openId === order.id && (
                 <>
                   <OrderInfoItems className="mt-8" order={order} />
-                  <div className="mt-5">
+                  <div className="mt-5 grid gap-3 sm:mx-0">
                     {typeof order.items === "string" &&
                       JSON.parse(order.items).map((item: any) => (
                         <ProfileOrdersItem

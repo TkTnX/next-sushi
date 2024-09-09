@@ -50,8 +50,8 @@ const ProfileAddress: React.FunctionComponent<IProfileAddressProps> = ({
 
   return (
     <TabsContent value={personalValue} className="flex-1">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-5xl font-bold">Адрес доставки</h2>
+      <div className="flex flex-col gap-3 sm:flex-row sm:gap-0 sm:items-center justify-between mb-6">
+        <h2 className="text-3xl md:text-5xl font-bold">Адрес доставки</h2>
 
         <AddAddressModal addresses={addresses.addressItem} handleAddAddress={handleAddAddress}>
           <Button className="flex items-center p-3 gap-2 bg-secondary text-white rounded-xl hover:bg-primary transition duration-200">

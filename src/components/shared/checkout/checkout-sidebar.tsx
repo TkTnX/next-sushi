@@ -19,7 +19,7 @@ const CheckoutSidebar: React.FunctionComponent<ICheckoutSidebar> = ({
   const MIN_TOTAL_PRICE = 400;
 
   return (
-    <div className="w-[778px]">
+    <div className="mt-10 xl:mt-0 xl:min-w-[500px] 2xl:w-[778px]">
       <div className="grid gap-5">
         {items.length > 0 ? (
           items.map((item) => (

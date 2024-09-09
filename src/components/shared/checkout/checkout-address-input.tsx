@@ -31,19 +31,20 @@ const CheckoutAddressInput: React.FunctionComponent<
 
       measureElement.textContent = selectedValue || "";
 
-      selectElement.style.width = `${measureElement.offsetWidth}px`; 
+      selectElement.style.width = `${measureElement.offsetWidth + 100}px`;
     }
   };
 
   React.useEffect(() => {
-    adjustWidth(); 
+    adjustWidth();
   }, [selectedValue]);
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newValue = e.target.value;
-    setSelectedValue(newValue);
     onChange?.(newValue);
+    setSelectedValue(newValue);
   };
+  console.log(selectedValue);
   return (
     <div className={className}>
       <label className="text-[#9e9e9e] mb-2 w-full">
@@ -57,33 +58,38 @@ const CheckoutAddressInput: React.FunctionComponent<
               whiteSpace: "nowrap",
             }}
           ></span>
-          {selectedValue === "hidden" && (
-            <AddressSuggestions
-              token={process.env.NEXT_PUBLIC_TOKEN_DADATA!}
-              onChange={(data) => onChange?.(data?.value)}
-              inputProps={{
-                placeholder: placeholder,
-                className:
-                  "rounded-md bg-[#f5f5f7] w-full py-[0.5rem] px-[0.75rem] placeholder:text-[#647b91] text-black",
-              }}
-            />
-          )}
+          {selectedValue === "hidden" ||
+            (selectedValue === "" && (
+              <AddressSuggestions
+                token={process.env.NEXT_PUBLIC_TOKEN_DADATA!}
+                onChange={(data) => onChange?.(data?.value)}
+                inputProps={{
+                  placeholder: placeholder,
+                  className:
+                    "rounded-md bg-[#f5f5f7] w-full py-[0.5rem] px-[0.75rem] placeholder:text-[#647b91] text-black",
+                }}
+              />
+            ))}
           {addresses && addresses.addressItem.length > 0 && (
-            <select
-              ref={selectRef}
-              onChange={handleSelectChange}
-              defaultValue={"hidden"}
-              value={selectedValue}
-              className="max-w-max h-10 bg-[#f5f5f7] pl-2"
-              style={{ width: "auto" }}
-            >
-              <option value="hidden" selected></option>
-              {addresses.addressItem.map((address) => (
-                <option key={address.id} value={address.name}>
-                  {address.name}
+            <div className="overflow-hidden">
+              <select
+                ref={selectRef}
+                onChange={handleSelectChange}
+                defaultValue={"hidden"}
+                value={selectedValue}
+                className="h-10 bg-[#e4e4e4] pl-2 rounded-md max-w-full overflow-hidden"
+                style={{ width: "100px" }}
+              >
+                <option value="" className="w-[100px]" selected>
+                  Выбрать адрес
                 </option>
-              ))}
-            </select>
+                {addresses.addressItem.map((address) => (
+                  <option key={address.id} value={address.name}>
+                    {address.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           )}
         </div>
       </label>
