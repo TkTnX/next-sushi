@@ -10,3 +10,13 @@ export async function getAllNews() {
         console.log(error)
     }
 }
+
+export async function getNewsItem(id: number) { 
+    try {
+        const newsItem = (await axiosInstance.get<INews>(`/news/${id}`)).data;
+
+        return newsItem
+    } catch (error) {
+        console.log(error)
+    }
+}

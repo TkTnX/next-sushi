@@ -12,8 +12,11 @@ const NewsGroupItem: React.FunctionComponent<INewsGroupItemProps> = ({
   newsItem,
   isBigNew,
 }) => {
+
+  if (!newsItem) return null;
+
   return (
-    <div key={newsItem.id} className="bg-white">
+    <div key={newsItem.id} className="bg-white ">
       <Link href={`/news/${newsItem.id}`}>
         <Image
           src={newsItem.image}
@@ -21,10 +24,11 @@ const NewsGroupItem: React.FunctionComponent<INewsGroupItemProps> = ({
           height={isBigNew ? 446 : 200}
           alt={newsItem.title}
           className="bg-[#d6d6d6] rounded-t-md"
+          style={{width: "100%"}}
         />
       </Link>
       <div className="p-4 rounded-b-md">
-        <div className="flex items-center justify-between">
+        <div className=" flex flex-col gap-2 md:gap-0 md:flex-row md:items-center justify-between">
           <p className="text-[#686870] text-sm py-1 px-2 bg-[#F5F5F7] rounded-lg max-w-max">
             {newsItem.category}
           </p>
