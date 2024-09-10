@@ -253,6 +253,18 @@ model AddressItem {
      @@unique([name, userAddressesId])
 }
 
+model NewsItem {
+    id Int @id @default(autoincrement())
+
+    title       String
+    description String
+    image       String
+    category    String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
+
 enum OrderStatus {
     PENDING
     SUCCEEDED

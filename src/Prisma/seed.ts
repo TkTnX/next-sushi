@@ -77,17 +77,40 @@ async function up() {
     data: promocodes,
   });
 
-  await prisma.userAddresses.create({
-    data: {
-      userId: 1,
-    },
-  });
 
-  await prisma.addressItem.createMany({
+
+
+  await prisma.newsItem.createMany({
     data: [
       {
-        userAddressesId: 1,
-        name: "Город",
+        title: "Тест 1",
+        description: "Описание 1",
+        image: "",
+        category: "Тестовый пост",
+      },
+      {
+        title: "Тест 2",
+        description: "Описание 2",
+        image: "",
+        category: "Тестовый пост",
+      },
+      {
+        title: "Тест 3",
+        description: "Описание 3",
+        image: "",
+        category: "Тестовый пост",
+      },
+      {
+        title: "Тест 4",
+        description: "Описание 4",
+        image: "",
+        category: "Тестовый пост",
+      },
+      {
+        title: "Тест 5",
+        description: "Описание 5",
+        image: "",
+        category: "Тестовый пост",
       },
     ],
   });
@@ -102,6 +125,7 @@ async function down() {
   await prisma.$executeRaw`TRUNCATE TABLE "Cart" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "CartItem" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Promocode" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "NewsItem" RESTART IDENTITY CASCADE`;
 }
 
 async function main() {
