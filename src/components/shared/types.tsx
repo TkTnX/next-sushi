@@ -30,7 +30,11 @@ const Types: React.FunctionComponent<ITypesProps> = ({ types }) => {
     }
   }, [])
   return (
-    <ul className={cn("flex items-center gap-2 mt-8 overflow-scroll", {"opacity-50 pointer-events-none": disabled})}>
+    <ul
+      className={cn("flex items-center gap-2 mt-8 overflow-scroll sm:overflow-auto", {
+        "opacity-50 pointer-events-none": disabled,
+      })}
+    >
       {types.map((type) => (
         <li key={type.id}>
           <button

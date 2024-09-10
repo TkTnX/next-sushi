@@ -29,7 +29,7 @@ const handleResetIngredients = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
-      <PopoverContent className="mt-4 w-[846px]   p-8 absolute right-0">
+      <PopoverContent className="mt-4 w-[320px] md:w-[500px] xl:w-[846px]   p-8 2xl:absolute  2xl:right-0">
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-2xl text-black">Ингредиенты</h2>
           <button

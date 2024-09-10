@@ -26,17 +26,17 @@ const ProductPage: React.FunctionComponent<IProductPageProps> = async ({
 
   return (
     <div className="mt-8">
-      <div className="flex items-start gap-20 relative">
-        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex items-center justify-between max-w-[1576px] mx-auto">
+      <div className="flex flex-col md:flex-row items-start gap-20 relative">
+        <div className="absolute left-0 right-0 top-20 md:top-1/2 -translate-y-1/2 flex items-center justify-between max-w-[1576px] mx-auto">
           <Link
             href={`/products/${Number(params.id) - 1}`}
-            className="h-[162px] px-9 bg-[#ebebec]/70 rounded-xl flex items-center justify-center hover:opacity-50 transition duration-200"
+            className="h-[50px] md:h-[162px] px-9 bg-[#ebebec]/70 rounded-xl flex items-center justify-center hover:opacity-50 transition duration-200"
           >
             <ChevronLeft />
           </Link>
           <Link
             href={`/products/${Number(params.id) + 1}`}
-            className="h-[162px] px-9 bg-[#ebebec]/70 rounded-xl flex items-center justify-center hover:opacity-50 transition duration-200"
+            className="h-[50px] md:h-[162px] px-9 bg-[#ebebec]/70 rounded-xl flex items-center justify-center hover:opacity-50 transition duration-200"
           >
             <ChevronRight />
           </Link>
@@ -50,7 +50,7 @@ const ProductPage: React.FunctionComponent<IProductPageProps> = async ({
         <ProductInformation product={product} />
       </div>
       <div className="mt-20">
-        <h2 className="text-4xl font-bold text-black mt-12">
+        <h2 className=" text-2xl md:text-4xl font-bold text-black mt-12">
           Может, ещё кое-что?
         </h2>
         {category && (

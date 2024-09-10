@@ -23,14 +23,14 @@ const ProductInformation: React.FunctionComponent<IProductInformationProps> = ({
           <CategoryGroupItemIsNew className="static max-w-max" />
         )}
       </div>
-      <h2 className="text-6xl font-bold mt-2">{product.name}</h2>
-      <p className="text-primary text-2xl font-medium mt-4">
+      <h2 className="text-4xl xl:text-6xl font-bold mt-2">{product.name}</h2>
+      <p className="text-primary text-xl xl:text-2xl font-medium mt-4">
         Вес: {product.weight}г
       </p>
       {product.ingredients && (
         <div className="mt-6">
           <p className="font-medium">Состав:</p>
-          <ul className="flex items-center gap-2 mt-3">
+          <ul className="flex items-center gap-2 mt-3 flex-wrap">
             {product.ingredients.map((ingredient) => (
               <li
                 className="flex flex-col items-center justify-center gap-2 p-3 bg-white rounded-md"

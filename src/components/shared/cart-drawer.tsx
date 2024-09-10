@@ -18,7 +18,7 @@ const CartDrawer: React.FunctionComponent<
   return (
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
-      <PopoverContent className="mt-4  w-[590px] p-8 absolute right-0">
+      <PopoverContent className="mt-4 w-[320px] sm:w-[590px] p-8 absolute -right-20 sm:right-0">
         <div>
           <h2 className="font-bold text-2xl text-black">Ваш заказ</h2>
         </div>

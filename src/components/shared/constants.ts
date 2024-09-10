@@ -8,8 +8,8 @@ export const navbarItems = [
     url: "/delivery",
   },
   {
-    name: "О нас",
-    url: "/about",
+    name: "Оферта",
+    url: "/offer",
   },
   {
     name: "Новости",

@@ -26,7 +26,7 @@ const NotificationsModal: React.FunctionComponent<INotificationsModalProps> = ({
   return (
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
-      <PopoverContent className="w-[590px] pb-0">
+      <PopoverContent className="w-[300px] sm:w-[590px] pb-0">
         <h2 className="text-2xl font-bold">Уведомления</h2>
 
         <div className="grid gap-2 mt-6  max-h-[600px] overflow-y-auto">

@@ -28,10 +28,7 @@ const FilterGroupIngredients: React.FunctionComponent<
       })}
     >
       {ingredients.slice(0, 4).map((ingredient, index) => (
-        <li
-          className="hidden first:block   sm:even:hidden md:block"
-          key={index}
-        >
+        <li className="hidden first:block  md:even:block md:block" key={index}>
           <button
             onClick={() => setSelectedIngredients(ingredient.id)}
             className={cn(
