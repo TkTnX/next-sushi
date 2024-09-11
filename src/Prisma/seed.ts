@@ -2,6 +2,7 @@ import {
   categories,
   exceptions,
   ingredients,
+  newsItews,
   products,
   promocodes,
   types,
@@ -50,29 +51,7 @@ async function up() {
     });
   }
 
-  await prisma.cart.create({
-    data: {
-      userId: 1,
-      totalPrice: 0,
-      token: "admin",
-    },
-  });
-
-  await prisma.cartItem.createMany({
-    data: [
-      {
-        cartId: 1,
-        productId: 1,
-        quantity: 1,
-      },
-      {
-        cartId: 1,
-        productId: 2,
-        quantity: 3,
-      },
-    ],
-  });
-
+  
   await prisma.promocode.createMany({
     data: promocodes,
   });
@@ -81,38 +60,7 @@ async function up() {
 
 
   await prisma.newsItem.createMany({
-    data: [
-      {
-        title: "Тест 1",
-        description: "Описание 1",
-        image: "",
-        category: "Тестовый пост",
-      },
-      {
-        title: "Тест 2",
-        description: "Описание 2",
-        image: "",
-        category: "Тестовый пост",
-      },
-      {
-        title: "Тест 3",
-        description: "Описание 3",
-        image: "",
-        category: "Тестовый пост",
-      },
-      {
-        title: "Тест 4",
-        description: "Описание 4",
-        image: "",
-        category: "Тестовый пост",
-      },
-      {
-        title: "Тест 5",
-        description: "Описание 5",
-        image: "",
-        category: "Тестовый пост",
-      },
-    ],
+    data: newsItews,
   });
 }
 
@@ -122,8 +70,6 @@ async function down() {
   await prisma.$executeRaw`TRUNCATE TABLE "Exception" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Ingredient" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Type" RESTART IDENTITY CASCADE`;
-  await prisma.$executeRaw`TRUNCATE TABLE "Cart" RESTART IDENTITY CASCADE`;
-  await prisma.$executeRaw`TRUNCATE TABLE "CartItem" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Promocode" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "NewsItem" RESTART IDENTITY CASCADE`;
 }

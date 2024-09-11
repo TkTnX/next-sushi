@@ -454,3 +454,54 @@ export const profileSidebarItems = [
     imageUrl: "/icons/03.svg",
   },
 ];
+
+export const newsItews = [
+  {
+    image: "/news/01.jpg",
+    title: "Ninja вернули лосось",
+    category: "Обновления в меню",
+    description: "Мы вернули набор лосося в меню",
+  },
+  {
+    image: "/news/02.jpg",
+    title: "Привет! Мы уже на правом!",
+    category: "Обновления в меню",
+    description: "Мы на правой части России",
+  },
+  {
+    image: "/news/03.jpg",
+    title: "Что посмотреть на Netflix?",
+    category: "Фильмы",
+    description: "Что посмотреть на Netflix?",
+  },
+  {
+    image: "/news/04.jpg",
+    title: "Романтичный плейлист от Ninja!",
+    category: "Музыка",
+    description: "Описание про музыку",
+  },
+  {
+    image: "/news/05.jpg",
+    title: "Таинственное исчезновение роллов с лососем",
+    category: "Обновления в меню",
+    description: "Мы потеряли набор лосося",
+  },
+  {
+    image: "/news/07.jpg",
+    title: "Идеи для свидания на 14 февраля",
+    category: "Рекомендации",
+    description: "Идеи для свидания на 14 февраля ",
+  },
+  {
+    image: "/news/06.jpg",
+    title: "Ninja Sushi в Москве!",
+    category: "Новости",
+    description: "Ninja Sushi в Москве!",
+  },
+  {
+    image: "/news/08.jpg",
+    title: "Кто пойдёт на романтическое свидание от Ninja?",
+    category: "Рекомендации",
+    description: "Кто пойдёт на романтическое свидание от Ninja?",
+  },
+];

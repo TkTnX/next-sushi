@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { INews } from "./news-group";
+import { cn } from "@/lib/utils";
 
 type INewsGroupItemProps = {
   newsItem: INews;
@@ -23,8 +24,9 @@ const NewsGroupItem: React.FunctionComponent<INewsGroupItemProps> = ({
           width={isBigNew ? 778 : 380}
           height={isBigNew ? 446 : 200}
           alt={newsItem.title}
-          className="bg-[#d6d6d6] rounded-t-md"
-          style={{width: "100%"}}
+          className={cn("bg-[#d6d6d6] rounded-t-md ", {
+            "w-full h-[446px]": isBigNew,})}
+          style={{ width: "100%" }}
         />
       </Link>
       <div className="p-4 rounded-b-md">

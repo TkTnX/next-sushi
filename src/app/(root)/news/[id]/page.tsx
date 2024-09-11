@@ -23,7 +23,7 @@ const NewsItem: React.FunctionComponent<INewsItemProps> = async ({
   return (
     <div className="mt-20">
       <div className="max-w-[1000px] mx-auto">
-        <h2 className="text-5xl font-bold ">{newsItem.title}</h2>
+        <h2 className="text-2xl md:text-5xl font-bold ">{newsItem.title}</h2>
         <div className="flex items-center gap-4 mt-4">
           <p className="text-[#686870] text-sm py-3 px-4 bg-white rounded-md max-w-max">
             {newsItem.category}
@@ -33,8 +33,9 @@ const NewsItem: React.FunctionComponent<INewsItemProps> = async ({
           </p>
         </div>
       </div>
-      <div className="max-w-[1310px] mx-auto relative w-full h-[500px] bg-white mt-8 rounded-lg">
-        <Image src={newsItem.image} alt={newsItem.title} fill />
+      <div className="max-w-[1000px] mx-auto relative w-full  bg-white mt-8 rounded-lg">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={newsItem.image} alt={newsItem.title} className="rounded-lg w-full " />
       </div>
       <p className="mt-4 text-[#686870] max-w-[1000px] mx-auto">
         {newsItem.description}
