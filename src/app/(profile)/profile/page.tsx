@@ -38,7 +38,7 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
       <ProfileOrders loading={loading} orders={orders} personalValue="0" />
       <ProfileFavorites
         loading={loading}
-        favorites={favorites.favoriteItem}
+        favorites={favorites.favoriteItem ?? []}
         personalValue="1"
       />
       <ProfileAddress personalValue="2" />

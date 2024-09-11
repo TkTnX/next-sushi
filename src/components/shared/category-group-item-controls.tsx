@@ -28,7 +28,7 @@ const CategoryGroupItemsControls: React.FunctionComponent<
   const { data: session } = useSession();
   const { getItems, favorites } = useFavoriteStore();
 
-  const favoriteItemsIds = favorites.favoriteItem.map((item) => item.productId);
+  const favoriteItemsIds = favorites ? favorites.favoriteItem.map((item) => item.productId) : [];
 
   const isFavorite = favoriteItemsIds.includes(id);
 

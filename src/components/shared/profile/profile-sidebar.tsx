@@ -29,6 +29,7 @@ const ProfileSidebar: React.FunctionComponent = async () => {
         name={user.fullName}
         email={user.email}
         image={data.image}
+        isAdmin={data.role === "ADMIN"}
       />
     </div>
   );

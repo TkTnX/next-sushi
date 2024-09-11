@@ -6,6 +6,7 @@ import * as favorites from "./favorites";
 import * as notifications from "./notifications"
 import * as addresses from "./addresses"
 import * as news from "./news"
+import * as users from "./users"
 export const Api = {
   products,
   types,
@@ -14,5 +15,6 @@ export const Api = {
   favorites,
   notifications,
   addresses,
-  news
+  news,
+  users
 };

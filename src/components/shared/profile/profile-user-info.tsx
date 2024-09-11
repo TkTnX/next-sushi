@@ -9,12 +9,14 @@ interface IProfileUserInfoProps {
   name: string;
   email: string;
   image: string;
+  isAdmin?: boolean;
 }
 
 const ProfileUserInfo: React.FunctionComponent<IProfileUserInfoProps> = ({
   name,
   email,
   image,
+  isAdmin,
 }) => {
   const [open, setOpen] = React.useState(false);
   return (
@@ -38,6 +40,7 @@ const ProfileUserInfo: React.FunctionComponent<IProfileUserInfoProps> = ({
             </button>
           </div>
           <p className="text-[#9E9E9E] text-xs">{email}</p>
+          {isAdmin && <p className="text-[#ff0000] text-xs">Админ</p>}
         </div>
         <ProfileEdit
           name={name}
@@ -46,7 +49,10 @@ const ProfileUserInfo: React.FunctionComponent<IProfileUserInfoProps> = ({
           onClose={() => setOpen(false)}
         />
       </div>
-      <Button className="w-full mt-2" onClick={() => signOut({ callbackUrl: "/" })}>
+      <Button
+        className="w-full mt-2"
+        onClick={() => signOut({ callbackUrl: "/" })}
+      >
         Выйти из аккаунта
       </Button>
     </div>
