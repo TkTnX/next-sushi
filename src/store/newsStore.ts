@@ -27,4 +27,5 @@ export const useNewsStore = create<NewsState>()((set) => ({
       set({ loading: false });
     }
   },
+
 }));

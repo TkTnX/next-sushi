@@ -6,7 +6,9 @@ import { PayOrder } from "@/components/shared/email-templates/pay-order";
 import VerifyCodeTemplate from "@/components/shared/email-templates/verify-code-template";
 
 import {
+  AddNewsItemFormData,
   ChangeUserFormData,
+  EditNewsItemFormData,
   RegisterFormData,
 } from "@/components/shared/forms/schemas";
 import { getUserSession } from "@/lib/get-user-session";
@@ -221,10 +223,65 @@ export async function registerUser(data: RegisterFormData) {
         code: code,
       })
     );
-
- 
   } catch (error) {
     console.error(error);
     console.log("[REGISTER_USER_FUNC] Error: ", error);
+  }
+}
+
+export async function addNewNewsItem(data: AddNewsItemFormData) {
+  try {
+    const user = await getUserSession();
+
+    if (!user || user?.role !== "ADMIN") { 
+      throw new Error("Недостаточно прав");
+    }
+
+    await prisma.newsItem.create({
+      data: {
+        title: data.title,
+        category: data.category,
+        description: data.description,
+        image: data.image || "",
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    console.log("[ADD_NEW_NEWS_ITEM] Error: ", error);
+  }
+}
+
+export async function editNewsItem(data: EditNewsItemFormData, id: number) { 
+  try {
+     const user = await getUserSession();
+
+     if (!user || user?.role !== "ADMIN") {
+       throw new Error("Недостаточно прав");
+     }
+    const newsItem = await prisma.newsItem.findFirst({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    if (!newsItem) {
+      throw new Error("Новость не найдена");
+    }
+
+    await prisma.newsItem.update({
+      where: {
+        id: newsItem.id,
+      },
+      data: {
+        title: data.title || newsItem.title,
+        category: data.category || newsItem.category,
+        description: data.description || newsItem.description,
+        image: data.image || newsItem.image, 
+      },
+    });
+  } catch (error) {
+    console.log(error)
+    console.log("[EDIT_NEWS_ITEM] Error: ", error);
+
   }
 }

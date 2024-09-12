@@ -20,3 +20,11 @@ export async function getNewsItem(id: number) {
         console.log(error)
     }
 }
+
+export async function deleteNewsItem(id: number) {
+    try {
+        await axiosInstance.delete(`/news/${id}`)
+    } catch (error) {
+        console.log(error)
+    }
+}

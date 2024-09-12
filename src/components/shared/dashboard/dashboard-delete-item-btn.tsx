@@ -6,15 +6,17 @@ import * as React from "react";
 interface IDashboardDeleteItemBtnProps {
   onClick: (id: number) => void;
   id: number;
+  loading?:boolean
 }
 
 const DashboardDeleteItemBtn: React.FunctionComponent<
   IDashboardDeleteItemBtnProps
-> = ({ onClick, id }) => {
+> = ({ onClick, id, loading }) => {
   return (
     <Button
       onClick={() => onClick(id)}
       variant="outline"
+      disabled={loading}
       className="text-red-500 ml-auto flex items-center"
     >
       Удалить <X />

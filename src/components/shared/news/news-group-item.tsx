@@ -19,7 +19,8 @@ const NewsGroupItem: React.FunctionComponent<INewsGroupItemProps> = ({
   return (
     <div key={newsItem.id} className="bg-white ">
       <Link href={`/news/${newsItem.id}`}>
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={newsItem.image}
           width={isBigNew ? 778 : 380}
           height={isBigNew ? 446 : 200}
