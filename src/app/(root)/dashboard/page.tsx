@@ -25,17 +25,10 @@ const Dashboard: React.FunctionComponent = async () => {
         createdAt: true,
       },
     });
-    const news = await prisma.newsItem.findMany({
-      orderBy: {
-        id: "asc",
-      },
-    });
-  
-    
 
   return (
     <div>
-      <h1 className="mt-10 text-5xl font-bold">
+      <h1 className="mt-10 text-3xl md:text-5xl font-bold">
         Админ-панель сайта Ninja Sushi
       </h1>
 
@@ -43,7 +36,7 @@ const Dashboard: React.FunctionComponent = async () => {
         <UsersList users={users} />
       </DashboardGroup>
       <DashboardGroup title="Список новостей">
-        <DashboardNews news={news} />
+        <DashboardNews  />
       </DashboardGroup>
     </div>
   );

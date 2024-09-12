@@ -11,8 +11,9 @@ import { AddNewsItemFormData, editNewsItemSchema } from "../forms/schemas";
 import FormInput from "@/components/ui/form-input";
 import FormTextarea from "@/components/ui/form-textarea";
 import toast from "react-hot-toast";
-import {  editNewsItem } from "@/app/actions";
+import { editNewsItem } from "@/app/actions";
 import { Button } from "@/components/ui/button";
+import { useDashboardStore } from "@/store/dashboardStore";
 
 interface IEditNewsItemModalProps {
   children: React.ReactNode;
@@ -23,6 +24,7 @@ const EditNewsItemModal: React.FunctionComponent<IEditNewsItemModalProps> = ({
   children,
   id,
 }) => {
+  const { getNews, loading } = useDashboardStore();
   const form = useForm({
     resolver: zodResolver(editNewsItemSchema),
     defaultValues: {
@@ -37,6 +39,7 @@ const EditNewsItemModal: React.FunctionComponent<IEditNewsItemModalProps> = ({
     try {
       await editNewsItem(data, id);
       toast.success("Новость обновлена!");
+      getNews();
     } catch (error) {
       console.log(error);
       toast.error("Не удалось обновить новость");
@@ -75,7 +78,7 @@ const EditNewsItemModal: React.FunctionComponent<IEditNewsItemModalProps> = ({
               label="Новое описание новости"
               placeholder="Описание новости"
             />
-            <Button className="mt-2 w-full">Изменить новость</Button>
+            <Button disabled={form.formState.isSubmitting} className="mt-2 w-full">Изменить новость</Button>
           </form>
         </FormProvider>
       </DialogContent>

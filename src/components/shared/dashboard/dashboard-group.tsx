@@ -1,7 +1,5 @@
 import * as React from "react";
-import UsersList from "./users-list";
-import { NewsItem, User } from "@prisma/client";
-import DashboardNews from "./dashboard-news";
+
 
 interface IDashboardGroupProps {
   title: string;

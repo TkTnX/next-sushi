@@ -19,7 +19,8 @@ const DashboardDeleteItemBtn: React.FunctionComponent<
       disabled={loading}
       className="text-red-500 ml-auto flex items-center"
     >
-      Удалить <X />
+      <span className="hidden md:block">Удалить</span>
+      <X />
     </Button>
   );
 };

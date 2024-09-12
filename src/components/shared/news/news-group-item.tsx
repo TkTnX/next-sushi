@@ -13,22 +13,33 @@ const NewsGroupItem: React.FunctionComponent<INewsGroupItemProps> = ({
   newsItem,
   isBigNew,
 }) => {
-
   if (!newsItem) return null;
-
   return (
     <div key={newsItem.id} className="bg-white ">
       <Link href={`/news/${newsItem.id}`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={newsItem.image}
-          width={isBigNew ? 778 : 380}
-          height={isBigNew ? 446 : 200}
-          alt={newsItem.title}
-          className={cn("bg-[#d6d6d6] rounded-t-md ", {
-            "w-full h-[446px]": isBigNew,})}
-          style={{ width: "100%" }}
-        />
+        {newsItem.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={newsItem.image}
+            width={isBigNew ? 778 : 380}
+            height={isBigNew ? 446 : 200}
+            alt={newsItem.title}
+            className={cn("bg-[#d6d6d6] rounded-t-md ", {
+              "w-full h-[446px]": isBigNew,
+            })}
+            style={{ width: "100%" }}
+            onError={(e) => {
+              e.currentTarget.src = "/no-image.png"; // Путь к запасному изображению
+              e.currentTarget.className += " bg-[#f0f0f0]"; // Дополнительно можно изменить класс
+            }}
+          />
+        ) : (
+          <div
+            className={cn("bg-[#d6d6d6] rounded-t-md ", {
+              "w-full h-[446px]": isBigNew,
+            })}
+          />
+        )}
       </Link>
       <div className="p-4 rounded-b-md">
         <div className=" flex flex-col gap-2 md:gap-0 md:flex-row md:items-center justify-between">

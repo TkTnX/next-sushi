@@ -40,19 +40,19 @@ const UsersList: React.FunctionComponent<IUsersListProps> = ({
         users.map((user) => (
           <div
             key={user.id}
-            className="flex items-center justify-between w-full"
+            className=" md:flex items-center justify-between w-full"
           >
             <div className="border p-3 flex items-center gap-4 w-full">
               <div>
                 <p className="font-bold">id</p>
                 {user.id}
               </div>
-              <div className="w-[200px]">
+              <div className="w-[200px] showLittle">
                 <p className="font-bold">ФИО</p>
                 {user.fullName}
               </div>
               <div>
-                <p className="font-bold">email</p>
+                <p className="font-bold showLittle">email</p>
                 {user.email}
               </div>
               <DashboardDeleteItemBtn onClick={deleteUser} id={user.id} />

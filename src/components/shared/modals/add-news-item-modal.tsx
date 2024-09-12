@@ -13,14 +13,20 @@ import FormTextarea from "@/components/ui/form-textarea";
 import toast from "react-hot-toast";
 import { addNewNewsItem } from "@/app/actions";
 import { Button } from "@/components/ui/button";
+import { useDashboardStore } from "@/store/dashboardStore";
 
 interface IAddNewsItemModalProps {
   children: React.ReactNode;
+  openModal: boolean,
+  setOpenModal: (open: boolean) => void
 }
 
 const AddNewsItemModal: React.FunctionComponent<IAddNewsItemModalProps> = ({
   children,
+  openModal,
+  setOpenModal
 }) => {
+  const { getNews, loading } = useDashboardStore();
   const form = useForm({
     resolver: zodResolver(addNewsItemSchema),
     defaultValues: {
@@ -35,13 +41,15 @@ const AddNewsItemModal: React.FunctionComponent<IAddNewsItemModalProps> = ({
     try {
       await addNewNewsItem(data);
       toast.success("Новость добавлена");
+      getNews();
+      setOpenModal(false)
     } catch (error) {
       console.log(error);
       toast.error("Не удалось добавить новость");
     }
   };
   return (
-    <Dialog>
+    <Dialog open={openModal}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogTitle>Добавление новости</DialogTitle>
@@ -73,7 +81,12 @@ const AddNewsItemModal: React.FunctionComponent<IAddNewsItemModalProps> = ({
               label="Описание новости"
               placeholder="Описание новости"
             />
-            <Button className="mt-2 w-full">Добавить новость</Button>
+            <Button
+              disabled={form.formState.isSubmitting}
+              className="mt-2 w-full"
+            >
+              Добавить новость
+            </Button>
           </form>
         </FormProvider>
       </DialogContent>

@@ -1,6 +1,3 @@
-import { ICartItem } from "@/@types/product";
-import { calcTotalPrice } from "@/lib/calc-cart-total-price";
-import { Api } from "@/services/api-client";
 import { create } from "zustand";
 
 interface UserStore {
