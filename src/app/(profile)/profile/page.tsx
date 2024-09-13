@@ -10,9 +10,8 @@ import { Order } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import * as React from "react";
 
-interface IProfileProps {}
 
-const Profile: React.FunctionComponent<IProfileProps> = () => {
+const Profile: React.FunctionComponent = () => {
   const { activeCategoryId, setActiveCategoryId } = useUserStore();
   const [orders, setOrders] = React.useState<Order[]>([]);
   const { data: session } = useSession();
