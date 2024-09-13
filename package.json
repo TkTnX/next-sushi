@@ -10,7 +10,7 @@
     "prisma:push": "prisma db push --schema ./src/prisma/schema.prisma",
     "prisma:studio": "prisma studio --schema ./src/prisma/schema.prisma",
     "prisma:seed": "prisma db seed",
-    "postinstall": "prisma generate --schema ./src/prisma/schema.prisma"
+    "postinstall": "prisma generate --schema ./src/Prisma/schema.prisma"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
