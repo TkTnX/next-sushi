@@ -11,8 +11,13 @@ const VerifyCodeTemplate: React.FunctionComponent<IVerifyCodeTemplateProps> = ({
       <p>Код подтверждения почты: {code}</p>
 
       <p>
-        Перейдите <a href={`http://localhost:3000/api/auth/verify?code=${code}`}>по ссылке</a>,
-        чтобы подтвердить почту
+        Перейдите{" "}
+        <a
+          href={`https://next-ninja-sushi.vercel.app/api/auth/verify?code=${code}`}
+        >
+          по ссылке
+        </a>
+        , чтобы подтвердить почту
       </p>
     </div>
   );
