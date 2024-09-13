@@ -1,8 +1,6 @@
-import { CircleEllipsis } from "lucide-react";
 import * as React from "react";
 import { AddressSuggestions } from "react-dadata";
 import "react-dadata/dist/react-dadata.css";
-import CheckoutAllAddresses from "./checkout-all-addresses";
 import { useAddressStore } from "@/store/addressStore";
 
 interface ICheckoutAddressInputProps {
