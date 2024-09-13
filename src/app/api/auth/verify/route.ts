@@ -1,8 +1,8 @@
-"use server";
+"use server"
+
 
 import { prisma } from "@/Prisma/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
-
 export async function GET(req: NextRequest) {
   try {
     const code = req.nextUrl.searchParams.get("code");
