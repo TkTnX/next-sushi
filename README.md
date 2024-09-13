@@ -1,3 +1,29 @@
+# Next Sushi
+
+Мой самый крупный сайт на данный момент. В нём есть:
+-База данных с prisma и Postgresql
+-Регистрация, вход в аккаунт
+-Фильтрация продуктов
+-Отправка писем на почту
+-Добавление в корзину
+-Оформление заказов
+-Дэшбоард для админа
+-Новостная лента
+-Уведомления
+-Добавление в избранное
+
+Использованный стек:
+
+-NextJS
+-TypeScript
+-Tailwind
+-Prisma + PostgreSQL
+-NextAuth
+-React Hook Form
+-Zustand
+-react use
+-lucide icons
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
