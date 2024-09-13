@@ -6,7 +6,7 @@ import { Tabs } from "@/components/ui/tabs";
 import { Api } from "@/services/api-client";
 import { useFavoriteStore } from "@/store/favoritesStore";
 import { useUserStore } from "@/store/userStore";
-import {  Order } from "@prisma/client";
+import { Order } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import * as React from "react";
 
@@ -27,7 +27,6 @@ const Profile: React.FunctionComponent<IProfileProps> = () => {
     }
     getOrders();
   }, [session]);
-
 
   return (
     <Tabs
