@@ -2,11 +2,11 @@
 import ProfileAddress from "@/components/shared/profile/profile-address";
 import ProfileFavorites from "@/components/shared/profile/profile-favorites";
 import ProfileOrders from "@/components/shared/profile/profile-orders";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Tabs } from "@/components/ui/tabs";
 import { Api } from "@/services/api-client";
 import { useFavoriteStore } from "@/store/favoritesStore";
 import { useUserStore } from "@/store/userStore";
-import { Favorites, Order } from "@prisma/client";
+import {  Order } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import * as React from "react";
 
