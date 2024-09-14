@@ -24,11 +24,11 @@ const CartDrawer: React.FunctionComponent<
         </div>
 
         <div className="mt-6 grid gap-3">
-          {items.length === 0 ? (
+          {!items || items.length === 0 ? (
             <CartDrawerEmpty />
           ) : (
             <>
-              {items.map((item) => (
+              {items && items.map((item) => (
                 <CartDrawerItem
                   productItem={item.productItem!}
                   quantity={item.quantity}
@@ -39,7 +39,11 @@ const CartDrawer: React.FunctionComponent<
                   deleteItem={deleteItem}
                 />
               ))}
-            <CartTotalPrice totalPrice={totalPrice} loading={loading} link={"/checkout"} />
+              <CartTotalPrice
+                totalPrice={totalPrice}
+                loading={loading}
+                link={"/checkout"}
+              />
             </>
           )}
         </div>

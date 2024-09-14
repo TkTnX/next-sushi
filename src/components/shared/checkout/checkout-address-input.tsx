@@ -42,7 +42,6 @@ const CheckoutAddressInput: React.FunctionComponent<
     onChange?.(newValue);
     setSelectedValue(newValue);
   };
-  console.log(selectedValue);
   return (
     <div className={className}>
       <label className="text-[#9e9e9e] mb-2 w-full">
@@ -68,27 +67,29 @@ const CheckoutAddressInput: React.FunctionComponent<
                 }}
               />
             ))}
-          {addresses && addresses.addressItem.length > 0 && (
-            <div className="overflow-hidden">
-              <select
-                ref={selectRef}
-                onChange={handleSelectChange}
-                defaultValue={"hidden"}
-                value={selectedValue}
-                className="h-10 bg-[#e4e4e4] pl-2 rounded-md max-w-full overflow-hidden"
-                style={{ width: "100px" }}
-              >
-                <option value="" className="w-[100px]" selected>
-                  Выбрать адрес
-                </option>
-                {addresses.addressItem.map((address) => (
-                  <option key={address.id} value={address.name}>
-                    {address.name}
+          {addresses &&
+            addresses.addressItem &&
+            addresses.addressItem.length > 0 && (
+              <div className="overflow-hidden">
+                <select
+                  ref={selectRef}
+                  onChange={handleSelectChange}
+                  defaultValue={"hidden"}
+                  value={selectedValue}
+                  className="h-10 bg-[#e4e4e4] pl-2 rounded-md max-w-full overflow-hidden"
+                  style={{ width: "100px" }}
+                >
+                  <option value="" className="w-[100px]" selected>
+                    Выбрать адрес
                   </option>
-                ))}
-              </select>
-            </div>
-          )}
+                  {addresses.addressItem.map((address) => (
+                    <option key={address.id} value={address.name}>
+                      {address.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
         </div>
       </label>
     </div>

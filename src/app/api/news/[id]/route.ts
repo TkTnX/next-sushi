@@ -46,6 +46,9 @@ export async function DELETE(
         id,
       },
     });
+
+    return NextResponse.json({ message: "Новость удалена" });
+
   } catch (error) {
     console.log(error);
     NextResponse.json({ error: "Не удалось удалить новость" });

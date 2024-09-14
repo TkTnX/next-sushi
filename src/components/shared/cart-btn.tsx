@@ -19,7 +19,7 @@ const CartBtn: React.FunctionComponent = () => {
           </div>
         ) : (
           <button className="relative xl:h-[56px] flex items-center gap-2 xl:border border-[#d2d2d7] rounded-2xl p-2 xl:p-4 text-[#686870] group hover:bg-primary hover:text-white hover:border-primary transition duration-200">
-            {items.length > 0 && (
+            {items && items.length > 0 && (
               <Badge className="absolute -left-1 xl:h-[25px] -top-3 xl:-top-2">
                 {items.length}
               </Badge>
