@@ -16,6 +16,8 @@ export const updateCart = async (token: string) => {
     },
   });
 
+  if (!userCart) return null;
+
   const totalPrice = calcTotalPrice({ items: userCart });
 
   await prisma.cart.update({
