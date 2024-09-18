@@ -223,7 +223,7 @@ model Notifications {
 model NotificationsItem {
     id Int @id @default(autoincrement())
 
-    notifications   Notifications @relation(fields: [notificationsId], references: [id])
+    notifications   Notifications @relation(fields: [notificationsId], references: [id], onDelete: Cascade)
     notificationsId Int
 
     title String
