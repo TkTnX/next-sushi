@@ -4,6 +4,7 @@ import * as React from "react";
 import ProfileEdit from "../modals/profile-edit";
 import { Button } from "@/components/ui/button";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 interface IProfileUserInfoProps {
   name: string;
@@ -49,6 +50,11 @@ const ProfileUserInfo: React.FunctionComponent<IProfileUserInfoProps> = ({
           onClose={() => setOpen(false)}
         />
       </div>
+      {isAdmin && (
+        <Link className="w-full mt-2 bg-red-600 text-white block text-center py-2 rounded-lg hover:opacity-80 transition duration-200" href={"/dashboard"}>
+          Админ-панель
+        </Link>
+      )}
       <Button
         className="w-full mt-2"
         onClick={() => signOut({ callbackUrl: "/" })}

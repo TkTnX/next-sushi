@@ -95,7 +95,7 @@ model Cart {
 
     totalPrice Int @default(0)
 
-    user   User? @relation(fields: [userId], references: [id])
+    user   User? @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId Int?  @unique
 
     token String
@@ -147,7 +147,7 @@ model CartItem {
 model Favorites {
     id Int @id @default(autoincrement())
 
-    user   User @relation(fields: [userId], references: [id])
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId Int  @unique
 
     favoriteItem FavoriteItem[]
@@ -158,14 +158,14 @@ model FavoriteItem {
     productItem Product @relation(fields: [productId], references: [id])
     productId   Int
 
-    favorites   Favorites @relation(fields: [favoritesId], references: [id])
+    favorites   Favorites @relation(fields: [favoritesId], references: [id], onDelete: Cascade)
     favoritesId Int
 }
 
 model Order {
     id Int @id @default(autoincrement())
 
-    user   User? @relation(fields: [userId], references: [id])
+    user   User? @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId Int?
 
     token String
@@ -190,7 +190,7 @@ model VerificationCode {
     id   Int    @id @default(autoincrement())
     code String
 
-    user   User @relation(fields: [userId], references: [id])
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId Int  @unique
 
     expiresAt DateTime?
@@ -213,7 +213,7 @@ model Notifications {
 
     notificationsItem NotificationsItem[]
 
-    user   User @relation(fields: [userId], references: [id])
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId Int
 
     createdAt DateTime @default(now())
@@ -238,7 +238,7 @@ model UserAddresses {
 
     addressItem AddressItem[]
 
-    user   User @relation(fields: [userId], references: [id])
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId Int
 }
 
@@ -247,7 +247,7 @@ model AddressItem {
 
     name String
 
-    userAddresses   UserAddresses @relation(fields: [userAddressesId], references: [id])
+    userAddresses   UserAddresses @relation(fields: [userAddressesId], references: [id], onDelete: Cascade)
     userAddressesId Int
 
     @@unique([name, userAddressesId])
