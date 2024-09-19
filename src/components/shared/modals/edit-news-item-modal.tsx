@@ -11,7 +11,6 @@ import { AddNewsItemFormData, editNewsItemSchema } from "../forms/schemas";
 import FormInput from "@/components/ui/form-input";
 import FormTextarea from "@/components/ui/form-textarea";
 import toast from "react-hot-toast";
-import { editNewsItem } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { useDashboardStore } from "@/store/dashboardStore";
 
@@ -32,7 +31,7 @@ const EditNewsItemModal: React.FunctionComponent<IEditNewsItemModalProps> = ({
   image,
   description,
 }) => {
-  const { getNews, loading } = useDashboardStore();
+  const { getNews, loading, editNewsItem } = useDashboardStore();
   const form = useForm({
     resolver: zodResolver(editNewsItemSchema),
     defaultValues: {
@@ -45,12 +44,15 @@ const EditNewsItemModal: React.FunctionComponent<IEditNewsItemModalProps> = ({
 
   const onSubmit = async (data: AddNewsItemFormData, id: number) => {
     try {
-      await editNewsItem(data, id);
+      await getNews();
+      editNewsItem(data, id);
+
       toast.success("Новость обновлена!");
-      getNews();
     } catch (error) {
       console.log(error);
       toast.error("Не удалось обновить новость");
+    } finally {
+      getNews();
     }
   };
   return (

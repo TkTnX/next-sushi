@@ -22,7 +22,7 @@ const DashboardNews: React.FunctionComponent<IDashboardNewsProps> = () => {
   const deleteNewsItemFunc = async (id: number) => {
     try {
       deleteNewsItem(id);
-      getNews();
+      await getNews();
       toast.success("Новость удалена");
     } catch (error) {
       console.log(error);
