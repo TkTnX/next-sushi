@@ -18,7 +18,7 @@ const CheckoutPromocode: React.FunctionComponent<ICheckoutPromocodeProps> = ({
     },
   ];
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 mt-5">
       <CheckoutPromocodeForm promocodes={promocodes} submitting={submitting} />
     </div>
   );

@@ -6,6 +6,7 @@ import CartTotalPrice from "../cart-total-price";
 import { useCart } from "@/hooks/use-cart";
 import { Skeleton } from "@/components/ui/skeleton";
 import CheckoutPromocode from "./checkout-promocode";
+import CheckoutDops from "./checkout-dops";
 
 interface ICheckoutSidebar {
   submitting?: boolean;
@@ -43,6 +44,7 @@ const CheckoutSidebar: React.FunctionComponent<ICheckoutSidebar> = ({
         )}
       </div>
       <div className="mt-16">
+        <CheckoutDops />
         <CheckoutPromocode submitting={submitting} />
         <CartTotalPrice
           submitting={submitting}

@@ -9,8 +9,11 @@ import * as React from "react";
 import CategoryGroupItemIsNew from "./category-group-item-is-new";
 import CategoryGroupItemException from "./category-group-item-exception";
 import CategoryGroupItemsControls from "./category-group-item-controls";
+import { cn } from "@/lib/utils";
 
-type Props = {};
+type Props = {
+  isDops?: boolean;
+};
 
 const CategoryGroupItem: React.FunctionComponent<IProduct & Props> = ({
   name,
@@ -21,6 +24,8 @@ const CategoryGroupItem: React.FunctionComponent<IProduct & Props> = ({
   exceptions,
   ingredients,
   createdAt,
+  categoryId,
+  isDops,
 }) => {
   const isNewProduct = calculateIsNewProducts(createdAt);
   const { selectedIngredients } = useFilterStore();
@@ -31,19 +36,40 @@ const CategoryGroupItem: React.FunctionComponent<IProduct & Props> = ({
   });
 
   return (
-    <div className="rounded-xl p-6 sm:max-w-[380px] bg-white h-full ">
+    <div
+      className={cn("rounded-xl p-6 sm:max-w-[380px] bg-white h-full ", {
+        "p-3": isDops,
+      })}
+    >
       <div className="relative">
         {isNewProduct && <CategoryGroupItemIsNew />}
         <Link href={`/products/${id}`}>
-          <Image className="mx-auto sm:mx-0" src={imageUrl} alt={name} width={331} height={290} />
+          <Image
+            className="mx-auto sm:mx-0"
+            src={imageUrl}
+            alt={name}
+            width={331}
+            height={290}
+          />
         </Link>
-        {exception ? <CategoryGroupItemException exception={exception} /> : ""}
+        {exception && categoryId !== 5 ? (
+          <CategoryGroupItemException exception={exception} />
+        ) : (
+          ""
+        )}
       </div>
       <div>
-        <h3 className="font-bold text-xl md:text-3xl text-black">{name}</h3>
+        <h3
+          className={cn("font-bold text-xl md:text-3xl text-black", {
+            "text-sm md:text-base": isDops,
+          })}
+        >
+          {name}
+        </h3>
         <p className="text-primary text-sm md:text-lg mt-3">Вес: {weight} г</p>
         <p className="mt-2 text-[#686870] font-normal flex items-center gap-1 flex-wrap">
           {ingredients &&
+            !isDops &&
             ingredients.map((ingredient, index) => (
               <span key={ingredient.id}>{`${index !== 0 ? "," : ""} ${
                 ingredient.name
@@ -52,11 +78,25 @@ const CategoryGroupItem: React.FunctionComponent<IProduct & Props> = ({
         </p>
       </div>
       <div className="flex lg:items-center lg:flex-row  justify-between mt-2 md:mt-[72px] flex-col items-start gap-2 lg:gap-2 ">
-        <p className="font-bold text-2xl md:text-4xl text-black flex items-end">
-          {price} <span className=" text-lg md:text-2xl text-[#686870]">руб</span>
+        <p
+          className={cn(
+            "font-bold text-2xl md:text-4xl text-black flex items-end",
+            {
+              "text-2xl md:text-2xl": isDops,
+            }
+          )}
+        >
+          {price}{" "}
+          <span
+            className={cn(" text-lg md:text-2xl text-[#686870]", {
+              "md:text-xl": isDops,
+            })}
+          >
+            руб
+          </span>
         </p>
 
-        <CategoryGroupItemsControls name={name} id={id} />
+        <CategoryGroupItemsControls isDops={isDops} name={name} id={id} />
       </div>
     </div>
   );

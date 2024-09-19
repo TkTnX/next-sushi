@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import * as React from "react";
 import CategoryGroupItemIsNew from "../category-group-item-is-new";
@@ -29,26 +29,30 @@ const ProductInformation: React.FunctionComponent<IProductInformationProps> = ({
       </p>
       {product.ingredients && (
         <div className="mt-6">
-          <p className="font-medium">Состав:</p>
-          <ul className="flex items-center gap-2 mt-3 flex-wrap">
-            {product.ingredients.map((ingredient) => (
-              <li
-                className="flex flex-col items-center justify-center gap-2 p-3 bg-white rounded-md"
-                key={ingredient.id}
-              >
-                <Image
-                  src={ingredient.imageUrl}
-                  alt={ingredient.name}
-                  width={74}
-                  height={50}
-                />
-                <p className="text-sm">{ingredient.name}</p>
-              </li>
-            ))}
-          </ul>
+          {product.categoryId !== 5 && (
+            <>
+              <p className="font-medium">Состав:</p>
+              <ul className="flex items-center gap-2 mt-3 flex-wrap">
+                {product.ingredients.map((ingredient) => (
+                  <li
+                    className="flex flex-col items-center justify-center gap-2 p-3 bg-white rounded-md"
+                    key={ingredient.id}
+                  >
+                    <Image
+                      src={ingredient.imageUrl}
+                      alt={ingredient.name}
+                      width={74}
+                      height={50}
+                    />
+                    <p className="text-sm">{ingredient.name}</p>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
       )}
-      {product.exceptions && (
+      {product.exceptions && product.categoryId !== 5 && (
         <CategoryGroupItemException
           exception={product.exceptions[0].exceptionId}
           className="static mt-4"
@@ -58,7 +62,7 @@ const ProductInformation: React.FunctionComponent<IProductInformationProps> = ({
         <h6 className="text-5xl font-bold">
           {product.price} <span className="text-[#686870] text-3xl">руб</span>
         </h6>
-        <CategoryGroupItemsControls name={product.name} id={product.id}  />
+        <CategoryGroupItemsControls name={product.name} id={product.id} />
       </div>
     </div>
   );

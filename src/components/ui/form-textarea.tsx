@@ -11,6 +11,7 @@ interface IFormTextareaProps {
   placeholder: string;
   name: string;
   className?: string;
+  isRequired?: boolean;
 }
 
 const FormTextarea: React.FunctionComponent<IFormTextareaProps> = ({
@@ -18,6 +19,7 @@ const FormTextarea: React.FunctionComponent<IFormTextareaProps> = ({
   placeholder,
   name,
   className,
+  isRequired,
 }) => {
   const {
     register,
@@ -32,7 +34,7 @@ const FormTextarea: React.FunctionComponent<IFormTextareaProps> = ({
   return (
     <div>
       <label className={cn("grid gap-1", className)}>
-        <p className="text-[#9e9e9e]">{label}</p>
+        <p className="text-[#9e9e9e]">{label} {isRequired && <span className="text-[#FF6633]">*</span>}</p>
         <div className="flex items-center bg-[#f5f5f7] rounded-xl">
           <Textarea
             {...register(name)}
@@ -41,9 +43,7 @@ const FormTextarea: React.FunctionComponent<IFormTextareaProps> = ({
             cols={5}
           />
 
-          {value && (
-        <CheckoutClearInputValue setValue={setValue} name={name} />
-          )}
+          {value && <CheckoutClearInputValue setValue={setValue} name={name} />}
         </div>
       </label>
       {errorText && <ErrorMessage errorText={errorText} />}

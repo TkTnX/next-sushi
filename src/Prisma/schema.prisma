@@ -27,7 +27,7 @@ model Product {
     weight      Int
     imageUrl    String
 
-    type   Type @relation(fields: [typeId], references: [id])
+    type  Type @relation(fields: [typeId], references: [id])
     typeId Int
 
     exceptions ProductsOnExceptions[]

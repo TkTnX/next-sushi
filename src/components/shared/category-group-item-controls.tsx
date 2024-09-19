@@ -12,11 +12,12 @@ interface ICategoryGroupItemsControlsProps {
   className?: string;
   id: number;
   name: string;
+  isDops?: boolean;
 }
 
 const CategoryGroupItemsControls: React.FunctionComponent<
   ICategoryGroupItemsControlsProps
-> = ({ className, id, name }) => {
+> = ({ className, id, name, isDops }) => {
   const { onClickAddToCart, loadingId } = useAddToCart({ id, name });
   const { addNewNotification } = useNotifications();
   const [loadingFavoriteId, setLoadingFavoriteId] = React.useState<
@@ -28,7 +29,9 @@ const CategoryGroupItemsControls: React.FunctionComponent<
   const { data: session } = useSession();
   const { getItems, favorites } = useFavoriteStore();
 
-  const favoriteItemsIds = favorites ? favorites.favoriteItem.map((item) => item.productId) : [];
+  const favoriteItemsIds = favorites
+    ? favorites.favoriteItem.map((item) => item.productId)
+    : [];
 
   const isFavorite = favoriteItemsIds.includes(id);
 
@@ -76,7 +79,7 @@ const CategoryGroupItemsControls: React.FunctionComponent<
 
   return (
     <div className={cn("flex items-center gap-3", className)}>
-      {session && (
+      {session && !isDops && (
         <button
           disabled={loadingFavoriteId === id}
           onClick={handleAddToFavorite}
@@ -103,8 +106,12 @@ const CategoryGroupItemsControls: React.FunctionComponent<
         </button>
       )}
       <button
+        type="button"
         onClick={onClickAddToCart}
-        className="lg:w-[76px] w-full p-2 lg:p-0 lg:h-[48px] group bg-[#ccf5d5] rounded-xl flex justify-center items-center "
+        className={cn(
+          "lg:w-[76px] w-full p-2 lg:p-0 lg:h-[48px] group bg-[#ccf5d5] rounded-xl flex justify-center items-center ",
+          { "lg:w-auto lg:h-auto": isDops }
+        )}
       >
         {!loadingId ? (
           <Plus

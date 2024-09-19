@@ -21,7 +21,7 @@ const CheckoutPage: React.FunctionComponent = () => {
   const [submitting, setSubmitting] = React.useState(false);
   const { data: session } = useSession();
   const { addNewNotification } = useNotifications();
-  const addNewAddress = useAddressStore(state => state.addNewAddress)
+  const addNewAddress = useAddressStore((state) => state.addNewAddress);
   const loading = useCartStore((state) => state.loading);
 
   const firstName = session?.user.name.split(" ")[0];
@@ -78,7 +78,7 @@ const CheckoutPage: React.FunctionComponent = () => {
           <div className="mt-6 xl:flex items-start justify-between mb-20 gap-10 2xl:gap-[153px]">
             {/* Левая часть */}
             <div
-              className={cn("grid gap-5 flex-1", {
+              className={cn("grid gap-5 flex-1 sm:min-w-96 2xl:min-w-0 sticky top-5", {
                 "opacity-50 pointer-events-none": loading,
               })}
             >

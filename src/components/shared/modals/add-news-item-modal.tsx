@@ -79,6 +79,7 @@ const AddNewsItemModal: React.FunctionComponent<IAddNewsItemModalProps> = ({
               name="description"
               label="Описание новости"
               placeholder="Описание новости"
+              isRequired={true}
             />
             <Button
               disabled={form.formState.isSubmitting}
