@@ -18,20 +18,28 @@ import { useDashboardStore } from "@/store/dashboardStore";
 interface IEditNewsItemModalProps {
   children: React.ReactNode;
   id: number;
+  title: string;
+  category: string;
+  image: string;
+  description: string;
 }
 
 const EditNewsItemModal: React.FunctionComponent<IEditNewsItemModalProps> = ({
   children,
   id,
+  title,
+  category,
+  image,
+  description,
 }) => {
   const { getNews, loading } = useDashboardStore();
   const form = useForm({
     resolver: zodResolver(editNewsItemSchema),
     defaultValues: {
-      title: "",
-      category: "",
-      description: "",
-      image: "",
+      title: title || "",
+      category: category || "",
+      description: description || "",
+      image: image || "",
     },
   });
 
@@ -78,7 +86,12 @@ const EditNewsItemModal: React.FunctionComponent<IEditNewsItemModalProps> = ({
               label="Новое описание новости"
               placeholder="Описание новости"
             />
-            <Button disabled={form.formState.isSubmitting} className="mt-2 w-full">Изменить новость</Button>
+            <Button
+              disabled={form.formState.isSubmitting}
+              className="mt-2 w-full"
+            >
+              Изменить новость
+            </Button>
           </form>
         </FormProvider>
       </DialogContent>

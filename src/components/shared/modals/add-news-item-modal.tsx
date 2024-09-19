@@ -11,22 +11,21 @@ import { AddNewsItemFormData, addNewsItemSchema } from "../forms/schemas";
 import FormInput from "@/components/ui/form-input";
 import FormTextarea from "@/components/ui/form-textarea";
 import toast from "react-hot-toast";
-import { addNewNewsItem } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { useDashboardStore } from "@/store/dashboardStore";
 
 interface IAddNewsItemModalProps {
   children: React.ReactNode;
-  openModal: boolean,
-  setOpenModal: (open: boolean) => void
+  openModal: boolean;
+  setOpenModal: (open: boolean) => void;
 }
 
 const AddNewsItemModal: React.FunctionComponent<IAddNewsItemModalProps> = ({
   children,
   openModal,
-  setOpenModal
+  setOpenModal,
 }) => {
-  const { getNews, loading } = useDashboardStore();
+  const { getNews, loading, addNewsItem } = useDashboardStore();
   const form = useForm({
     resolver: zodResolver(addNewsItemSchema),
     defaultValues: {
@@ -39,17 +38,17 @@ const AddNewsItemModal: React.FunctionComponent<IAddNewsItemModalProps> = ({
 
   const onSubmit = async (data: AddNewsItemFormData) => {
     try {
-      await addNewNewsItem(data);
+      addNewsItem(data);
       toast.success("Новость добавлена");
       getNews();
-      setOpenModal(false)
+      setOpenModal(false);
     } catch (error) {
       console.log(error);
       toast.error("Не удалось добавить новость");
     }
   };
   return (
-    <Dialog open={openModal}>
+    <Dialog onOpenChange={setOpenModal} open={openModal}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogTitle>Добавление новости</DialogTitle>

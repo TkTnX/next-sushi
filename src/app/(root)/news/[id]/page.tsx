@@ -1,3 +1,4 @@
+import NewsGroupItemImage from "@/components/shared/news/news-group-item-image";
 import { Api } from "@/services/api-client";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -34,8 +35,7 @@ const NewsItem: React.FunctionComponent<INewsItemProps> = async ({
         </div>
       </div>
       <div className="max-w-[1000px] mx-auto relative w-full  bg-white mt-8 rounded-lg">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={newsItem.image} alt={newsItem.title} className="rounded-lg w-full " />
+      <NewsGroupItemImage image={newsItem.image} title={newsItem.title} />
       </div>
       <p className="mt-4 text-[#686870] max-w-[1000px] mx-auto">
         {newsItem.description}

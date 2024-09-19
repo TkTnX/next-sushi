@@ -237,7 +237,7 @@ export async function addNewNewsItem(data: AddNewsItemFormData) {
       throw new Error("Недостаточно прав");
     }
 
-    await prisma.newsItem.create({
+    const newNewsItem = await prisma.newsItem.create({
       data: {
         title: data.title,
         category: data.category,
@@ -245,6 +245,8 @@ export async function addNewNewsItem(data: AddNewsItemFormData) {
         image: data.image || "",
       },
     });
+
+    return newNewsItem;
   } catch (error) {
     console.log(error);
     console.log("[ADD_NEW_NEWS_ITEM] Error: ", error);

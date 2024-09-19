@@ -12,7 +12,7 @@ export type INews = {
   description: string;
   image: string;
   category: string;
-  createdAt: string;
+  createdAt: Date | string;
 };
 
 const NewsGroup: React.FunctionComponent<INewsGroupProps> = () => {

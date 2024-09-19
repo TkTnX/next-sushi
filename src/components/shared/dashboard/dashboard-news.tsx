@@ -1,6 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { NewsItem } from "@prisma/client";
 import { Pen, Plus } from "lucide-react";
 import * as React from "react";
 import DashboardDeleteItemBtn from "./dashboard-delete-item-btn";
@@ -9,12 +8,11 @@ import EditNewsItemModal from "../modals/edit-news-item-modal";
 import toast from "react-hot-toast";
 import { useDashboardStore } from "@/store/dashboardStore";
 import { Skeleton } from "@/components/ui/skeleton";
-import { deleteNewsItem } from "@/services/news";
 
 interface IDashboardNewsProps {}
 
 const DashboardNews: React.FunctionComponent<IDashboardNewsProps> = () => {
-  const { loading, news, getNews } = useDashboardStore();
+  const { loading, news, getNews, deleteNewsItem } = useDashboardStore();
   const [openModal, setOpenModal] = React.useState(false);
 
   React.useEffect(() => {
@@ -23,7 +21,7 @@ const DashboardNews: React.FunctionComponent<IDashboardNewsProps> = () => {
 
   const deleteNewsItemFunc = async (id: number) => {
     try {
-      await deleteNewsItem(id);
+      deleteNewsItem(id);
       getNews();
       toast.success("Новость удалена");
     } catch (error) {
@@ -76,12 +74,13 @@ const DashboardNews: React.FunctionComponent<IDashboardNewsProps> = () => {
                   loading={loading}
                   id={news.id}
                 />
-                <EditNewsItemModal id={news.id}>
+                <EditNewsItemModal title={news.title} category={news.category} image={news.image} description={news.description} id={news.id}>
                   <Button
                     variant="outline"
                     className="text-orange-500  flex items-center gap-2"
                   >
-                    <span className="hidden md:block">Редактировать</span> <Pen size={15} />
+                    <span className="hidden md:block">Редактировать</span>{" "}
+                    <Pen size={15} />
                   </Button>
                 </EditNewsItemModal>
               </div>
