@@ -1,6 +1,7 @@
 import NewsGroup from "@/components/shared/news/news-group";
 import NewsSearch from "@/components/shared/news/news-search";
 import * as React from "react";
+export const fetchCache = "force-no-store";
 
 interface INewsPageProps {}
 

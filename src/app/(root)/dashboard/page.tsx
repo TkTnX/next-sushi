@@ -5,6 +5,7 @@ import { getUserSession } from "@/lib/get-user-session";
 import { prisma } from "@/Prisma/prisma-client";
 import { redirect } from "next/navigation";
 import * as React from "react";
+export const fetchCache = "force-no-store";
 
 const Dashboard: React.FunctionComponent = async () => {
   const user = await getUserSession();

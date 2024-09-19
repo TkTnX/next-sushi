@@ -11,7 +11,6 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Ninja Sushi",
 };
-export const fetchCache = "force-no-store";
 export default function AppLayout({
   children,
 }: Readonly<{
