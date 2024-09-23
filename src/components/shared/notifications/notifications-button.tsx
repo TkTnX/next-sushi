@@ -31,12 +31,12 @@ const NotificationsButton: React.FunctionComponent = () => {
               size={24}
             />
             {notifications && notifications.length > 0 && (
-              <Badge className="absolute -left-1 h-[25px] -top-2">
+              <Badge className="absolute left-0 flex items-center justify-center text-left xl:-left-1 w-[10px] xl:w-auto xl:h-[25px] -top-2">
                 {notifications.length}
               </Badge>
             )}
             {hasNewNotifications && (
-              <div className="absolute -right-1 w-[15px] h-[15px] -top-1 bg-primary rounded-full" />
+              <div className="absolute right-0 xl:-right-1 w-[8px] xl:w-[15px] h-[8px] xl:h-[15px] top-0 xl:-top-1 bg-primary rounded-full" />
             )}
           </>
         )}

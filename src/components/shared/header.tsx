@@ -54,7 +54,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({
         <Image src="/logo.svg" alt={"logo"} width={214} height={48} />
       </Link>
 
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <Navbar />
       </div>
 
